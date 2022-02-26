@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 17.x
       - run: npm install
-      - run: npm start
+      
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -24,5 +24,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'client-bookstore-udweb'
           heroku_email: 'builehoangnhattruong@gmail.com'
-        
+      - run: npm start  
   
