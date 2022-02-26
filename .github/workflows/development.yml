@@ -1,4 +1,4 @@
-name: Client workflow pipeline
+name: Client Workflow pipeline
 
 on:
   push:
