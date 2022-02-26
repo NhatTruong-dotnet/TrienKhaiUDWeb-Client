@@ -17,9 +17,15 @@ jobs:
           node-version: 17.x
       - run: npm install
 
+  Start-Server:
+      runs-on: ubuntu-latest
+      needs: [Install-Dependencies]
+      steps:
+        - run: npm start
+  
   Deploy:
     runs-on: ubuntu-latest
-    needs: [Install-Dependencies]
+    needs: [Deploy]
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
@@ -29,8 +35,4 @@ jobs:
           heroku_app_name: 'client-bookstore-udweb'
           heroku_email: 'builehoangnhattruong@gmail.com'
         
-  Start-Server:
-    runs-on: ubuntu-latest
-    needs: [Deploy]
-    steps:
-      - run: npm start
+  
