@@ -6,7 +6,7 @@ on:
       - Master
 
 jobs:
-  Install-Dependencies-And-Start-Server:
+  Install-Dependencies:
     runs-on: ubuntu-latest
     steps:
       - name: Development code
@@ -16,7 +16,11 @@ jobs:
         with:
           node-version: 17.x
       - run: npm install
-      
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [Install-Dependencies]
+    steps:    
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
