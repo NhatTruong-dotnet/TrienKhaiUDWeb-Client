@@ -1,0 +1,25 @@
+.bubble {
+    box-shadow: rgb(0 0 0 / 15%) 0px 3px 12px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: absolute;
+    outline: transparent;
+    background-color: rgb(230, 145, 66);
+    width: auto;
+    height: auto;
+    float: right;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 4px 24px 4px 16px;
+    right: 20px;
+    bottom: 20px;
+}
+
+.bubble img{
+    margin-left: 2px;
+}
