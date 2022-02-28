@@ -7,7 +7,7 @@
     align-items: center;
     cursor: pointer;
     user-select: none;
-    position: absolute;
+    position: fixed;
     outline: transparent;
     background-color: rgb(230, 145, 66);
     width: auto;
