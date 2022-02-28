@@ -1,7 +1,17 @@
-import React from 'react'
+import './book.css'
 
 export default function Book() {
   return (
-    <div>Book</div>
+    <>
+      <div className="bookWrapper">
+        <div className="book-image">
+          <img src="" alt="img here" />
+        </div>
+        <div className="book-content">
+
+        </div>
+      </div>
+
+    </>
   )
 }

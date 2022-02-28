@@ -1,3 +1,4 @@
+import Conversation from '../Chat/Conversation'
 import Book from './components/book/Book'
 import Sidebar from './components/sidebar/Sidebar'
 import Silder from './components/slider/Silder'
@@ -9,6 +10,9 @@ export default function HomePage() {
       <Silder />
       <Sidebar />
       <Book />
+      <>
+        <Conversation />
+      </>
     </>
 
 

@@ -1,0 +1,23 @@
+.containerSidebar{
+    margin: 0;
+}
+
+.sidebarHeader{
+    font-size: 20px;
+    color: white;
+    background-color: #F7941E;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+    padding: 0 20px;
+    min-height: 42px;
+    line-height: 38px;
+}
+
+.verticalmenu{
+    position: static;
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0
+}

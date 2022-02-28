@@ -1,0 +1,35 @@
+.dropdown{
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: sans-serif;
+    background: #f8f6f0;
+    padding: 12px 10px 13px 20px;
+    line-height: 17px;
+    display: flex;
+}
+
+.dropdown .sidebarName a{
+    padding: 10px 15px;
+    color: #333333;
+    text-decoration: none;
+}
+
+
+.dropdown:hover{
+    color: black;
+    background-color: #f3c287;
+}
+
+.angle-right{
+    color: black;
+    background-color: #f3c287;
+    cursor: pointer;
+}
+.fa-solid .fa-angle-right{
+    height: 30px;
+}
