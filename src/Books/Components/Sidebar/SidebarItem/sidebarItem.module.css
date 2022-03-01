@@ -1,0 +1,68 @@
+.sideBar {
+    padding-top: 10px;
+    border-bottom: 1.5px solid rgb(0 0 0 / 10%);
+}
+.sidebarTitle {
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.filterItem {
+    margin-left: 10px;
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+.label {
+    line-height: 22px;
+    font-family: sans-serif;
+    color: #666;
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 300ms ease-in 0s;
+}
+.filterItem:hover > .label {
+    color: #042d3d;
+    opacity: 0.8;
+}
+.showAction {
+    cursor: pointer;
+    color: #063547;
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    line-height: 40px;
+}
+.icon {
+    font-size: 27px;
+    position: absolute;
+    top: 6px;
+}
+.link {
+    color: #666;
+    font-size: 14px;
+    text-transform: capitalize;
+    transition: all 300ms ease-in 0s;
+    text-decoration: none;
+    line-height: 22px;
+    font-family: sans-serif;
+}
+.link:hover {
+    color: #044c68;
+    opacity: 0.8;
+}
+
+.checkbox {
+    margin: 0;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    accent-color: #063547;
+    cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.sidebarContainer {
+    padding: 10px 10px 40px;
+}
+.title {
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

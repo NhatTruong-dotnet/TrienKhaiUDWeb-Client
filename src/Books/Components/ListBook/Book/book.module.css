@@ -1,0 +1,95 @@
+.wrap {
+    padding-left: 4px;
+    padding-right: 4px;
+    flex: 0 0 25%;
+}
+
+.bookItem {
+    padding: 8px 10px 40px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.bookItem:hover {
+    box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+}
+
+.bookImg {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+
+.discount {
+    position: absolute;
+    top: 10px;
+    right: 4px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #f7941e;
+    text-align: center;
+    line-height: 44px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.name {
+    font-size: 14px;
+    color: #333;
+    font-family: sans-serif;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 40px;
+    max-height: 40px;
+    /* width: 200px; */
+}
+
+.discountPrice {
+    line-height: 16.5px;
+    font-size: 16.5px;
+    color: #c92127;
+    font-weight: 600;
+    min-height: 25px;
+    font-family: sans-serif;
+    margin-top: 4px;
+}
+
+.price {
+    font-size: 14px;
+    font-family: sans-serif;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.withDiscount {
+    text-decoration: line-through;
+}
+
+.rating {
+    position: relative;
+}
+
+.ratingIcon {
+    color: #e3e5e5;
+    font-size: 18px;
+}
+
+.ratingIcon.check {
+    color: #f6a500;
+}
+
+.ratingAmount {
+    font-family: sans-serif;
+    color: #f6a500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 5px;
+    position: absolute;
+}
+/* -------------------------- */
