@@ -9,12 +9,24 @@
 
 .chatBox{
     flex: 4.5;
-    position: relative;
+    position: absolute;
     width: 360px;
-
+    right: 20px;
+    bottom: 60px;
+    
+    box-shadow: 0 0 2px black;
 }
 .chatBoxHeader{
     height: 60px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 354px;
+    position: relative;
+    background-color: rgb(219, 153, 31);
+}
+
+.modalGuestHeader{
+    height: 30px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     width: 354px;
@@ -30,15 +42,14 @@
 
 .chatSubmitButton{
     width: 70px;
-    height: 40px;
+    height: auto;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    color: white;
-    background-color: teal;
+    margin-top: 3px;
+    
 }
 .chatMessageInput{
-    width: 75%;
+    width: 85%;
     height: 70px;
     padding: 10px;
 }
@@ -110,19 +121,24 @@
     left: 48px;
     top: 29px;
     position: absolute;
+    color: rgb(219, 213, 213);
   }
   .rightbarUsername{
       font-weight: 500;
       margin-left: 5px;
+      color: white;
   }
 
   .modalGuest{
     flex: 4.5;
-    position: relative;
+    position: absolute;
     width: 360px;
-    background-color: rgb(233, 229, 229);
+    padding: 2px;
+    right: 20px;
+bottom: 70px;
+    box-shadow: 0 0 2px black;
+
   }
   .modalGuest input{
     background-color: inherit;
-    border: 1px solid black;
   }
