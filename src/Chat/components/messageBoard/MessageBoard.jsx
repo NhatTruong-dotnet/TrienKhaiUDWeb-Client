@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Message from "../message/Message";
 import './messageBoard.css';
 
 export default function MessageBoard() {
   const [guestUser, setGuestUser] = useState(false);
   const [showModal, setShowModal] = useState(true);
-
+  const [conversations, setConversations] = useState([]);
   let guestUserEmail = React.createRef();
+
+  useEffect(()=>{
+    const getConversations = async()=>{
+      try {
+        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/builehoangnhattruong@gmail.com");
+        setConversations(res.data[0].messages);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getConversations();
+  }, [conversations]);
 
   function popupModalGuestUser() {
 
@@ -49,11 +62,11 @@ export default function MessageBoard() {
         </div>
         <div className="chatBoxWrapper">
           <div className="chatBoxTop">
-            <Message />
-            <Message own={true} />
-            <Message own={true} />
-            <Message own={true} />
-            <Message />
+           {
+             conversations.map((element) => {
+                <Message messageText={element.messageText} />
+             })
+           }
           </div>
           <div className="chatBoxBottom">
             <textarea className='chatMessageInput' placeholder='Type something'></textarea>
