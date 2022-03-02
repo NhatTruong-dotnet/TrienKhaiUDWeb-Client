@@ -29,6 +29,7 @@
 
 .message.own{
     align-items: flex-end;
+    margin-right: 4px;
 }
 
 .message.own .messageText{

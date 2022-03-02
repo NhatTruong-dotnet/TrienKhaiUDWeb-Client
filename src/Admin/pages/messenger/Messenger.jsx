@@ -12,6 +12,7 @@ export default function Messenger() {
   const [fetchMessagesByEmail, setEmail] = useState('');
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
+
   try {
     userToFetchConversation = currentUser.userToFetchConversation;
   } catch (error) {
@@ -37,7 +38,6 @@ export default function Messenger() {
   }, []);
   useEffect(() => {
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
-
     const getConversations = async () => {
       try {
         currentUser = JSON.parse(localStorage.getItem('user'));
@@ -45,14 +45,17 @@ export default function Messenger() {
         const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + userToFetchConversation);
         setMessages(res.data[0].messages);
       } catch (error) {
-        console.log(error);
+          console.log(error);
       }
     }
-    getConversations();
-  }, [fetchMessagesByEmail]);
+    getConversations();}, [fetchMessagesByEmail]
+  );
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" })}, [messages]
+  );
 
   function fetchMessageFromConversation(gmail) {
-
     let guestInfo = {
       "userToFetchConversation": gmail,
       "gmail": "admin@gmail.com"
@@ -84,10 +87,10 @@ export default function Messenger() {
                 messages.map((element, i) => {
                   return <div ref={scrollRef}>
                     <Message key={i}
-                      messageText={element.messageText}
-                      //https://www.javascripttutorial.net/web-apis/javascript-localstorage/#:~:text=The%20localStorage%20can%20store%20only,the%20localStorage%20using%20the%20JSON.
-                      own={element.gmail === currentUser.gmail ? true : false}
-                      chatTime={element.chatTime}
+                        messageText={element.messageText}
+                        //https://www.javascripttutorial.net/web-apis/javascript-localstorage/#:~:text=The%20localStorage%20can%20store%20only,the%20localStorage%20using%20the%20JSON.
+                        own={element.gmail === currentUser.gmail ? true : false}
+                        chatTime={element.chatTime}
                     />
                   </div>
 
@@ -100,11 +103,7 @@ export default function Messenger() {
             </div>
           </div>
         </div>
-        <div className="chatOnlineAdmin">
-          <div className="chatOnlineWrapperAdmin">
-            <ChatOnline />
-          </div>
-        </div>
+        
       </div>
     </>
 
