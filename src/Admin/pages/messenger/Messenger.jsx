@@ -10,8 +10,10 @@ export default function Messenger() {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [fetchMessagesByEmail, setEmail] = useState('');
+  const [messageSendSucess, setMessageSendSucess] = useState(false);
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
+  let messageSend = useRef();
 
   try {
     userToFetchConversation = currentUser.userToFetchConversation;
@@ -36,6 +38,7 @@ export default function Messenger() {
     }
     getConversations();
   }, []);
+
   useEffect(() => {
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
@@ -48,7 +51,7 @@ export default function Messenger() {
           console.log(error);
       }
     }
-    getConversations();}, [fetchMessagesByEmail]
+    getConversations();}, [fetchMessagesByEmail,messageSendSucess]
   );
 
   useEffect(() => {
@@ -63,6 +66,17 @@ export default function Messenger() {
     localStorage.setItem('user', JSON.stringify(guestInfo))
     setEmail(gmail);
   }
+
+  async function  sendMessage(){
+    try {
+        currentUser = JSON.parse(localStorage.getItem('user'))
+        const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
+        const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
+        document.getElementById('chatMessageInputAdmin').value = '';
+    } catch (error) {
+        console.log(error);
+    }
+}
   return (
     <>
       <div className='messengerAdmin'>
@@ -98,8 +112,8 @@ export default function Messenger() {
               }
             </div>
             <div className="chatBoxBottomAdmin">
-              <textarea className='chatMessageInputAdmin' placeholder='write something'></textarea>
-              <button className='chatSubmitButtonAdmin'>Send</button>
+              <textarea className='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'></textarea>
+              <button className='chatSubmitButtonAdmin' onClick={sendMessage}>Send</button>
             </div>
           </div>
         </div>
