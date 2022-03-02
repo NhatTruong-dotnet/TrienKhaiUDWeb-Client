@@ -29,6 +29,7 @@ export default function Conversation(props) {
 
         const getConversations = async () => {
             try {
+                currentUser = JSON.parse(localStorage.getItem('user'));
                 const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
                 setConversations(res.data[0].messages);
                 console.log('load in useEffect');
@@ -41,6 +42,7 @@ export default function Conversation(props) {
 
     async function  sendMessage(){
         try {
+            currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
@@ -54,6 +56,7 @@ export default function Conversation(props) {
     }, [conversations])
 
     function isPopupModalGuestUser() {
+        currentUser = JSON.parse(localStorage.getItem('user'))
         if (currentUser.gmail === "" || currentUser === null) {
             setGuestUser(true)
             setShowModal(false);
@@ -81,6 +84,7 @@ export default function Conversation(props) {
                 "gmail": guestUserEmail.current.value
             }
             localStorage.setItem('user', JSON.stringify(guestInfo))
+            
             setGuestUser(false);
             setShowModal(true);
         }
@@ -137,8 +141,6 @@ export default function Conversation(props) {
                         <input required type="email" ref={guestUserEmail} className="form-control" id="guestEmail" aria-describedby="emailHelp" placeholder="Enter email" />
                     </div>
                     <div className="form-group">
-                        <label hmtlFor="guestMessage">Câu hỏi của bạn</label>
-                        <input required type="text" className="form-control" id="guestMessage" placeholder="Bạn cần hỗ trợ gì?" />
                         <div className="chatSubmitButton">
                             <button type="submit">Send</button>
                         </div>
