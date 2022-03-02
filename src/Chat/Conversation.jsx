@@ -1,22 +1,23 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Message from './components/message/Message';
 import './conversation.css'
 
 export default function Conversation(props) {
     const [showModal, setShowModal] = useState(false);
+    const [messageSendSucess, setMessageSendSucess] = useState(false);
     let currentUser = JSON.parse(localStorage.getItem('user'));
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
-    const [isLoaded, setLoaded] = useState(false);
-    
+    const scrollRef = useRef();
     let guestUserEmail = React.createRef();
-     function openMessageBoard() {
+    let messageSend = useRef();
+    function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
         } catch (error) {
             let guestInfo = {
-                "gmail":""
+                "gmail": ""
             }
             localStorage.setItem('user', JSON.stringify(guestInfo))
         }
@@ -28,7 +29,7 @@ export default function Conversation(props) {
 
         const getConversations = async () => {
             try {
-                const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail);
+                const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
                 setConversations(res.data[0].messages);
                 console.log('load in useEffect');
             } catch (error) {
@@ -36,7 +37,21 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal])
+    }, [showModal, messageSendSucess])
+
+    async function  sendMessage(){
+        try {
+            const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
+            const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
+            document.getElementById('chatMessageInput').value = '';
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+      scrollRef.current?.scrollIntoView({behavior:"smooth"})
+    }, [conversations])
 
     function isPopupModalGuestUser() {
         if (currentUser.gmail === "" || currentUser === null) {
@@ -46,8 +61,8 @@ export default function Conversation(props) {
         else if (guestUser) {
             setGuestUserInformation();
         }
-        else{
-            console.log('send');
+        else {
+            sendMessage();
         }
     }
 
@@ -63,7 +78,7 @@ export default function Conversation(props) {
     function setGuestUserInformation() {
         if (guestUser) {
             let guestInfo = {
-                "gmail":guestUserEmail.current.value
+                "gmail": guestUserEmail.current.value
             }
             localStorage.setItem('user', JSON.stringify(guestInfo))
             setGuestUser(false);
@@ -83,22 +98,25 @@ export default function Conversation(props) {
                     <span className="rightbarHint">Thường trả lời trong vài phút</span>
                     <img onClick={closeChat} src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png" style={{ right: "8px", bottom: "30px", cursor: "pointer", position: "absolute" }} />
                 </div>
-                <div className="chatBoxWrapper" style={{backgroundColor:'#f8f6f0'}}>
+                <div className="chatBoxWrapper" style={{ backgroundColor: '#f8f6f0' }}>
                     <div className="chatBoxTop" id="messageBoard" >
                         {
                             /*https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */
-                            conversations.map((element, i) => { 
-                                return <Message key={i} 
-                                                messageText={element.messageText} 
-                                                //https://www.javascripttutorial.net/web-apis/javascript-localstorage/#:~:text=The%20localStorage%20can%20store%20only,the%20localStorage%20using%20the%20JSON.
-                                                own={element.gmail === currentUser.gmail?true:false}
-                                                chatTime={element.chatTime}
-                                            />
+                            conversations.map((element, i) => {
+                                return <div ref={scrollRef}>
+                                        <Message key={i}
+                                            messageText={element.messageText}
+                                            //https://www.javascripttutorial.net/web-apis/javascript-localstorage/#:~:text=The%20localStorage%20can%20store%20only,the%20localStorage%20using%20the%20JSON.
+                                            own={element.gmail === currentUser.gmail ? true : false}
+                                            chatTime={element.chatTime}
+                                        />
+                                </div>
+
                             })
                         }
                     </div>
                     <div className="chatBoxBottom">
-                        <textarea className='chatMessageInput' placeholder='Type something'></textarea>
+                        <textarea className='chatMessageInput' id='chatMessageInput'  ref={messageSend} placeholder='Type something'></textarea>
                         <img onClick={isPopupModalGuestUser} src="https://img.icons8.com/external-gradak-royyan-wijaya/40/000000/external-chat-gradak-communikatok-solidarity-gradak-royyan-wijaya-9.png" style={{ right: "15px", bottom: "30px", cursor: "pointer", position: "absolute" }} />
                     </div>
                 </div>
