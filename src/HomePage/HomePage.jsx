@@ -5,7 +5,8 @@ import Silder from './components/slider/Silder'
 import './homepage.css'
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-
+import ListBook from '../Books/Components/ListBook/ListBook'
+import Books from '../Books'
 
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
@@ -24,12 +25,18 @@ export default function HomePage() {
   
   return (
     <>
-      <Silder />
+      {/* <Silder />
       <Sidebar />
-      <Book messages={conversations}/>
+      <Book />
+      <ListBook />
       <>
-        <Conversation />
-      </>
+      </> */}
+      <div >
+      <Books />
+      <Conversation />
+
+      </div>
+     
     </>
 
 

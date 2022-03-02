@@ -9,9 +9,17 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const [isLoaded, setLoaded] = useState(false);
-    let guestUserEmail = React.createRef();
     
+    let guestUserEmail = React.createRef();
      function openMessageBoard() {
+        try {
+            console.log(currentUser.gmail);
+        } catch (error) {
+            let guestInfo = {
+                "gmail":""
+            }
+            localStorage.setItem('user', JSON.stringify(guestInfo))
+        }
         setShowModal(!showModal);
     }
 
@@ -31,7 +39,7 @@ export default function Conversation(props) {
     }, [showModal])
 
     function isPopupModalGuestUser() {
-        if (currentUser.gmail === undefined) {
+        if (currentUser.gmail === "" || currentUser === null) {
             setGuestUser(true)
             setShowModal(false);
         }
@@ -75,8 +83,8 @@ export default function Conversation(props) {
                     <span className="rightbarHint">Thường trả lời trong vài phút</span>
                     <img onClick={closeChat} src="https://img.icons8.com/material-outlined/24/000000/delete-sign.png" style={{ right: "8px", bottom: "30px", cursor: "pointer", position: "absolute" }} />
                 </div>
-                <div className="chatBoxWrapper">
-                    <div className="chatBoxTop" id="messageBoard">
+                <div className="chatBoxWrapper" style={{backgroundColor:'#f8f6f0'}}>
+                    <div className="chatBoxTop" id="messageBoard" >
                         {
                             /*https://stackoverflow.com/questions/22876978/loop-inside-react-jsx */
                             conversations.map((element, i) => { 

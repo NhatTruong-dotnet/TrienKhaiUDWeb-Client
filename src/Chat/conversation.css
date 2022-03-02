@@ -35,11 +35,10 @@
 
 .chatBox{
     flex: 4.5;
-    position: absolute;
+    position: fixed;
     width: 360px;
     right: 20px;
     bottom: 60px;
-    
     box-shadow: 0 0 2px black;
 }
 .chatBoxHeader{
