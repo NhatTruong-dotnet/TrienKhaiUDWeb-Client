@@ -12,6 +12,7 @@ export default function Conversation(props) {
     const scrollRef = useRef();
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
+
     function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
@@ -31,8 +32,10 @@ export default function Conversation(props) {
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
                 const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
-                setConversations(res.data[0].messages);
-                console.log('load in useEffect');
+                if (currentUser.gmail !== "") {
+                    setConversations(res.data[0].messages);
+                    console.log('load in useEffect');
+                }
             } catch (error) {
                 console.log(error);
             }
