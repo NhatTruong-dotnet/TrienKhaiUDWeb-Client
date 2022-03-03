@@ -113,7 +113,7 @@ export default function Messenger() {
             </div>
             <div className="chatBoxBottomAdmin">
               <textarea className='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'></textarea>
-              <button className='chatSubmitButtonAdmin' onClick={sendMessage}>Send</button>
+              <button className='chatSubmitButtonAdmin' id='chatMessageInputAdmin' onClick={sendMessage}>Send</button>
             </div>
           </div>
         </div>
