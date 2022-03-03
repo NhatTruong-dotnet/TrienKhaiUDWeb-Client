@@ -12,7 +12,7 @@ export default function Conversation(props) {
     const scrollRef = useRef();
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
-
+    const [enabledSendIcon, setEnabledSendIcon] = useState(false);
     function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
@@ -49,6 +49,7 @@ export default function Conversation(props) {
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
+            setEnabledSendIcon(false)
         } catch (error) {
             console.log(error);
         }
@@ -123,8 +124,11 @@ export default function Conversation(props) {
                         }
                     </div>
                     <div className="chatBoxBottom">
-                        <textarea className='chatMessageInput' id='chatMessageInput'  ref={messageSend} placeholder='Type something'></textarea>
-                        <img onClick={isPopupModalGuestUser} src="https://img.icons8.com/external-gradak-royyan-wijaya/40/000000/external-chat-gradak-communikatok-solidarity-gradak-royyan-wijaya-9.png" style={{ right: "15px", bottom: "30px", cursor: "pointer", position: "absolute" }} />
+                        <textarea className='chatMessageInput' id='chatMessageInput'  ref={messageSend} placeholder='Type something' 
+                            onChange={() => {document.getElementById('chatMessageInput').value ==="" ? setEnabledSendIcon(false):setEnabledSendIcon(true) }}>
+                        
+                        </textarea>
+                        { enabledSendIcon && < img onClick={isPopupModalGuestUser} src="https://img.icons8.com/external-gradak-royyan-wijaya/40/000000/external-chat-gradak-communikatok-solidarity-gradak-royyan-wijaya-9.png" style={{ right: "15px", bottom: "30px", cursor: "pointer", position: "absolute" }} />}
                     </div>
                 </div>
             </div>}

@@ -14,7 +14,7 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
-
+  const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try {
     userToFetchConversation = currentUser.userToFetchConversation;
   } catch (error) {
@@ -73,6 +73,7 @@ export default function Messenger() {
         const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
         const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
         document.getElementById('chatMessageInputAdmin').value = '';
+        setEnabledSendIcon(false)
     } catch (error) {
         console.log(error);
     }
@@ -112,8 +113,9 @@ export default function Messenger() {
               }
             </div>
             <div className="chatBoxBottomAdmin">
-              <textarea className='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'></textarea>
-              <button className='chatSubmitButtonAdmin' id='chatMessageInputAdmin' onClick={sendMessage}>Send</button>
+              <textarea className='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'
+                onChange={() => {document.getElementById('chatMessageInputAdmin').value ==="" ? setEnabledSendIcon(false):setEnabledSendIcon(true) }}></textarea>
+              {enabledSendIcon && <button className='chatSubmitButtonAdmin' id='chatMessageInputAdmin' onClick={sendMessage}>Send</button>}
             </div>
           </div>
         </div>
