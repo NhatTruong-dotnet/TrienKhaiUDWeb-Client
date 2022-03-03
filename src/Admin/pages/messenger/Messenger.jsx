@@ -113,7 +113,7 @@ export default function Messenger() {
               }
             </div>
             <div className="chatBoxBottomAdmin">
-              <textarea className='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'
+              <textarea className='chatMessageInputAdmin' id='chatMessageInputAdmin'  ref={messageSend} placeholder='write something'
                 onChange={() => {document.getElementById('chatMessageInputAdmin').value ==="" ? setEnabledSendIcon(false):setEnabledSendIcon(true) }}></textarea>
               {enabledSendIcon && <button className='chatSubmitButtonAdmin' id='chatMessageInputAdmin' onClick={sendMessage}>Send</button>}
             </div>
