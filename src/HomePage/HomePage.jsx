@@ -41,8 +41,6 @@ export default function HomePage() {
     <>
 
       <div >
-        <Header />
-
         <div className='container'style={{maxWidth:"1200px", margin:"0px auto"}}>
           <div className="row" >
             <div className='col-3'>
@@ -55,7 +53,6 @@ export default function HomePage() {
         </div>
 
         <Conversation />
-        <Footer />
 
       </div>
 
