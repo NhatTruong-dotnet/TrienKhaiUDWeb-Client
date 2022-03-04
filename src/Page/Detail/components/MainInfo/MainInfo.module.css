@@ -1,0 +1,75 @@
+.name {
+    font-size: 22px;
+    color: #333;
+    font-family: 'Nunito', sans-serif;
+    /* font-weight: 600; */
+    margin-bottom: 20px;
+}
+
+.mainInfoRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainInfo {
+    flex: 0 0 50%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    line-height: 23px;
+}
+
+.label {
+    color: rgb(51, 51, 51);
+    font-weight: 400;
+    padding-right: 5px;
+}
+.content {
+    font-weight: 600;
+    color: rgb(51, 51, 51);
+    text-align: left;
+}
+.content.link {
+    cursor: pointer;
+    color: rgb(36, 137, 244);
+}
+.ratingAmount {
+    color: #f6a500;
+}
+
+.ratingAmount {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-bottom: 8px;
+}
+
+.priceContainer {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px 8px 0;
+}
+.discountPrice {
+    font-size: 32px;
+    line-height: 32px;
+    color: #c92127;
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700;
+}
+.oldPrice {
+    margin-left: 8px;
+    color: #0d0e0f;
+    font-weight: 300;
+    padding-left: 5px;
+    text-decoration: line-through;
+}
+.discountPercentage {
+    margin-left: 8px;
+    border-radius: 4px;
+    background-color: #c92127;
+    color: #fff;
+    font-weight: 600;
+    width: 43px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    font-family: sans-serif;
+}

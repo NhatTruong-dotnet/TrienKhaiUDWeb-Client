@@ -1,0 +1,10 @@
+.gallery {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.thumbnail {
+    width: 76px;
+    display: flex;
+    flex-direction: column;
+}

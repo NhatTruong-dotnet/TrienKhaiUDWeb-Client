@@ -1,0 +1,16 @@
+.ratingStar {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.ratingIcon {
+    color: #e3e5e5;
+    font-size: 18px;
+}
+
+.ratingIcon.check {
+    color: #f6a500;
+}
+.ratingIcon.large {
+    font-size: 25px;
+}

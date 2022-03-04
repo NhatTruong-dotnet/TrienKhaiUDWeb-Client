@@ -1,5 +1,6 @@
 .booksContainer {
-    padding: 34px 0 30px;
+    padding: 34px 0 0;
+    background-color: #fff;
 }
 
 .line {

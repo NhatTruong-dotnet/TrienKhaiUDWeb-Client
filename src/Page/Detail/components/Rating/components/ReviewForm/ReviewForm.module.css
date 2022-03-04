@@ -1,0 +1,63 @@
+.reviewForm {
+    width: 800px;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+.header {
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+}
+.icon {
+    position: absolute;
+    right: 0;
+    top: -3px;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+.ratingChoice {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.formGroup {
+    margin-top: 16px;
+}
+
+.nameInput,
+.reviewInput {
+    padding: 8px 0 8px 8px;
+    border: 1px solid #cdcfd0;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    line-height: 1.4;
+    color: #646464;
+}
+
+.nameInput::placeholder,
+.reviewInput::placeholder {
+    font-size: 12px;
+    color: #cdcfd0;
+}
+.reviewInput {
+    height: 122px;
+    resize: none;
+    margin-bottom: 60px;
+}
+.controlBtn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+.closeModal {
+    color: #7a7e7f;
+    margin-right: 30px;
+    cursor: pointer;
+}

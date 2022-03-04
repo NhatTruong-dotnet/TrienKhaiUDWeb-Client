@@ -1,0 +1,31 @@
+.amount {
+    max-width: 270px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.amountLabel {
+    color: #555555;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif !important;
+}
+.amountControl {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+}
+.decrease > *,
+.increase > * {
+    width: 36px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.number {
+    width: 46px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif !important;
+}

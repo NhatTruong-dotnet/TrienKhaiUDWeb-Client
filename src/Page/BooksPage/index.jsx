@@ -1,10 +1,10 @@
 import React from 'react'
-import GlobalStyle from '../GlobalStyle/GlobalStyle'
-import ListBook from './Components/ListBook/ListBook'
+import GlobalStyle from '../../GlobalStyle/GlobalStyle'
+import ListBook from '../../Common/ListBook/ListBook'
 import Sidebar from './Components/Sidebar/Sidebar'
 import styles from './index.module.css'
 import Sort from './Components/Sort/Sort'
-import Paging from './Components/Paging/Paging'
+import Paging from '../../Common/Paging/Paging'
 
 function Books(props) {
     return (
@@ -20,8 +20,8 @@ function Books(props) {
                                 <Sort title='Sắp xếp theo' />
                                 <div className={styles.line}></div>
                                 <ListBook />
+                                <Paging totalPage={5} />
                             </div>
-                            <Paging totalPage={5} />
                         </div>
                     </div>
                 </div>

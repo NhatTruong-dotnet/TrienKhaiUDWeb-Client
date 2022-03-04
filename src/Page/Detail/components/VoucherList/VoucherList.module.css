@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+}
+
+.title {
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+    margin-left: 5px;
+}
+
+.voucherList {
+    display: flex;
+    margin: 0 -5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.voucherList::-webkit-scrollbar {
+    display: none;
+}
