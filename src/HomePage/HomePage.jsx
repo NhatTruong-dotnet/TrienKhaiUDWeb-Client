@@ -1,16 +1,29 @@
-import Book from '../Books/Components/ListBook/Book/Book'
 import Conversation from '../Chat/Conversation'
-import Sidebar from './components/sidebar/Sidebar'
-import Silder from './components/slider/Silder'
+import SidebarItem from '../Books/Components/Sidebar/SidebarItem/SidebarItem'
 import './homepage.css'
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-import ListBook from '../Books/Components/ListBook/ListBook'
-import Books from '../Books'
-
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
-
+  const arr1 = [
+    {
+        id: 1,
+        label: 'Sách tiếng Việt',
+        value: 1,
+    },
+    {
+        id: 2,
+        label: 'Thiếu nhi',
+        value: 2,
+    },
+    {
+        id: 3,
+        label: 'Văn học',
+        value: 3,
+    },
+]
   useEffect(() => {
     const getConversations = async()=>{
       try {
@@ -25,15 +38,14 @@ export default function HomePage() {
   
   return (
     <>
-      {/* <Silder />
-      <Sidebar />
-      <Book />
-      <ListBook />
-      <>
-      </> */}
+
       <div >
-      <Books />
+      <Header />
+      <div className='col-3'>
+      <SidebarItem title={'All Category'} listFilter={arr1} />
+      </div>
       <Conversation />
+      <Footer />
 
       </div>
      
