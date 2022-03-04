@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
+
 } from "react-router-dom";
 import Messenger from "./Admin/pages/messenger/Messenger";
 import Footer from "./Footer/Footer";

@@ -1,7 +1,6 @@
 import './messenger.css'
 import Conversation from '../../components/conversations/Conversation'
 import Message from '../../components/message/Message'
-import ChatOnline from '../../components/chatOnline/ChatOnline'
 import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
 export default function Messenger() {
@@ -15,7 +14,7 @@ export default function Messenger() {
   let userToFetchConversation = '';
   let messageSend = useRef();
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-  try {
+  try { 
     userToFetchConversation = currentUser.userToFetchConversation;
   } catch (error) {
     let guestInfo = {

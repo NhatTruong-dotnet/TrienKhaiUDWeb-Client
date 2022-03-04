@@ -1,5 +1,4 @@
 import "./conversation.css"
-import {useEffect, useState} from "react";
 
 export default function Conversation(conversation) {
   return (
