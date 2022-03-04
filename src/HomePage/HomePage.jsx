@@ -4,8 +4,6 @@ import ListBook from '../Common/ListBook/ListBook'
 import './homepage.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
   const arr1 = [

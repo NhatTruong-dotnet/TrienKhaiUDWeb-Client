@@ -1,4 +1,3 @@
-import react from "react"
 import {FiLogIn} from "react-icons/fi"
 import {FaSearch} from "react-icons/fa"
 import {FiShoppingCart} from "react-icons/fi"
