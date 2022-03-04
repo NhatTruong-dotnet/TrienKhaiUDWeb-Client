@@ -1,5 +1,5 @@
 import React from 'react'
-import GlobalStyle from '../../GlobalStyle/GlobalStyle'
+import GlobalStyle from '../GlobalStyle/GlobalStyle'
 import ListBook from './Components/ListBook/ListBook'
 import Sidebar from './Components/Sidebar/Sidebar'
 import styles from './index.module.css'

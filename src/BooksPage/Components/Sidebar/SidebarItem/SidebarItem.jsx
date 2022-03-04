@@ -1,5 +1,4 @@
 import styles from './sidebarItem.module.css'
-import { BiChevronDown } from 'react-icons/bi'
 
 function SidebarItem({ title, listFilter = [], checkbox }) {
     return (
@@ -15,9 +14,6 @@ function SidebarItem({ title, listFilter = [], checkbox }) {
                 </div>
             ))}
 
-            <div className={styles.showAction}>
-                Xem thêm <BiChevronDown className={styles.icon} />
-            </div>
         </div>
     )
 }
