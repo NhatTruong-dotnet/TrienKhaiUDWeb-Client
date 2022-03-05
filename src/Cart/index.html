@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cart-page">
+            <div id="content">
+
+                <!-- <div class="fhs_redis_cart_msg">
+                    <div>
+                        <img
+                            src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/exclaiming.svg?q=10077" />
+                    </div>
+                    <div class="message">
+                    </div>
+                </div>
+
+                <div class="message_error"></div>
+
+                <div class="cart">
+                    <div class="cart-banner-block fhs-no-mobile-block">
+                    </div>
+                    <div class="page-title title-buttons">
+                        <div class="page-title-container">
+                            <h1 style="display: inline-block;width: auto;">Giỏ hàng</h1>
+                            <span class="cart-title-num-items"></span>
+                        </div>
+                    </div>
+                    <div class="cart-loading">
+                        <div class="cart-loading-icon">
+                            <img
+                                src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/bar_loading.gif?q=10077" />
+                        </div>
+                    </div>
+                    <div class="cart-event-promo-outer-mobile" style="display: none;">
+                        <div class="col-xs-12 col-sm-12 block event-cart-mobile-ui event-promotion-block"
+                            id="block-totals-mobile" style="display:none;">
+                            <div class="totals">
+                                <div class="fhs_checkout_event_promotion">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                <form action="https://www.fahasa.com/checkout/cart/updatePost/" method="post" id="form-cart">
+                    <input name="form_key" type="hidden" value="8unjGJg0llFS6MT7" />
+                    <div class="cart-ui-content row ">
+                        <div class="col-sm-8 col-xs-12">
+                            <div>
+                                <div class="header-cart-item">
+                                    <div class="checkbox-all-product ">
+                                        <input class="checkbox-add-cart" type="checkbox" id="checkbox-all-products"
+                                            onclick="cart.checkAllProducts()" />
+                                    </div>
+                                    <div><span>Chọn tất cả (<span class="num-items-checkbox"></span> sản phẩm)</span>
+                                    </div>
+                                    <div>Số lượng</div>
+                                    <div>Thành tiền</div>
+                                    <div></div>
+                                </div>
+                                <div class="product-cart-left">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 hidden-max-width-992">
+                            <div class="total-cart-right">
+                                <div class="effect-scroll-cart-right">
+
+                                    <div class="cart-event-promo-outer">
+                                        <div class="col-xs-12 col-sm-12 block event-promotion-block" id="block-totals"
+                                            style="display: none;">
+                                            <div class="totals">
+                                                <div class="fhs_checkout_event_promotion">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both;"></div>
+                                    <div class="block-total-cart" style="display: none;">
+                                        <div class="block-totals-cart-page">
+                                        </div>
+                                        <div class="checkout-type-button-cart" style="text-align: center;">
+                                            <div class="method-button-cart">
+                                                <button onclick="cart.goToCheckout(this)" type="button"
+                                                    title="Thanh toán"
+                                                    class="button btn-proceed-checkout btn-checkout"><span><span>Thanh
+                                                            toán</span></span>
+                                                </button>
+                                                <div class="retail-note"><a
+                                                        href="https://www.fahasa.com/chinh-sach-khach-si/"
+                                                        target="_blank">(Giảm giá trên web chỉ áp dụng cho bán lẻ)</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="fhs_error_message_cart"
+                                        style="margin-top:10px;background: white;padding:10px;display:none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+            </form>
+</body>
+
+</html>
