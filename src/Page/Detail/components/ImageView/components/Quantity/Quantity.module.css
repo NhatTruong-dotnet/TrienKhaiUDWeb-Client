@@ -21,7 +21,6 @@
 .decrease > *,
 .increase > * {
     width: 36px;
-    margin-top: 5px;
     cursor: pointer;
 }
 .number {

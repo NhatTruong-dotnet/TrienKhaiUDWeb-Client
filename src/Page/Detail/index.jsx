@@ -17,7 +17,8 @@ function DetailContainer(props) {
     const [bookDetail, setBookDetail] = useState({})
     const [selectedAmount, setSelectedAmount] = useState(1)
 
-    const { bookName } = useParams()
+    const param = useParams()
+    const { bookName } = param
 
     useEffect(() => {
         const fetchData = async () => {
