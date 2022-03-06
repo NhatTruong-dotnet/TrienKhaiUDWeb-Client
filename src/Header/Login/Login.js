@@ -1,4 +1,5 @@
 import {GrClose} from "react-icons/gr"
+import "./login.css"
 function Login(){
     return(
         <div className="login_form" id="login-register">

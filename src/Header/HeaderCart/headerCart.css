@@ -1,0 +1,102 @@
+.top-cart-content {
+    margin-top: 16px;
+    /* display: block; */
+    display: none;
+    width: 360px;
+    position: absolute;
+    bottom: -21px;
+    right: 0;
+    border: 1px solid #e4e4e4;
+    background: #fff;
+    /* padding: 12px; */
+    text-align: left;
+    -webkit-transform: translate(0, 100%);
+    -ms-transform: translate(0, 100%);
+    -moz-transform: translate(0, 100%);
+    transform: translate(0, 100%);
+    -webkit-box-shadow: 0 3px 8px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    box-shadow: 0 3px 8px rgb(0 0 0 / 25%);
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    font-family: 'Nunito Sans' !important;
+    
+}
+.top-cart-content li.item {
+    float: left;
+    width: 100%;
+    margin: 0 0 0px;
+}
+.top-cart-content .mini-products-list > li {
+    display: flex;
+}
+.mini-products-list .product-image {
+    /* flex: 1; */
+    width: 80px;
+}
+.mini-products-list .product-details {
+    margin-left: 0px;
+}
+.top-cart-content .product-details {
+    position: relative;
+}
+p {
+    margin: 0 0 10px;
+}
+.top-subtotal {
+    float: left;
+    font-size: 1.1em;
+    margin: 0;
+    font-size: 10px;
+    /* text-transform: uppercase; */
+    flex: 1;
+    color: #0D0E0F;
+}
+.top-subtotal > div:nth-of-type(1) {
+    font-size: 1.4em;
+}
+
+.cart-btn-checkout .btn-checkout  span{
+    border: none;
+    /* padding: 10px 20px; */
+    border-radius: 8px;
+}
+
+.cart-btn-checkout .btn-checkout{
+    border: none;
+    background: #C92127;
+    border-radius: 8px;
+}
+.cart-btn-checkout .btn-checkout > span{
+    color: white;
+    background: #C92127;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-size: 13px;
+}
+.product-details .product-name-no-ellipsis a{
+    font-size: 14.3px;
+    color: #0D0E0F;
+}
+.top-cart-header{    
+    display:flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid #ededed;
+}
+.top-cart-header span{    
+    margin-left: 6;
+    font-weight: bold;
+    font-size: 15.6px;
+    color: #333333;
+}
+
+.cart-price {
+    width: auto;
+    font-size: 13.65px;
+    color: #0D0E0F;
+    font-weight: 600;
+}

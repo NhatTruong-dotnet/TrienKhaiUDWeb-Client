@@ -5,6 +5,7 @@ import {FiBell} from "react-icons/fi"
 import "./Login/Login"
 import "./header.css"
 import Login from "./Login/Login"
+import HeaderCart from "./HeaderCart/HeaderCart"
 function Header (){
     return (
         <div className="hero_area">
@@ -40,19 +41,26 @@ function Header (){
                 </button>
               </from>
             </li>
-            <li className="nav-item" style={{ textAlign: "center" }}>
+            <li className="nav-item" style={{ textAlign: "center"}}>
               <FiBell className="header-icon"/>            
               <a className="nav-link" href="#">
                 {" "}
                 Thông báo
               </a>
+              {/* <div class="cart-number" >
+						    <span>1</span>
+					     </div> */}
             </li>
-            <li className="nav-item" style={{ textAlign: "center" }}>
+            <li className="nav-item header-cart-noti" style={{ textAlign: "center" }}>
               <FiShoppingCart className="header-icon"/>            
               <a className="nav-link" href="#">
                 {" "}
                 Giỏ hàng
               </a>
+              {/* <div class="cart-number" >
+						    <span>1</span>
+					     </div> */}
+              <HeaderCart style={{top:"-20px"}}/>
             </li>
             <li className="nav-item " style={{ textAlign: "center" }} onClick={()=>{
               document.getElementById("login-register").classList.add("active");
