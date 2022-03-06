@@ -8,6 +8,7 @@ import Messenger from "./Admin/pages/messenger/Messenger";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import HomePage from "./HomePage/HomePage";
+import BookPage from "./Page/BooksPage";
 import Detail from './Page/Detail'
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/books">
+          <BookPage />
         </Route>
         <Route path="/admin/messenger">
           <Messenger />

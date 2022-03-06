@@ -1,7 +1,17 @@
 import styles from './sidebarItem.module.css'
 import { BiChevronDown } from 'react-icons/bi'
+import { useHistory } from "react-router-dom";
+import { useEffect } from 'react';
 
 function SidebarItem({ title, listFilter = [], checkbox }) {
+    let url =localStorage.getItem('url');
+    const navigate = useHistory();
+
+    function setURLFilter(url){
+        localStorage.setItem('url',JSON.stringify(url));
+        navigate.push('/books')
+    }
+
     return (
         <div className={styles.sideBar}>
             <div className={styles.sidebarTitle}>{title}</div>
@@ -10,14 +20,12 @@ function SidebarItem({ title, listFilter = [], checkbox }) {
                     {checkbox ? (
                         <FilterCheckBox id={id} value={value} label={label} />
                     ) : (
-                        <div className={styles.link}>{label}</div>
+                        <div className={styles.link} onClick={() => {
+                            setURLFilter(value)
+                        }}>{label}</div>
                     )}
                 </div>
             ))}
-
-            <div className={styles.showAction}>
-                Xem thêm <BiChevronDown className={styles.icon} />
-            </div>
         </div>
     )
 }
