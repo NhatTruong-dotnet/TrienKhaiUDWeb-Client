@@ -1,16 +1,15 @@
 import styles from './Quantity.module.css'
 import { GrFormSubtract, GrFormAdd } from 'react-icons/gr'
-import { useState } from 'react'
 
-function Quantity(props) {
-    const [value, setValue] = useState(1)
-
+function Quantity({ max, value, onChangeValue }) {
     const handleIncrease = () => {
-        setValue(value + 1)
+        if (value < max) {
+            onChangeValue(value + 1)
+        }
     }
     const handleDecrease = () => {
         if (value > 1) {
-            setValue(value - 1)
+            onChangeValue(value - 1)
         }
     }
     return (

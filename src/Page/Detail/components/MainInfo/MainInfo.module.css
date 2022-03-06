@@ -59,6 +59,10 @@
     color: #0d0e0f;
     font-weight: 300;
     padding-left: 5px;
+    display: none;
+}
+.withDiscount {
+    display: inline-block;
     text-decoration: line-through;
 }
 .discountPercentage {

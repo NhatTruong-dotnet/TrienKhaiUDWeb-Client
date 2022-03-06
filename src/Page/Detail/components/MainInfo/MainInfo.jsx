@@ -3,48 +3,78 @@ import clsx from 'clsx'
 import RatingStar from '../../../../Common/RatingStar/RatingStar'
 import { formatCurrency } from '../../../../Tools/formatCurrency'
 
-function MainInfo(props) {
+function MainInfo({
+    name,
+    suppiler,
+    publisher,
+    author,
+    bookLayout,
+    rating = [],
+    bookDetail,
+    discountPrice,
+    discountPercentage,
+    price,
+}) {
+    const totalRatingValue = rating.reduce(
+        (prev, { ratingValue }) => prev + ratingValue,
+        0
+    )
+    const averageRatingValue = totalRatingValue / rating.length
+
     return (
         <>
-            <h1 className={styles.name}>Thám Tử Lừng Danh Conan - Tập 99</h1>
+            <h1 className={styles.name}>{name}</h1>
             <div className='mainInfoContainer'>
                 <div className={styles.mainInfoRow}>
                     <div className={styles.mainInfo}>
                         <span className={styles.label}>Nhà cung cấp:</span>
                         <span className={clsx(styles.content, styles.link)}>
-                            Nhà Xuất Bản Kim Đồng
+                            {suppiler}
                         </span>
                     </div>
                     <div className={styles.mainInfo}>
                         <span className={styles.label}>Tác giả:</span>
-                        <span className={styles.content}>
-                            Gosho Aoyama, Yutaka Abe, Denjiro Maru
-                        </span>
+                        <span className={styles.content}>{author}</span>
                     </div>
                 </div>
                 <div className={styles.mainInfoRow}>
                     <div className={styles.mainInfo}>
                         <span className={styles.label}>Nhà xuất bản:</span>
                         <span className={clsx(styles.content, styles.link)}>
-                            NXB Kim Đồng
+                            {publisher}
                         </span>
                     </div>
                     <div className={styles.mainInfo}>
                         <span className={styles.label}>Hình thức bìa:</span>
-                        <span className={styles.content}>Bìa mềm</span>
+                        <span className={styles.content}>{bookLayout}</span>
                     </div>
                 </div>
-                <RatingStar>
-                    <span className={styles.ratingAmount}>(0) đánh giá</span>
+                <RatingStar value={averageRatingValue}>
+                    <span className={styles.ratingAmount}>
+                        ({rating.length}) đánh giá
+                    </span>
                 </RatingStar>
                 <div className={styles.priceContainer}>
                     <div className={styles.discountPrice}>
-                        {formatCurrency(63000)}
+                        {formatCurrency(
+                            discountPrice ||
+                                price - (price / 100) * discountPercentage ||
+                                price
+                        )}
                     </div>
-                    <div className={styles.oldPrice}>
-                        {formatCurrency(70000)}
+                    <div
+                        className={clsx(styles.oldPrice, {
+                            [styles.withDiscount]:
+                                discountPrice || discountPercentage || false,
+                        })}
+                    >
+                        {formatCurrency(price)}
                     </div>
-                    <div className={styles.discountPercentage}>-20%</div>
+                    {discountPercentage && (
+                        <div className={styles.discountPercentage}>
+                            -{discountPercentage}%
+                        </div>
+                    )}
                 </div>
             </div>
         </>

@@ -7,22 +7,32 @@ import { useState } from 'react'
 import Modal from '../../../../Common/Modal/Modal'
 import ReviewForm from './components/ReviewForm/ReviewForm'
 
-function Rating(props) {
+function Rating({ rating = [] }) {
     const [isOpenModal, setIsOpenModal] = useState(false)
+
+    const totalRatingValue = rating.reduce(
+        (prev, { ratingValue }) => prev + ratingValue,
+        0
+    )
+    const averageRatingValue = totalRatingValue / rating.length
+
     return (
         <div className={styles.ratingContainer}>
             <div className={styles.averageRating}>
                 <div className={styles.ratingNumber}>
-                    0 <span className={styles.textSm}>/5</span>
+                    {averageRatingValue}{' '}
+                    <span className={styles.textSm}>/5</span>
                 </div>
-                <RatingStar />
-                <div className={styles.ratingAmount}>(0) đánh giá</div>
+                <RatingStar value={averageRatingValue} />
+                <div className={styles.ratingAmount}>
+                    ({rating.length}) đánh giá
+                </div>
             </div>
             <div className={styles.wrapBtn}>
                 <Button
                     icon={<BiPencil />}
                     style={{ minWidth: 360 }}
-                    onOpenModal={() => setIsOpenModal(!isOpenModal)}
+                    eventClick={() => setIsOpenModal(!isOpenModal)}
                 >
                     Viết đánh giá
                 </Button>

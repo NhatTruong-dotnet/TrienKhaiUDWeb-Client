@@ -2,15 +2,18 @@ import clsx from 'clsx'
 import { AiFillStar } from 'react-icons/ai'
 import styles from './book.module.css'
 import { formatCurrency } from '../../../Tools/formatCurrency'
+import { useHistory } from 'react-router-dom'
 
 function Book({
+    id,
     imgSrc = 'https://cdn0.fahasa.com/media/catalog/product/cache/1/small_image/400x400/9df78eab33525d08d6e5fb8d27136e95/i/m/image_195509_1_36793.jpg',
-    name = 'Nhà Giả Kim (Tái bản 2020)',
-    discountPrice = 20000,
-    discountPercentage = 20,
-    price = 70000,
-    rating = [{ ratingValue: 5 }, { ratingValue: 3 }],
+    name,
+    discountPrice,
+    discountPercentage,
+    price,
+    rating,
 }) {
+    const history = useHistory()
     const renderRatingValue = rating => {
         const totalRatingValue = rating.reduce(
             (prev, { ratingValue }) => prev + ratingValue,
@@ -37,22 +40,36 @@ function Book({
         return result
     }
 
+    const handleSelectBook = () => {
+        localStorage.setItem(
+            'selectedBook',
+            JSON.stringify({ id, bookName: name })
+        )
+        history.push(`/detail/${name}`)
+    }
+
     return (
-        <div className={styles.wrap}>
+        <div className={styles.wrap} onClick={handleSelectBook}>
             <div className={styles.bookItem}>
                 <img src={imgSrc} alt={name} className={styles.bookImg} />
+
                 {discountPercentage && (
                     <div className={styles.discount}>{discountPercentage}%</div>
                 )}
+
                 <div className={styles.name}>{name}</div>
-                {(discountPrice || discountPercentage) && (
-                    <div className={styles.discountPrice}>
-                        {formatCurrency(discountPrice) ||
-                            formatCurrency(
-                                price - (price / 100) * discountPercentage
-                            )}
-                    </div>
-                )}
+
+                <div className={styles.discountPrice}>
+                    {formatCurrency(
+                        discountPrice ||
+                            price - (price / 100) * discountPercentage ||
+                            price
+                    )}
+                </div>
+
+                {/* {(discountPrice || discountPercentage) && (
+                    
+                )} */}
                 <div
                     className={clsx(styles.price, {
                         [styles.withDiscount]:

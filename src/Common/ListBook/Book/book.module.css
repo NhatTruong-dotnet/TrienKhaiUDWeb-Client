@@ -45,9 +45,9 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    min-height: 40px;
-    max-height: 40px;
-    /* width: 200px; */
+    height: 40px;
+    overflow-y: hidden;
+    line-height: 20px;
 }
 
 .discountPrice {
@@ -65,10 +65,12 @@
     font-family: sans-serif;
     color: #999;
     margin-bottom: 10px;
+    display: none;
 }
 
 .withDiscount {
     text-decoration: line-through;
+    display: block;
 }
 
 .rating {

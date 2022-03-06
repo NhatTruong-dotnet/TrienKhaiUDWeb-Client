@@ -2,13 +2,18 @@ import Book from './Book/Book'
 
 import styles from './listBook.module.css'
 
-function ListBook(props) {
+function ListBook({ listBook = [] }) {
     return (
         <div className={styles.listBook}>
-            <Book />
-            <Book />
-            <Book />
-            <Book />
+            {listBook.map(({ _id, name, price, rating }) => (
+                <Book
+                    key={_id}
+                    id={_id}
+                    name={name}
+                    price={price}
+                    rating={rating}
+                />
+            ))}
         </div>
     )
 }

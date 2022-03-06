@@ -3,7 +3,7 @@ import styles from './RatingStar.module.css'
 import clsx from 'clsx'
 import { AiFillStar } from 'react-icons/ai'
 
-function RatingStar({ value, large, style, children, onRating }) {
+function RatingStar({ value, large, style, children, onRating = () => {} }) {
     const result = []
     for (let i = 0; i < 5; i++) {
         if (i < value) {

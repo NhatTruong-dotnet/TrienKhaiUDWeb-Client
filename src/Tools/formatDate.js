@@ -1,3 +1,7 @@
 export const formatDate = dateTime => {
-    return dateTime.split(',')[0]
+    function pad(s) {
+        return s < 10 ? '0' + s : s
+    }
+    var d = new Date(dateTime)
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/')
 }
