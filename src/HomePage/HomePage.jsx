@@ -5,7 +5,6 @@ import './homepage.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 export default function HomePage() {
-  const [conversations, setConversations] = useState([]);
   const [localBooks, setLocalBooks] = useState([]);
   const [globalBooks,setGlobalBooks] = useState([]);
 
@@ -15,18 +14,16 @@ export default function HomePage() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/builehoangnhattruong@gmail.com");
         const bookLocalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/local");
         setLocalBooks(bookLocalResponse.data);
         const globalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/global");
-        setGlobalBooks((globalResponse.data).slice(0,5));
-        setConversations(res.data[0].messages);
+        setGlobalBooks((globalResponse.data).slice(0,4));
       } catch (error) {
         console.log(error);
       }
     }
-    getConversations();
-  })
+   getConversations();
+  },[url])
 
   return (
     <>

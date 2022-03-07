@@ -29,12 +29,12 @@ export default function Conversation(props) {
         //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
         const getConversations = async () => {
+
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
                 const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
                 if (currentUser.gmail !== "") {
                     setConversations(res.data[0].messages);
-                    console.log('load in useEffect');
                 }
             } catch (error) {
                 console.log(error);
@@ -57,8 +57,6 @@ export default function Conversation(props) {
 
     useEffect(() => {
       scrollRef.current?.scrollIntoView({behavior:"smooth"});
-      console.log('load in change');
-
     }, [conversations])
 
     function isPopupModalGuestUser() {
