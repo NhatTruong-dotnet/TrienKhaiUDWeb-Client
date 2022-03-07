@@ -11,8 +11,7 @@ import { Context } from './Context/Context'
 function Books(props) {
     const { listBook, fetchData } = useContext(Context)
 
-    const url = 'https://serverbookstore.herokuapp.com/api/Books'
-
+    let url = JSON.parse(localStorage.getItem('url'));
     useEffect(() => {
         fetchData(url)
     }, [url])

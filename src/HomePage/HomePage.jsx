@@ -6,27 +6,20 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
-  const arr1 = [
-    {
-      id: 1,
-      label: 'Sách tiếng Việt',
-      value: 1,
-    },
-    {
-      id: 2,
-      label: 'Thiếu nhi',
-      value: 2,
-    },
-    {
-      id: 3,
-      label: 'Văn học',
-      value: 3,
-    },
-  ]
+  const [localBooks, setLocalBooks] = useState([]);
+  const [globalBooks,setGlobalBooks] = useState([]);
+
+  const url = 'https://serverbookstore.herokuapp.com/api/Books'
+
+
   useEffect(() => {
     const getConversations = async () => {
       try {
         const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/builehoangnhattruong@gmail.com");
+        const bookLocalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/local");
+        setLocalBooks(bookLocalResponse.data);
+        const globalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/global");
+        setGlobalBooks((globalResponse.data).slice(0,5));
         setConversations(res.data[0].messages);
       } catch (error) {
         console.log(error);
@@ -45,7 +38,8 @@ export default function HomePage() {
               <Sidebar />
             </div>
             <div className='col-9'>
-              <ListBook />
+              <ListBook listBook={localBooks} />
+              <ListBook listBook={globalBooks} />
             </div>
           </div>
         </div>
