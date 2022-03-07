@@ -17,7 +17,7 @@ export default function CartItem(props) {
                     <span className="cart-price" >
                       {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.bookPrice)}&nbsp;đ
                     </span>
-                    <span style={{fontSize:"13px"}}> x 1{/*<span*/}</span>
+                    <span style={{fontSize:"13px"}}> x {props.amount}{/*<span*/}</span>
                   </div>
                 </li>      
                 

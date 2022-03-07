@@ -13,23 +13,24 @@ function HeaderCart() {
         JSON.parse(localStorage.getItem("user")).gmail
     );
   }, []);
-  console.log(carts);
+  let total=0;
   return (
     <div className="top-cart-content">
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div className="top-cart-header">
           <FiShoppingCart />
-          <span>&nbsp; Giỏ hàng (2) </span>
+          <span>&nbsp; Giỏ hàng ({carts.length}) </span>
         </div>
 
         {carts.map((element) => {
-          return <CartItem key={element._id} bookName={element.bookName} bookPrice={element.price} />
+          total += (parseInt(element.price)*parseInt(element.amount))
+          return <CartItem key={element._id} bookName={element.bookName} amount={element.amount} bookPrice={element.price} />
         })}
       </div>
       <div style={{ display: "flex", padding: "12px 16px" }}>
         <div className="top-subtotal">
           <div>Thành tiền</div>
-          <div>110.150&nbsp;đ</div>
+          <div>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)}&nbsp;đ</div>
         </div>
         <a href="" style={{ flex: 1 }} className="cart-btn-checkout">
           <button

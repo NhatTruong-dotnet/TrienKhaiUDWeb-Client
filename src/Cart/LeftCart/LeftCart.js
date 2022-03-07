@@ -34,9 +34,11 @@ function RightCart() {
         {carts.map((element) => {
           return (
             <LeftCartItem
+                id={element.bookId}
               key={element._id}
               bookName={element.bookName}
               bookPrice={element.price}
+              amount={element.amount}
             />
           );
         })}
