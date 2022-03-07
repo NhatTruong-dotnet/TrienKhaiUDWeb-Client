@@ -56,7 +56,9 @@ export default function Conversation(props) {
     }
 
     useEffect(() => {
-      scrollRef.current?.scrollIntoView({behavior:"smooth"})
+      scrollRef.current?.scrollIntoView({behavior:"smooth"});
+      console.log('load in change');
+
     }, [conversations])
 
     function isPopupModalGuestUser() {
