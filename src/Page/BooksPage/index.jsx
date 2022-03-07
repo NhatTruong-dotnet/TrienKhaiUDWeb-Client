@@ -6,6 +6,7 @@ import styles from './index.module.css'
 import Sort from './Components/Sort/Sort'
 import Paging from '../../Common/Paging/Paging'
 import { Context } from './Context/Context'
+import Conversation from './../../Chat/Conversation'
 // import ContextProvider from './Context/Context'
 
 function Books(props) {
@@ -38,6 +39,7 @@ function Books(props) {
                 </div>
             </div>
             {/* </ContextProvider> */}
+            <Conversation />
         </GlobalStyle>
     )
 }
