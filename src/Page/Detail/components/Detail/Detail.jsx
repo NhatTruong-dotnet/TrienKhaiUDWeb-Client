@@ -1,7 +1,7 @@
 import styles from './Detail.module.css'
 import clsx from 'clsx'
 
-function Detail(props) {
+function Detail({ bookDetail }) {
     return (
         <>
             <div className={styles.detailContainer}>
