@@ -6,14 +6,17 @@ import "./Login/Login"
 import "./header.css"
 import Login from "./Login/Login"
 import HeaderCart from "./HeaderCart/HeaderCart"
+import { useHistory } from "react-router-dom"
 function Header (){
+
+  const navigate = useHistory();
     return (
         <div className="hero_area">
   {/* header section strats */}
   <header className="header_section">
     <div className="container-fluid">
       <nav className="navbar navbar-expand-lg custom_nav-container ">
-        <a className="navbar-brand" href="#"style={{ alignItems: "center", paddingLeft: 100 }}>
+        <a  className="navbar-brand" href="#"style={{ alignItems: "center", paddingLeft: 100 }}>
           <span>Bostorek</span>
         </a>
        

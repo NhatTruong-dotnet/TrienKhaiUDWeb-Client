@@ -9,9 +9,10 @@ import MainInfo from './components/MainInfo/MainInfo'
 import Detail from './components/Detail/Detail'
 import Rating from './components/Rating/Rating'
 import CommentList from './components/Rating/components/CommentList/CommentList'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { Context } from "../../Header/Context/Context";
 
 function DetailContainer(props) {
     const [bookDetail, setBookDetail] = useState({})
@@ -19,7 +20,7 @@ function DetailContainer(props) {
 
     const param = useParams()
     const { bookName } = param
-
+    const { carts, fetchData } = useContext(Context);
     useEffect(() => {
         const fetchData = async () => {
             const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
@@ -34,6 +35,7 @@ function DetailContainer(props) {
         fetchData()
     }, [bookName])
 
+    
     const {
         _id: id,
         name,
@@ -45,6 +47,21 @@ function DetailContainer(props) {
         price,
         numberInStock,
     } = bookDetail
+    
+    async function  addItemToCart(){
+        let cartItem ={
+            bookId: id,
+            price: price,
+            amount : selectedAmount,
+            bookName:name
+        }
+        try {
+            await axios.post("https://serverbookstore.herokuapp.com/api/carts/"+ JSON.parse(localStorage.getItem("user")).gmail,cartItem)
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
 
     return (
         <GlobalStyle>
@@ -57,7 +74,11 @@ function DetailContainer(props) {
                             {/* handle cart here */}
                             <Button
                                 icon={<RiShoppingCart2Line />}
-                                eventClick={() => {}}
+                                eventClick={async () => {
+                                    await addItemToCart();
+                                    fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
+                                    JSON.parse(localStorage.getItem("user")).gmail)
+                                }}
                             >
                                 Thêm vào giỏ hàng
                             </Button>

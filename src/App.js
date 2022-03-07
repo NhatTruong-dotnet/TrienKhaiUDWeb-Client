@@ -6,10 +6,18 @@ import HomePage from './HomePage/HomePage'
 import BookPage from './Page/BooksPage'
 import Detail from './Page/Detail'
 import ContextProvider from './Page/BooksPage/Context/Context'
+import CartContextProvider from './Header/Context/Context'
 
+import Cart from './Cart/Cart'
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+
+const common_en = require('./Common/translations/en/common.json');
+const common_vn = require('./Common/translations/vn/common.json');
 export default function App() {
     return (
         <>
+        <CartContextProvider>
             <Header />
             <Router>
                 <Switch>
@@ -27,9 +35,14 @@ export default function App() {
                     <Route exact path='/detail/:bookName'>
                         <Detail />
                     </Route>
+                    <Route exact path='/checkout/cart'>
+                        <Cart />
+                    </Route>
                 </Switch>
             </Router>
             <Footer />
+        </CartContextProvider>
+
         </>
     )
 }
