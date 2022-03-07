@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from 'react';
 
 function SidebarItem({ title, listFilter = [], checkbox }) {
-    let urlState =localStorage.getItem('url');
+    let url =localStorage.getItem('url');
     const navigate = useHistory();
 
     function setURLFilter(url){

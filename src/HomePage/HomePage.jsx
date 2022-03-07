@@ -5,25 +5,35 @@ import './homepage.css'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 export default function HomePage() {
-  const [localBooks, setLocalBooks] = useState([]);
-  const [globalBooks,setGlobalBooks] = useState([]);
-
-  const url = 'https://serverbookstore.herokuapp.com/api/Books'
-
-
+  const [conversations, setConversations] = useState([]);
+  const arr1 = [
+    {
+      id: 1,
+      label: 'Sách tiếng Việt',
+      value: 1,
+    },
+    {
+      id: 2,
+      label: 'Thiếu nhi',
+      value: 2,
+    },
+    {
+      id: 3,
+      label: 'Văn học',
+      value: 3,
+    },
+  ]
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const bookLocalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/local");
-        setLocalBooks(bookLocalResponse.data);
-        const globalResponse = await axios.get("https://serverbookstore.herokuapp.com/api/Books/Search-Translator/global");
-        setGlobalBooks((globalResponse.data).slice(0,4));
+        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/builehoangnhattruong@gmail.com");
+        setConversations(res.data[0].messages);
       } catch (error) {
         console.log(error);
       }
     }
    getConversations();
-  },[url])
+  },[])
 
   return (
     <>
@@ -35,8 +45,7 @@ export default function HomePage() {
               <Sidebar />
             </div>
             <div className='col-9'>
-              <ListBook listBook={localBooks} />
-              <ListBook listBook={globalBooks} />
+              <ListBook />
             </div>
           </div>
         </div>

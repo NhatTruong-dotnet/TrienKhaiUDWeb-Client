@@ -7,12 +7,12 @@ const arr1 = [
     {
         id: 1,
         label: 'Sách trong nước',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator/local",
+        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator",
     },
     {
         id: 2,
         label: 'Sách nước ngoài',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator/global",
+        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator",
     },
     {
         id: 3,
