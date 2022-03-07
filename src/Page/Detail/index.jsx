@@ -15,23 +15,22 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 
 function DetailContainer(props) {
     const [bookDetail, setBookDetail] = useState({})
+
     const [selectedAmount, setSelectedAmount] = useState(1)
 
-    const param = useParams()
-    const { bookName } = param
+    const { bookName } = useParams()
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
-            try {
-                const res = await axios.get(url)
-                setBookDetail(res.data[0])
-            } catch (error) {
-                console.log(error)
-            }
+    const getBookDetail = async () => {
+        const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
+        try {
+            const res = await axios.get(url)
+            setBookDetail(res.data[0])
+        } catch (error) {
+            console.log(error)
         }
-
-        fetchData()
+    }
+    useEffect(() => {
+        getBookDetail()
     }, [bookName])
 
     const {
@@ -93,7 +92,11 @@ function DetailContainer(props) {
                 </div>
                 <div className={styles.wrap}>
                     <div className={styles.header}>Đánh giá sản phẩm</div>
-                    <Rating rating={rating} />
+                    <Rating
+                        rating={rating}
+                        bookId={id}
+                        getBookDetail={getBookDetail}
+                    />
                     <CommentList rating={rating} />
                 </div>
             </div>

@@ -6,6 +6,7 @@ import HomePage from './HomePage/HomePage'
 import BookPage from './Page/BooksPage'
 import Detail from './Page/Detail'
 import ContextProvider from './Page/BooksPage/Context/Context'
+import MyAccount from './Page/MyAccount'
 
 export default function App() {
     return (
@@ -26,6 +27,9 @@ export default function App() {
                     </Route>
                     <Route exact path='/detail/:bookName'>
                         <Detail />
+                    </Route>
+                    <Route exact path='/account'>
+                        <MyAccount />
                     </Route>
                 </Switch>
             </Router>

@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Modal from '../../../../Common/Modal/Modal'
 import ReviewForm from './components/ReviewForm/ReviewForm'
 
-function Rating({ rating = [] }) {
+function Rating({ rating = [], bookId, getBookDetail }) {
     const [isOpenModal, setIsOpenModal] = useState(false)
 
     const totalRatingValue = rating.reduce(
@@ -39,7 +39,11 @@ function Rating({ rating = [] }) {
             </div>
             {isOpenModal && (
                 <Modal>
-                    <ReviewForm onCloseModal={() => setIsOpenModal(false)} />
+                    <ReviewForm
+                        onCloseModal={() => setIsOpenModal(false)}
+                        bookId={bookId}
+                        getBookDetail={getBookDetail}
+                    />
                 </Modal>
             )}
         </div>
