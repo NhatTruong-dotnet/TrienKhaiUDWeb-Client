@@ -13,11 +13,12 @@ import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { Context } from "../../Header/Context/Context";
+import { useHistory } from 'react-router-dom'
 
 function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context);
     const [bookDetail, setBookDetail] = useState({})
-
+    const navigate = useHistory();
     const [selectedAmount, setSelectedAmount] = useState(1)
 
     const { bookName } = useParams()
@@ -83,7 +84,12 @@ function DetailContainer(props) {
                             >
                                 Thêm vào giỏ hàng
                             </Button>
-                            <Button solid>Mua hàng</Button>
+                            <Button eventClick={async () => {
+                                    await addItemToCart();
+                                    fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
+                                    JSON.parse(localStorage.getItem("user")).gmail)
+                                    navigate.push('/checkout/payment')
+                                }} solid>Mua hàng</Button>
                             {/* handle cart here */}
                         </div>
                         <div className='col l-7'>

@@ -12,6 +12,7 @@ import MyAccount from './Page/MyAccount'
 import Cart from './Cart/Cart'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
+import Payment from './Cart/components/payment/Payment'
 
 const common_en = require('./Common/translations/en/common.json')
 const common_vn = require('./Common/translations/vn/common.json')
@@ -41,6 +42,9 @@ export default function App() {
                         </Route>
                         <Route path='/account/:tab'>
                             <MyAccount />
+                        </Route>
+                        <Route path='/checkout/payment'>
+                            <Payment />
                         </Route>
                     </Switch>
                     <Footer />
