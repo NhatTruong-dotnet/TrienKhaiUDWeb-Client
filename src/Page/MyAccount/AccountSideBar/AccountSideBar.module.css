@@ -1,0 +1,14 @@
+.sideBarContainer {
+    padding: 30px 0 15px 20px;
+}
+.title {
+    font-size: 20px;
+    color: #c92127;
+    padding: 10px 15px 10px 0;
+    word-wrap: break-word;
+    display: inline-block;
+    text-transform: uppercase;
+    background: #fff;
+    font-weight: 700;
+    font-family: sans-serif;
+}

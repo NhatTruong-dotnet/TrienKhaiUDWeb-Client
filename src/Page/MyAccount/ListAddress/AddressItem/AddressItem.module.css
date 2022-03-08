@@ -1,0 +1,28 @@
+.address {
+    border-bottom: 1px solid #f2f2f2;
+    padding: 20px 0;
+    position: relative;
+}
+.title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.text {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.label {
+    font-size: 13px;
+    font-weight: 700;
+    width: 70px;
+    display: inline-block;
+}
+.link {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    color: #c92127;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}

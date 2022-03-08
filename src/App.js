@@ -28,7 +28,7 @@ export default function App() {
                     <Route exact path='/detail/:bookName'>
                         <Detail />
                     </Route>
-                    <Route exact path='/account'>
+                    <Route path='/account/:tab'>
                         <MyAccount />
                     </Route>
                 </Switch>

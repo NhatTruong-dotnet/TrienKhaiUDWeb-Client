@@ -1,0 +1,8 @@
+.listAddress {
+    position: relative;
+}
+.wrap {
+    position: absolute;
+    top: -48px;
+    right: 10px;
+}

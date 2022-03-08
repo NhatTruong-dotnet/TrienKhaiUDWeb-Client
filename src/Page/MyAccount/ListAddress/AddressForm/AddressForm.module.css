@@ -1,0 +1,44 @@
+.form {
+    max-width: 740px;
+}
+.formGroup {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.formGroup + .formGroup {
+    margin-top: 30px;
+}
+
+.label {
+    flex: 0 0 25%;
+    text-align: left;
+    font-weight: normal;
+    color: #555555;
+    font-size: 13px;
+}
+
+.input {
+    flex: 0 0 75%;
+    padding: 5px 0 5px 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+.file {
+    padding-left: 0;
+}
+.btnWrap {
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+}
+.link {
+    position: absolute;
+    top: 10px;
+    color: #2489f4;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}

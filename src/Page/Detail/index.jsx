@@ -43,6 +43,7 @@ function DetailContainer(props) {
         rating,
         price,
         numberInStock,
+        img,
     } = bookDetail
 
     return (
@@ -51,7 +52,7 @@ function DetailContainer(props) {
                 <div className={styles.wrap}>
                     <div className='row'>
                         <div className='col l-5'>
-                            <ImageView />
+                            <ImageView listImage={img} />
 
                             {/* handle cart here */}
                             <Button

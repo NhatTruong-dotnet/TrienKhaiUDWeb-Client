@@ -6,16 +6,19 @@ import styles from './index.module.css'
 import Sort from './Components/Sort/Sort'
 import Paging from '../../Common/Paging/Paging'
 import { Context } from './Context/Context'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 // import ContextProvider from './Context/Context'
 
 function Books(props) {
     const { listBook, fetchData } = useContext(Context)
 
-    const url = 'https://serverbookstore.herokuapp.com/api/Books'
+    const { url } = useParams()
+    console.log(url)
+    // const url = 'https://serverbookstore.herokuapp.com/api/Books'
 
-    useEffect(() => {
-        fetchData(url)
-    }, [url])
+    // useEffect(() => {
+    //     fetchData(url)
+    // }, [url])
 
     return (
         <GlobalStyle>
