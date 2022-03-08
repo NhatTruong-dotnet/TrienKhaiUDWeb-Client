@@ -1,5 +1,6 @@
 import "./cart.css"
 import RightCart from "./RightCart/RightCart"
+import Conversation from './../Chat/Conversation'
 import LeftCart from "./LeftCart/LeftCart"
 function Cart(){
     return(
@@ -14,6 +15,7 @@ function Cart(){
                     <RightCart/>
                 </div>
             </div>
+            <Conversation />
         </div>
             
     )

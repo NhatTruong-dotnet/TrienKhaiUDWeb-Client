@@ -32,8 +32,8 @@ export default function HomePage() {
         console.log(error);
       }
     }
-    getConversations();
-  })
+   getConversations();
+  },[])
 
   return (
     <>

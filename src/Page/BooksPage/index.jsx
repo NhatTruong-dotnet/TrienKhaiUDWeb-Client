@@ -6,14 +6,14 @@ import styles from './index.module.css'
 import Sort from './Components/Sort/Sort'
 import Paging from '../../Common/Paging/Paging'
 import { Context } from './Context/Context'
+import Conversation from './../../Chat/Conversation'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 // import ContextProvider from './Context/Context'
 
 function Books(props) {
     const { listBook, fetchData } = useContext(Context)
+    const params = useParams()
 
-    const { url } = useParams()
-    console.log(url)
     // const url = 'https://serverbookstore.herokuapp.com/api/Books'
 
     // useEffect(() => {
@@ -41,6 +41,7 @@ function Books(props) {
                 </div>
             </div>
             {/* </ContextProvider> */}
+            <Conversation />
         </GlobalStyle>
     )
 }

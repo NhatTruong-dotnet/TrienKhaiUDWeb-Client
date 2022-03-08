@@ -9,11 +9,13 @@ import MainInfo from './components/MainInfo/MainInfo'
 import Detail from './components/Detail/Detail'
 import Rating from './components/Rating/Rating'
 import CommentList from './components/Rating/components/CommentList/CommentList'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { Context } from "../../Header/Context/Context";
 
 function DetailContainer(props) {
+    const { carts, fetchData } = useContext(Context);
     const [bookDetail, setBookDetail] = useState({})
 
     const [selectedAmount, setSelectedAmount] = useState(1)
@@ -33,6 +35,7 @@ function DetailContainer(props) {
         getBookDetail()
     }, [bookName])
 
+    
     const {
         _id: id,
         name,
@@ -45,6 +48,21 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
+    
+    async function  addItemToCart(){
+        let cartItem ={
+            bookId: id,
+            price: price,
+            amount : selectedAmount,
+            bookName:name
+        }
+        try {
+            await axios.post("https://serverbookstore.herokuapp.com/api/carts/"+ JSON.parse(localStorage.getItem("user")).gmail,cartItem)
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
 
     return (
         <GlobalStyle>
@@ -57,7 +75,11 @@ function DetailContainer(props) {
                             {/* handle cart here */}
                             <Button
                                 icon={<RiShoppingCart2Line />}
-                                eventClick={() => {}}
+                                eventClick={async () => {
+                                    await addItemToCart();
+                                    fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
+                                    JSON.parse(localStorage.getItem("user")).gmail)
+                                }}
                             >
                                 Thêm vào giỏ hàng
                             </Button>
