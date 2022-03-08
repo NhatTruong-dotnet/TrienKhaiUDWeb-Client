@@ -19,11 +19,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import '../../../node_modules/react-toastify/dist/ReactToastify.css';
 function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context);
-    const { seenList, fetchData:renderSeenList } = useContext(SeenListContext);
+    const {  fetchData:renderSeenList } = useContext(SeenListContext);
     const [bookDetail, setBookDetail] = useState({})
     const navigate = useHistory();
     const [selectedAmount, setSelectedAmount] = useState(1)
-    const [cartItem, setCartItem] = useState({})
     const { bookName } = useParams()
 
     const getBookDetail = async () => {
@@ -39,8 +38,9 @@ function DetailContainer(props) {
                 bookName: res.data[0].name
             }
             await axios.post("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail, cartItem).then(() =>{
-                renderSeenList("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail)
             })
+            renderSeenList("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail)
+
         } catch (error) {
             console.log(error)
         }
