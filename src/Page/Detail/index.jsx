@@ -38,8 +38,9 @@ function DetailContainer(props) {
                 bookName: res.data[0].name
             }
             await axios.post("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail, cartItem).then(() =>{
+                renderSeenList("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail)
             })
-            renderSeenList("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail)
+            
 
         } catch (error) {
             console.log(error)
