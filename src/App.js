@@ -7,6 +7,7 @@ import BookPage from './Page/BooksPage'
 import Detail from './Page/Detail'
 import ContextProvider from './Page/BooksPage/Context/Context'
 import CartContextProvider from './Header/Context/Context'
+import SeenListProvider from './Header/Context/SeenListContext'
 import MyAccount from './Page/MyAccount'
 
 import Cart from './Cart/Cart'
@@ -20,6 +21,7 @@ export default function App() {
     return (
         <>
             <Router>
+                <SeenListProvider>
                 <CartContextProvider>
                     <Header />
                     <Switch>
@@ -49,6 +51,7 @@ export default function App() {
                     </Switch>
                     <Footer />
                 </CartContextProvider>
+                </SeenListProvider>
             </Router>
         </>
     )

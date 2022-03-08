@@ -9,14 +9,17 @@ import MainInfo from './components/MainInfo/MainInfo'
 import Detail from './components/Detail/Detail'
 import Rating from './components/Rating/Rating'
 import CommentList from './components/Rating/components/CommentList/CommentList'
-import { useEffect, useState,useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { Context } from "../../Header/Context/Context";
+import { SeenListContext } from "../../Header/Context/SeenListContext";
 import { useHistory } from 'react-router-dom'
-
+import { ToastContainer, toast } from 'react-toastify';
+import '../../../node_modules/react-toastify/dist/ReactToastify.css';
 function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context);
+    const { seenList, fetchData:renderSeenList } = useContext(SeenListContext);
     const [bookDetail, setBookDetail] = useState({})
     const navigate = useHistory();
     const [selectedAmount, setSelectedAmount] = useState(1)
@@ -32,11 +35,11 @@ function DetailContainer(props) {
             console.log(error)
         }
     }
-    useEffect(() => {
-        getBookDetail()
-    }, [bookName])
-
     
+    useEffect(() => {
+         getBookDetail()  
+        }
+    , [bookName])
     const {
         _id: id,
         name,
@@ -49,22 +52,31 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
-    
-    async function  addItemToCart(){
-        let cartItem ={
+
+
+    async function addItemToCart() {
+        let cartItem = {
             bookId: id,
             price: price,
-            amount : selectedAmount,
-            bookName:name
+            amount: selectedAmount,
+            bookName: name
         }
         try {
-            await axios.post("https://serverbookstore.herokuapp.com/api/carts/"+ JSON.parse(localStorage.getItem("user")).gmail,cartItem)
+            await axios.post("https://serverbookstore.herokuapp.com/api/carts/" + JSON.parse(localStorage.getItem("user")).gmail, cartItem)
         } catch (error) {
             console.log(error);
         }
-        
-    }
 
+    }
+    const notify = () => toast.success('Thêm vào giỏ hàng thành công', {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
     return (
         <GlobalStyle>
             <div className='grid wide'>
@@ -79,17 +91,19 @@ function DetailContainer(props) {
                                 eventClick={async () => {
                                     await addItemToCart();
                                     fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
-                                    JSON.parse(localStorage.getItem("user")).gmail)
+                                        JSON.parse(localStorage.getItem("user")).gmail)
+                                    
+                                    notify()
                                 }}
                             >
                                 Thêm vào giỏ hàng
                             </Button>
                             <Button eventClick={async () => {
-                                    await addItemToCart();
-                                    fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
+                                await addItemToCart();
+                                fetchData("https://serverbookstore.herokuapp.com/api/carts/" +
                                     JSON.parse(localStorage.getItem("user")).gmail)
-                                    navigate.push('/checkout/payment')
-                                }} solid>Mua hàng</Button>
+                                navigate.push('/checkout/payment')
+                            }} solid>Mua hàng</Button>
                             {/* handle cart here */}
                         </div>
                         <div className='col l-7'>
@@ -129,6 +143,18 @@ function DetailContainer(props) {
                     <CommentList rating={rating} />
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+
         </GlobalStyle>
     )
 }
