@@ -23,9 +23,7 @@ export default function Payment() {
     setItemsCheckOut(cartsRes.data)
 },[checkoutComplete])
 
-  async function setInvoiceTemplate(templateBody){
-     setNewBillCreated(templateBody)
-  }
+
   let total =0;
   return (
     <>

@@ -23,7 +23,7 @@ function DetailContainer(props) {
     const [bookDetail, setBookDetail] = useState({})
     const navigate = useHistory();
     const [selectedAmount, setSelectedAmount] = useState(1)
-
+    const [cartItem, setCartItem] = useState({})
     const { bookName } = useParams()
 
     const getBookDetail = async () => {
@@ -31,6 +31,16 @@ function DetailContainer(props) {
         try {
             const res = await axios.get(url)
             setBookDetail(res.data[0])
+
+            let cartItem = {
+                bookId: res.data[0]._id,
+                price: res.data[0].price,
+                amount: selectedAmount,
+                bookName: res.data[0].name
+            }
+            console.log(cartItem);
+            await axios.post("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail, cartItem)
+            renderSeenList("https://serverbookstore.herokuapp.com/api/seenList/" + JSON.parse(localStorage.getItem("user")).gmail)
         } catch (error) {
             console.log(error)
         }
