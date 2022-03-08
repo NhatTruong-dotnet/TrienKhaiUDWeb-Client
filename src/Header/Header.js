@@ -54,7 +54,9 @@ function Header (){
 						    <span>1</span>
 					     </div> */}
             </li>
-            <li className="nav-item header-cart-noti" style={{ textAlign: "center" }}>
+            <li className="nav-item header-cart-noti" style={{ textAlign: "center" }} onClick={()=>{
+              navigate.push('/checkout/cart');
+            }}>
               <FiShoppingCart className="header-icon"/>            
               <a className="nav-link" href="#">
                 {" "}
