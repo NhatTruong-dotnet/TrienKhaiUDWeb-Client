@@ -12,6 +12,7 @@ import MyAccount from './Page/MyAccount'
 import Cart from './Cart/Cart'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
+import ToastMessage, { emitMessage } from './Common/ToastMessage/ToastMessage'
 
 const common_en = require('./Common/translations/en/common.json')
 const common_vn = require('./Common/translations/vn/common.json')
@@ -24,6 +25,11 @@ export default function App() {
                     <Switch>
                         <Route exact path='/'>
                             <HomePage />
+                            {/* <button
+                                onClick={() => emitMessage('success', 'Hello')}
+                            >
+                                click
+                            </button> */}
                         </Route>
                         <Route path='/books'>
                             <ContextProvider>
@@ -44,6 +50,7 @@ export default function App() {
                         </Route>
                     </Switch>
                     <Footer />
+                    <ToastMessage />
                 </CartContextProvider>
             </Router>
         </>
