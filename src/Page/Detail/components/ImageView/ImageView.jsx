@@ -1,27 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SelectedImage from './components/SelectedImage/SelectedImage'
 import ThumbnailItem from './components/ThumbnailItem/ThumbnailItem'
 import styles from './ImageView.module.css'
 
-function ImageView({
-    listImage = [
-        {
-            id: 1,
-            imgSrc: 'https://cdn0.fahasa.com/media/catalog/product/t/h/tham-tu-lung-danh-conan-_-tap-99.jpg',
-            name: 'ttld',
-        },
-        {
-            id: 2,
-            imgSrc: 'https://cdn0.fahasa.com/media/catalog/product/6/0/600ra-bo-suoi---bm_1.jpg',
-            name: 'rbs',
-        },
-    ],
-}) {
-    const [selectedImage, setSelectedImage] = useState(listImage[0])
+function ImageView({ listImage = [] }) {
+    const [selectedImage, setSelectedImage] = useState()
 
-    const handleChooseImage = id => {
+    useEffect(() => {
+        setSelectedImage(listImage[0])
+    }, [listImage])
+
+    const handleChooseImage = imgSrc => {
         listImage.forEach(item => {
-            if (id === item.id) {
+            if (imgSrc === item) {
                 setSelectedImage(item)
             }
         })
@@ -30,20 +21,17 @@ function ImageView({
     return (
         <div className={styles.gallery}>
             <div className={styles.thumbnail}>
-                {listImage.map(({ id, imgSrc, name }) => (
+                {listImage.map((imgSrc, index) => (
                     <ThumbnailItem
-                        key={id}
+                        key={index}
                         imgSrc={imgSrc}
-                        alt={name}
-                        onChooseImage={() => handleChooseImage(id)}
+                        alt={'image'}
+                        onChooseImage={() => handleChooseImage(imgSrc)}
                     />
                 ))}
             </div>
             <div className={styles.imageViewContainer}>
-                <SelectedImage
-                    imgSrc={selectedImage.imgSrc}
-                    alt={selectedImage.name}
-                />
+                <SelectedImage imgSrc={selectedImage} alt={selectedImage} />
             </div>
         </div>
     )

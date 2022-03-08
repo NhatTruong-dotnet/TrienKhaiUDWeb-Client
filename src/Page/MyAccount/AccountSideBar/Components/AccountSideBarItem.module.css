@@ -1,0 +1,14 @@
+.link {
+    border-bottom: 1px solid #f2f2f2;
+    padding: 15px 0;
+    color: #646464;
+    transition: all 300ms ease-in 0s;
+    font-family: sans-serif;
+    display: block;
+}
+.link:hover {
+    color: #c92127;
+}
+.link.active {
+    color: #646464;
+}
