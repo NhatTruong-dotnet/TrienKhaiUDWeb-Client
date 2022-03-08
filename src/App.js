@@ -18,14 +18,14 @@ const common_vn = require("./Common/translations/vn/common.json");
 export default function App() {
   return (
     <>
+      <Router>
       <CartContextProvider>
         <Header />
-        <Router>
           <Switch>
             <Route exact path="/">
               <HomePage />
             </Route>
-            <Route exact path="/books">
+            <Route  path="/books">
               <ContextProvider>
                 <BookPage />
               </ContextProvider>
@@ -39,14 +39,14 @@ export default function App() {
             <Route exact path="/checkout/cart">
               <Cart />
             </Route>
-
             <Route exact path="/account">
               <MyAccount />
             </Route>
           </Switch>
-        </Router>
         <Footer />
       </CartContextProvider>
+      </Router>
+
     </>
   );
 }
