@@ -3,8 +3,10 @@ import Conversation from '../../components/conversations/Conversation'
 import Message from '../../components/message/Message'
 import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
-export default function Messenger() {
+import {io} from "socket.io-client"
 
+export default function Messenger() {
+  const socket = useRef();
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -13,6 +15,8 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
+  const[newMessageComing, setNewMessageComing] = useState(false)
+
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
     userToFetchConversation = currentUser.userToFetchConversation;
@@ -23,25 +27,21 @@ export default function Messenger() {
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
   }
+useEffect(()=>{
+  console.log('run from addmin');
+  
+  
+},[newMessageComing])
+ 
 
   useEffect(() => {
-    //https://dmitripavlutin.com/react-useeffect-infinite-loop/
-
-    const getConversations = async () => {
-      try {
-        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
-        setConversations(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getConversations();
-  }, []);
-
-  useEffect(() => {
+    socket.current = io("ws://localhost:8800");
+    
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
       try {
+        const resData = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
+        setConversations(resData.data);
         currentUser = JSON.parse(localStorage.getItem('user'));
         userToFetchConversation = currentUser.userToFetchConversation;
         const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + userToFetchConversation);
@@ -63,6 +63,8 @@ export default function Messenger() {
       "gmail": "admin@gmail.com"
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
+    
+
     setEmail(gmail);
   }
 
@@ -73,6 +75,7 @@ export default function Messenger() {
         const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
         document.getElementById('chatMessageInputAdmin').value = '';
         setEnabledSendIcon(false)
+        
     } catch (error) {
         console.log(error);
     }

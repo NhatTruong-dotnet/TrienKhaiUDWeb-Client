@@ -7,6 +7,8 @@ import "./header.css"
 import Login from "./Login/Login"
 import HeaderCart from "./HeaderCart/HeaderCart"
 import { useHistory } from "react-router-dom"
+import SeenCart from "./SeenCart/SeenCart"
+
 function Header (){
 
   const navigate = useHistory();
@@ -44,17 +46,19 @@ function Header (){
                 </button>
               </from>
             </li>
-            <li className="nav-item" style={{ textAlign: "center"}}>
+            <li className="nav-item header-cart-noti" style={{ textAlign: "center"}}>
               <FiBell className="header-icon"/>            
               <a className="nav-link" href="#">
                 {" "}
-                Thông báo
+                Danh sách đã xem
               </a>
               {/* <div class="cart-number" >
 						    <span>1</span>
 					     </div> */}
+              <SeenCart style={{top:"-20px"}}/>
+
             </li>
-            <li className="nav-item header-cart-noti" style={{ textAlign: "center" }}>
+            <li className="nav-item header-cart-noti" style={{ textAlign: "center" }} >
               <FiShoppingCart className="header-icon"/>            
               <a className="nav-link" href="#">
                 {" "}

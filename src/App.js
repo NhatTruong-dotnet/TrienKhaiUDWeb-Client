@@ -7,6 +7,7 @@ import BookPage from './Page/BooksPage'
 import Detail from './Page/Detail'
 import ContextProvider from './Page/BooksPage/Context/Context'
 import CartContextProvider from './Header/Context/Context'
+import SeenListProvider from './Header/Context/SeenListContext'
 import MyAccount from './Page/MyAccount'
 
 import Cart from './Cart/Cart'
@@ -14,6 +15,7 @@ import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import ToastMessage, { emitMessage } from './Common/ToastMessage/ToastMessage'
 import DynamicModal from './Common/DynamicModal/DynamicModal'
+import Payment from './Cart/components/payment/Payment'
 
 const common_en = require('./Common/translations/en/common.json')
 const common_vn = require('./Common/translations/vn/common.json')
@@ -22,39 +24,44 @@ export default function App() {
     return (
         <>
             <Router>
-                <CartContextProvider>
-                    <Header />
-                    <Switch>
-                        <Route exact path='/'>
-                            <HomePage />
-                            {/* <button
+                <SeenListProvider>
+                    <CartContextProvider>
+                        <Header />
+                        <Switch>
+                            <Route exact path='/'>
+                                <HomePage />
+                                {/* <button
                                 onClick={() => emitMessage('success', 'Hello')}
                             >
                                 click
                             </button> */}
-                            {/* <DynamicModal showModal={true}></DynamicModal> */}
-                        </Route>
-                        <Route path='/books'>
-                            <ContextProvider>
-                                <BookPage />
-                            </ContextProvider>
-                        </Route>
-                        <Route path='/admin/messenger'>
-                            <Messenger />
-                        </Route>
-                        <Route exact path='/detail/:bookName'>
-                            <Detail />
-                        </Route>
-                        <Route exact path='/checkout/cart'>
-                            <Cart />
-                        </Route>
-                        <Route path='/account/:tab'>
-                            <MyAccount />
-                        </Route>
-                    </Switch>
-                    <Footer />
-                    <ToastMessage />
-                </CartContextProvider>
+                                {/* <DynamicModal showModal={true}></DynamicModal> */}
+                            </Route>
+                            <Route path='/books'>
+                                <ContextProvider>
+                                    <BookPage />
+                                </ContextProvider>
+                            </Route>
+                            <Route path='/admin/messenger'>
+                                <Messenger />
+                            </Route>
+                            <Route path='/detail/:bookName'>
+                                <Detail />
+                            </Route>
+                            <Route exact path='/checkout/cart'>
+                                <Cart />
+                            </Route>
+                            <Route path='/account/:tab'>
+                                <MyAccount />
+                            </Route>
+                            <Route path='/checkout/payment'>
+                                <Payment />
+                            </Route>
+                        </Switch>
+                        <Footer />
+                        <ToastMessage />
+                    </CartContextProvider>
+                </SeenListProvider>
             </Router>
         </>
     )
