@@ -85,6 +85,7 @@ export default function Messenger() {
         currentUser = JSON.parse(localStorage.getItem('user'))
         const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
         const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
+        fetchData(document.getElementById('chatMessageInputAdmin').value);
         document.getElementById('chatMessageInputAdmin').value = '';
         setEnabledSendIcon(false)
         
