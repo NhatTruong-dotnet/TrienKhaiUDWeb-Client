@@ -1,6 +1,22 @@
-.logout{
-    background-color: red;
-    color: #FFF;
-    width: 500px;
-    height: 200px;
+#logout{
+    margin-top: 16px;
+    /* display: block; */
+  
+    width: auto;
+    position: absolute;
+    bottom: -21px;
+    right: 0;
+    border: 1px solid #e4e4e4;
+    background: #fff;
+    /* padding: 12px; */
+    text-align: center;   
+    transform: translate(0, 100%);
+    box-shadow: 0 3px 8px rgb(0 0 0 / 25%);
+    border-radius: 8px;   
+    z-index: 45;
+    font-family: 'Nunito Sans' !important;
+}
+.logout-item{
+    margin: 16px;
+    width: 150px;
 }
