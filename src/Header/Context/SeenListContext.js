@@ -1,26 +1,27 @@
 import { createContext, useState } from 'react'
 import axios from 'axios'
 
-export const Context = createContext()
+export const SeenListContext = createContext()
 
 function Provider({ children }) {
-    const [listBook, setListBook] = useState([])
-    
+    const [seenList, setSeenList] = useState([])
+
     const fetchData = async url => {
+        console.log('run');
         try {
             const res = await axios.get(url)
-            setListBook(res.data)
+            setSeenList(res.data)
         } catch (error) {
             console.log(error)
         }
     }
 
     const value = {
-        listBook,
+        seenList,
         fetchData,
     }
 
-    return <Context.Provider value={value}>{children}</Context.Provider>
+    return <SeenListContext.Provider value={value}>{children}</SeenListContext.Provider>
 }
 
 export default Provider
