@@ -13,9 +13,11 @@ import Cart from './Cart/Cart'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import ToastMessage, { emitMessage } from './Common/ToastMessage/ToastMessage'
+import DynamicModal from './Common/DynamicModal/DynamicModal'
 
 const common_en = require('./Common/translations/en/common.json')
 const common_vn = require('./Common/translations/vn/common.json')
+
 export default function App() {
     return (
         <>
@@ -30,6 +32,7 @@ export default function App() {
                             >
                                 click
                             </button> */}
+                            {/* <DynamicModal showModal={true}></DynamicModal> */}
                         </Route>
                         <Route path='/books'>
                             <ContextProvider>

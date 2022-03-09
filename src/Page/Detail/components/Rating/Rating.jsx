@@ -6,6 +6,7 @@ import RatingStar from '../../../../Common/RatingStar/RatingStar'
 import { useState } from 'react'
 import Modal from '../../../../Common/Modal/Modal'
 import ReviewForm from './components/ReviewForm/ReviewForm'
+import DynamicModal from '../../../../Common/DynamicModal/DynamicModal'
 
 function Rating({ rating = [], bookId, getBookDetail }) {
     const [isOpenModal, setIsOpenModal] = useState(false)
@@ -37,15 +38,28 @@ function Rating({ rating = [], bookId, getBookDetail }) {
                     Viết đánh giá
                 </Button>
             </div>
-            {isOpenModal && (
-                <Modal>
-                    <ReviewForm
-                        onCloseModal={() => setIsOpenModal(false)}
-                        bookId={bookId}
-                        getBookDetail={getBookDetail}
-                    />
-                </Modal>
-            )}
+            <DynamicModal showModal={isOpenModal}>
+                <ReviewForm
+                    onCloseModal={() => setIsOpenModal(false)}
+                    bookId={bookId}
+                    getBookDetail={getBookDetail}
+                />
+            </DynamicModal>
+
+            {/* <DynamicModal loading showModal={true} autoClose={1000} /> */}
+
+            {/* <DynamicModal
+                confirmDialogConfig={{
+                    title: 'This is title',
+                    content: 'This is content',
+                    acceptText: 'Yes',
+                    cancelText: 'No',
+                    onDone: value => {
+                        console.log(value)
+                    },
+                    loadingOnDone: true,
+                }}
+            /> */}
         </div>
     )
 }

@@ -14,11 +14,11 @@ function Books(props) {
     const { listBook, fetchData } = useContext(Context)
     const params = useParams()
 
-    // const url = 'https://serverbookstore.herokuapp.com/api/Books'
+    const url = 'https://serverbookstore.herokuapp.com/api/Books'
 
-    // useEffect(() => {
-    //     fetchData(url)
-    // }, [url])
+    useEffect(() => {
+        fetchData(url)
+    }, [url])
 
     return (
         <GlobalStyle>
