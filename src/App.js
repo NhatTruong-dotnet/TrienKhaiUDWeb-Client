@@ -36,7 +36,7 @@ export default function App() {
                         <Route path='/admin/messenger'>
                             <Messenger />
                         </Route>
-                        <Route exact path='/detail/:bookName'>
+                        <Route path='/detail/:bookName'>
                             <Detail />
                         </Route>
                         <Route exact path='/checkout/cart'>

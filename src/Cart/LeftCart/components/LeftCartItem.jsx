@@ -19,15 +19,10 @@ export default function LeftCartItem(props) {
         console.log(error.message);
     });
     
-    console.log(bookImg);
     
     let url="https://serverbookstore.herokuapp.com/api/carts/" +
     JSON.parse(localStorage.getItem("user")).gmail
-    useEffect(() => {
-        fetchData(
-            url
-        );
-    }, [url]);
+    
     
     async function updateSubtractAmountCartItem(key){
         setAmount(currentAmount-1);
@@ -73,7 +68,9 @@ export default function LeftCartItem(props) {
     }
     return (
         <>
-            <div className="item-product-cart">
+            <div className="item-product-cart" onClick={() => {
+                console.log('click in cart');
+            }}>
                 {/* <div className="checked-product-cart">
                     <input type={"checkbox"} className="checkbox-add-cart" />
                 </div> */}

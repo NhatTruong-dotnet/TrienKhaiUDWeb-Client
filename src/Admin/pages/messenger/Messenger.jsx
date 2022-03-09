@@ -31,7 +31,7 @@ useEffect(()=>{
   console.log('run from addmin');
   
   
-},[newMessageComing,socket.current.emit("messageComing")])
+},[newMessageComing])
  
 
   useEffect(() => {

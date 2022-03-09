@@ -14,6 +14,7 @@ function HeaderCart() {
     );
   }, []);
   let total=0;
+  const navigate = useHistory();
   return (
     <div className="top-cart-content">
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -32,7 +33,9 @@ function HeaderCart() {
           <div>Thành tiền</div>
           <div>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)}&nbsp;đ</div>
         </div>
-        <a href="" style={{ flex: 1 }} className="cart-btn-checkout">
+        <a href="" style={{ flex: 1 }} className="cart-btn-checkout" onClick={()=>{
+              navigate.push('/checkout/cart');
+            }}>
           <button
             type="button"
             title="Thanh toán"

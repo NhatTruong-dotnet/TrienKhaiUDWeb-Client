@@ -17,6 +17,8 @@ function LoginForm (){
             passwordHash:pass
         }).then(res=>{
           if(res.data.message==="Login successful"){
+            console.log(res.data.USER);
+            localStorage.setItem('user',JSON.stringify(res.data.USER))
             setUserSession(res.data.USER.accessToken,res.data.USER)
             console.log(res.data.USER);            
             his.push('/');

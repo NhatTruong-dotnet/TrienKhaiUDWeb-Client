@@ -33,7 +33,7 @@ function RightCart() {
       <div className="product-cart-left">
         {carts.map((element) => {
           return (
-            <LeftCartItem
+            <LeftCartItem 
                 id={element.bookId}
               key={element._id}
               bookName={element.bookName}
