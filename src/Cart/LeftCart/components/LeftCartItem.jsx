@@ -9,6 +9,18 @@ import axios from 'axios';
 export default function LeftCartItem(props) {
     const { carts, fetchData } = useContext(Context);
     const [currentAmount, setAmount] = useState(props.amount);
+    const [bookImg, setBookImg] = useState({})
+    
+    axios.get("https://serverbookstore.herokuapp.com/api/Books/"+props.bookName).then(res=>{
+        console.log(res.data[0]);
+        setBookImg(res.data[0].img[0]);
+    }).catch(error=>{           
+        console.error(error);
+        console.log(error.message);
+    });
+    
+    console.log(bookImg);
+    
     let url="https://serverbookstore.herokuapp.com/api/carts/" +
     JSON.parse(localStorage.getItem("user")).gmail
     useEffect(() => {
@@ -16,9 +28,10 @@ export default function LeftCartItem(props) {
             url
         );
     }, [url]);
-
+    
     async function updateSubtractAmountCartItem(key){
         setAmount(currentAmount-1);
+       
         let amountUpdate={
             bookId: key,
             amount: currentAmount-1,
@@ -33,6 +46,7 @@ export default function LeftCartItem(props) {
     }
     async function updatePlusAmountCartItem(key){
         setAmount(currentAmount+1);
+       
         let amountUpdate={
             bookId: key,
             amount: currentAmount+1,
@@ -60,12 +74,12 @@ export default function LeftCartItem(props) {
     return (
         <>
             <div className="item-product-cart">
-                <div className="checked-product-cart">
+                {/* <div className="checked-product-cart">
                     <input type={"checkbox"} className="checkbox-add-cart" />
-                </div>
+                </div> */}
                 <div className="img-product-cart">
                     <a className="product-image">
-                        <img src="https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_23407.jpg" width="120" height="120" alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" />
+                        <img src={bookImg} width="120" height="120" alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" />
                     </a>
                 </div>
                 <div className="group-product-info">
@@ -80,7 +94,7 @@ export default function LeftCartItem(props) {
                             <div className="cart-price">
                                 <div className="cart-fhsItem-price">
                                     <div>
-                                        <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.bookPrice)}đ  </span>
+                                        <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.bookPrice)} </span>
                                     </div>
                                     <div className="fhsItem-price-old">
                                         <span className="price" style={{ fontSize: "13px" }}> 23.000 đ</span>
@@ -115,7 +129,7 @@ export default function LeftCartItem(props) {
                         </div>
                         <div className="cart-price-total">
                             <span className="cart-price">
-                                <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.bookPrice)} đ</span>
+                                <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.bookPrice*currentAmount)} </span>
                             </span>
                         </div>
                     </div>

@@ -1,6 +1,26 @@
+/* eslint-disable no-lone-blocks */
 import {FiAlertCircle} from "react-icons/fi"
+import { useContext, useEffect } from "react";
+import { Context } from "../../Header/Context/Context";
 import "./right.css"
 function LeftCart(){
+    const { carts, fetchData } = useContext(Context);
+  var totalPrice =0;
+  useEffect(() => {
+    fetchData(
+      "https://serverbookstore.herokuapp.com/api/carts/" +
+        JSON.parse(localStorage.getItem("user")).gmail
+    );
+  }, []);
+  {carts.map((element) => {        
+            
+    return (     
+        totalPrice +=(parseInt(element.price)*parseInt(element.amount)) 
+    );
+  })}
+  if(totalPrice!=0){
+    document.getElementById("btnCheckout").classList.remove("btn-checkout-disable");
+  }
     return (
         <div className="col-sm-4 ">
                         <div className="total-cart-right">
@@ -116,20 +136,20 @@ function LeftCart(){
                                         <div className="total-cart-page ">
                                             <div className="title-cart-page-left">Thành tiền</div>
                                             <div className="number-cart-page-right">
-                                                <span className="price">0 đ</span>
+                                                <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice)}</span>
                                             </div>
                                         </div>
                                         <div className="border-product"></div>
                                         <div className="total-cart-page title-final-total">
                                             <div className="title-cart-page-left">Tổng Số Tiền (gồm VAT)</div>
                                             <div className="number-cart-page-right">
-                                                <span className="price">0 đ</span>
+                                                <span className="price">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice)}</span>
                                             </div>
                                         </div>
                                     </div>                                            
                                     <div className="checkout-type-button-cart" style={{textAlign:"center"}} >
                                         <div className="method-button-cart">
-                                            <button onClick="" type="button" title="Thanh toán" className="button btn-proceed-checkout btn-checkout btn-checkout-disable" style={{padding:"0px"}}>
+                                            <button onClick="" type="button" title="Thanh toán" id="btnCheckout" className="button btn-proceed-checkout btn-checkout btn-checkout-disable" style={{padding:"0px"}}>
                                                 <span><span>Thanh toán</span></span>
                                             </button>
                                             <div className="retail-note"><a href="#" target="_blank">(Giảm giá trên web chỉ áp dụng cho bán lẻ)</a></div>
