@@ -4,7 +4,7 @@ import Message from '../../components/message/Message'
 import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
 import {io} from "socket.io-client"
-
+import { Context } from "../../Context/Context";
 export default function Messenger() {
   const socket = useRef();
   const [conversations, setConversations] = useState([]);
@@ -15,7 +15,7 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
-  const[newMessageComing, setNewMessageComing] = useState(false)
+  const { newMessageCome, fetchData } = useContext(Context);
 
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
@@ -27,19 +27,12 @@ export default function Messenger() {
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
   }
-useEffect(()=>{
-  console.log('run from addmin');
-  
-  
-},[newMessageComing])
- 
-
   useEffect(() => {
-    socket.current = io("ws://localhost:8800");
     
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
       try {
+        
         const resData = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
         setConversations(resData.data);
         currentUser = JSON.parse(localStorage.getItem('user'));
@@ -50,7 +43,26 @@ useEffect(()=>{
           console.log(error);
       }
     }
-    getConversations();}, [fetchMessagesByEmail,messageSendSucess]
+    getConversations();},
+  );
+
+  useEffect(() => {
+    
+    //https://dmitripavlutin.com/react-useeffect-infinite-loop/
+    const getConversations = async () => {
+      try {
+        console.log('run');
+        const resData = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
+        setConversations(resData.data);
+        currentUser = JSON.parse(localStorage.getItem('user'));
+        userToFetchConversation = currentUser.userToFetchConversation;
+        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + userToFetchConversation);
+        setMessages(res.data[0].messages);
+      } catch (error) {
+          console.log(error);
+      }
+    }
+    getConversations();}, [fetchMessagesByEmail,messageSendSucess,newMessageCome]
   );
 
   useEffect(() => {
@@ -102,7 +114,7 @@ useEffect(()=>{
             <div className="chatBoxTopAdmin">
               {
                 messages.map((element, i) => {
-                  return <div ref={scrollRef}>
+                  return <div >
                     <Message key={i}
                         messageText={element.messageText}
                         //https://www.javascripttutorial.net/web-apis/javascript-localstorage/#:~:text=The%20localStorage%20can%20store%20only,the%20localStorage%20using%20the%20JSON.

@@ -3,6 +3,7 @@ import {FiAlertCircle} from "react-icons/fi"
 import { useContext, useEffect } from "react";
 import { Context } from "../../Header/Context/Context";
 import "./right.css"
+import { useHistory } from "react-router-dom";
 function LeftCart(){
     const { carts, fetchData } = useContext(Context);
   var totalPrice =0;
@@ -21,6 +22,7 @@ function LeftCart(){
   if(totalPrice!=0){
     document.getElementById("btnCheckout").classList.remove("btn-checkout-disable");
   }
+  const navigate = useHistory();
     return (
         <div className="col-sm-4 ">
                         <div className="total-cart-right">
@@ -147,7 +149,9 @@ function LeftCart(){
                                             </div>
                                         </div>
                                     </div>                                            
-                                    <div className="checkout-type-button-cart" style={{textAlign:"center"}} >
+                                    <div className="checkout-type-button-cart" style={{textAlign:"center"}} onClick={()=> {
+                                        navigate.push('/checkout/payment')
+                                    }}>
                                         <div className="method-button-cart">
                                             <button onClick="" type="button" title="Thanh toán" id="btnCheckout" className="button btn-proceed-checkout btn-checkout btn-checkout-disable" style={{padding:"0px"}}>
                                                 <span><span>Thanh toán</span></span>

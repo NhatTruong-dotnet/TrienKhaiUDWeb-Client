@@ -9,7 +9,7 @@ import ContextProvider from './Page/BooksPage/Context/Context'
 import CartContextProvider from './Header/Context/Context'
 import SeenListProvider from './Header/Context/SeenListContext'
 import MyAccount from './Page/MyAccount'
-
+import AdminContext from './Admin/Context/Context'
 import Cart from './Cart/Cart'
 import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
@@ -21,6 +21,7 @@ export default function App() {
     return (
         <>
             <Router>
+                <AdminContext >
                 <SeenListProvider>
                 <CartContextProvider>
                     <Header />
@@ -52,6 +53,7 @@ export default function App() {
                     <Footer />
                 </CartContextProvider>
                 </SeenListProvider>
+                </AdminContext>
             </Router>
         </>
     )

@@ -18,7 +18,9 @@ function Header (){
   <header className="header_section">
     <div className="container-fluid">
       <nav className="navbar navbar-expand-lg custom_nav-container ">
-        <a  className="navbar-brand" href="#"style={{ alignItems: "center", paddingLeft: 100 }}>
+        <a  className="navbar-brand" onClick={()=>{
+          navigate.push('/books');
+        }} href="#"style={{ alignItems: "center", paddingLeft: 100 }}>
           <span>Bostorek</span>
         </a>
        
