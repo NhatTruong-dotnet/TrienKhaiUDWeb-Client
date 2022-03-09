@@ -1,5 +1,7 @@
 import {GrClose} from "react-icons/gr"
 import "./login.css"
+import LoginForm from "./LoginForm/LoginForm";
+import RegisterForm from "./RegisterForm/RegisterForm"
 function Login(){
     return(
         <div className="login_form" id="login-register">
@@ -24,66 +26,11 @@ function Login(){
               <div className="line" />
             </div>
             <div className="tab-pane active" id="formLogin">
-              <form action="" method="post" id="form1">
-                <div className="input-box">
-                  <label htmlFor="email_login">Số điện thoại/Email</label>
-                  <input
-                    type="email"
-                    placeholder="Nhập số điện thoại hoặc email"
-                    id="ten"
-                    name="email_login"
-                  />
-                  <div className="err">
-                    <span />
-                  </div>
-                </div>
-                <div className="input-box">
-                  <label htmlFor="pass_login">Mật khẩu</label>
-                  <input
-                    type="password"
-                    placeholder="Nhập mật khẩu"
-                    id="pass"
-                    name="pass_login"
-                  />
-                  <div className="err">
-                    <span />
-                  </div>
-                </div>
-                <div id="createAccount">
-                  <a href="">Quên mật khẩu?</a>
-                </div>
-                <div className="btn-box">
-                  <button type="submit">Đăng nhập</button>
-                </div>
-              </form>
+              <LoginForm/>
             </div>
             {/* ====Đăng ký==== */}
             <div className="tab-pane" id="formRegiister">
-              <form action="home.php" method="post" id="form2">
-                <div className="input-box">
-                  <label htmlFor="phone_signup">Số điện thoại</label>
-                  <input
-                    type="text"
-                    placeholder="Nhập số điện thoại"
-                    name="phone_signup"
-                  />
-                </div>
-                <div className="input-box">
-                  <label htmlFor="otp">Mã xác nhận OTP</label>
-                  <input type="email" placeholder="6 ký tự" name="otp" />
-                </div>
-                <div className="input-box">
-                  <label htmlFor="pass_signup">Mật khẩu</label>
-                  <input
-                    type="password"
-                    placeholder="Nhập mật khẩu"
-                    name="pass_signup"
-                  />
-                </div>
-                <div className="btn-box">
-                  <button type="submit">Đăng ký</button>
-                </div>
-              </form>
+              <RegisterForm/>
             </div>
           </div>
         </div>

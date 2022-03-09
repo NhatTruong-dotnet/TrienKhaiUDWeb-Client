@@ -324,11 +324,7 @@
     padding-left: 16px;
     padding-right: 16px;
 }
-button.button.btn-checkout-disable {
-    /* width: 100%; */
-    margin: 0px 0px 10px 0px;
-    cursor: not-allowed;
-}
+
 .checkout-type-button-cart button {
     width: 100%;
     margin: 0px 0px 10px 0px;
@@ -343,12 +339,14 @@ button.button.btn-checkout-disable {
     font-size: 13px;
     /* font-weight: 600; */
 }
-button.button.btn-checkout-disable span {  
+button.button.btn-checkout-disable  {  
     background: linear-gradient(90deg, rgba(224,224,224,1) 0%, rgba(224,224,224,1) 100%);
     width: 100%;
     border: none;
     border-radius: 8px;
     color: #b3b3b3;
+    margin: 0px 0px 10px 0px;
+    cursor: not-allowed;
 }
 .checkout-type-button-cart button span {
     font-size: 18px;
@@ -364,17 +362,17 @@ button.button.btn-checkout-disable span {
     background: transparent!important;
     font-family: 'Nunito Sans' !important;
 }
-button.button > span {
+button.button  span {
     color: white;
     background: #C92127;
     border: none;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     border-radius: 8px;
     transition: all 0.3s;
     font-weight: 600;
 }
 
-button.button span {
+/* button.button span {
     display: block;
     text-align: center;
     white-space: nowrap;
@@ -383,7 +381,7 @@ button.button span {
     color: #393939;
     border: 2px solid #313131;
     font-family: 'Open Sans', Arial, Helvetica;
-}
+} */
 .fhs-event-promo-sumary {
     border-top: 1px solid #ededed;
     padding: 7.5px 0 15px 0;

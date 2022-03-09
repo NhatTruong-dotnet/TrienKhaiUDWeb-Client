@@ -1,0 +1,144 @@
+.messenger{
+    height: calc(100vh - 70px);
+    display: flex;
+}
+
+.chatMenu{
+    flex: 3.5;
+}
+
+.chatBox{
+    flex: 4.5;
+    position: absolute;
+    width: 360px;
+    right: 20px;
+    bottom: 60px;
+    
+    box-shadow: 0 0 2px black;
+}
+.chatBoxHeader{
+    height: 60px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 354px;
+    position: relative;
+    background-color: rgb(219, 153, 31);
+}
+
+.modalGuestHeader{
+    height: 30px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 354px;
+    position: relative;
+    background-color: rgb(219, 153, 31);
+}
+.chatBoxBottom{
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatSubmitButton{
+    width: 70px;
+    height: auto;
+    border: none;
+    cursor: pointer;
+    margin-top: 3px;
+    
+}
+.chatMessageInput{
+    width: 85%;
+    height: 70px;
+    padding: 10px;
+}
+.chatOnline{
+    flex: 3;
+}
+
+.chatMenuInput{
+    width: 90%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.chatBoxWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right:10px ;
+    width: 360px;
+    height: 360px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.chatBoxTop {
+    height: 360px;
+
+    overflow-x: hidden;
+}
+.chatMenuWrapper, .chatBoxWrapper, .chatOnlineWrapper {
+    padding: 10px;
+    
+    height: 100%;
+}
+
+.rightbarFriend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .rightbarProfileImgContainer {
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .rightbarProfileImg {
+      margin-left: 4px;
+      margin-top: 5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .rightbarOnline{
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: limegreen;
+      position: absolute;
+      left: 28px;
+      bottom: 0;
+      border: 2px solid white;
+  }
+  .rightbarHint{
+    font-size: 12px;
+    left: 48px;
+    top: 29px;
+    position: absolute;
+    color: rgb(219, 213, 213);
+  }
+  .rightbarUsername{
+      font-weight: 500;
+      margin-left: 5px;
+      color: white;
+  }
+
+  .modalGuest{
+    flex: 4.5;
+    position: absolute;
+    width: 360px;
+    padding: 2px;
+    right: 20px;
+bottom: 70px;
+    box-shadow: 0 0 2px black;
+
+  }
+  .modalGuest input{
+    background-color: inherit;
+  }
