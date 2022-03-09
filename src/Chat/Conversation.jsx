@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react'
 import Message from './components/message/Message';
 import './conversation.css'
-
+import {io} from "socket.io-client"
 export default function Conversation(props) {
     const [showModal, setShowModal] = useState(false);
     const [messageSendSucess, setMessageSendSucess] = useState(false);
@@ -10,9 +10,20 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
+    const [socket, setSocket] = useState(null);
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
+
+    useEffect(() => {
+        setSocket(io("ws://localhost:8800"))
+    },[])
+
+    useEffect(() => {
+        socket?.on("welcome", message => {
+            console.log(message);
+        })
+    },[socket])
     function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
