@@ -5,6 +5,7 @@ import {FiBell} from "react-icons/fi"
 import "./Login/Login"
 import "./header.css"
 import Login from "./Login/Login"
+import LogOut from './Login/Logout/logout'
 import HeaderCart from "./HeaderCart/HeaderCart"
 import { useHistory } from "react-router-dom"
 import SeenCart from "./SeenCart/SeenCart"
@@ -84,7 +85,7 @@ function Header (){
               <a className="nav-link " href="#" id="myAccount">
                 Tài khoản{" "}
               </a>
-              <Logout style={{top:"-20px"}}/>
+              <LogOut style={{top:"-20px"}}/>
             </li>
           </ul>
         </div>

@@ -36,7 +36,7 @@ export default function Conversation(props) {
         //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
         const getConversations = async () => {
-
+            console.log('run');
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
                 const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
