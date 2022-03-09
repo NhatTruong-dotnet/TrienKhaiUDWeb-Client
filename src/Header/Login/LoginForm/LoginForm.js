@@ -23,6 +23,8 @@ function LoginForm (){
             console.log(res.data.USER);            
             his.push('/');
             document.getElementById("login-register").classList.remove("active");
+            document.getElementById("userAccount").classList.remove("display_none");
+            document.getElementById("iconLogin").classList.add("display_none");
           }else if(res.data.message==="User not found"){
             alert(res.data.message);
           }else{

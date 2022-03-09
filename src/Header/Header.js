@@ -8,7 +8,7 @@ import Login from "./Login/Login"
 import HeaderCart from "./HeaderCart/HeaderCart"
 import { useHistory } from "react-router-dom"
 import SeenCart from "./SeenCart/SeenCart"
-
+import {FiUser} from "react-icons/fi"
 function Header (){
 
   const navigate = useHistory();
@@ -71,13 +71,20 @@ function Header (){
 					     </div> */}
               <HeaderCart style={{top:"-20px"}}/>
             </li>
-            <li className="nav-item " style={{ textAlign: "center" }} onClick={()=>{
+            <li className="nav-item " style={{ textAlign: "center" }} id="iconLogin" onClick={()=>{
               document.getElementById("login-register").classList.add("active");
             }}>
               <FiLogIn className="header-icon"/>              
               <a className="nav-link " href="#" id="myAccount">
                 Đăng nhập{" "}
               </a>
+            </li>
+            <li className="nav-item header-cart-noti display_none" style={{ textAlign: "center"}} id="userAccount">
+              <FiUser className="header-icon"/>              
+              <a className="nav-link " href="#" id="myAccount">
+                Tài khoản{" "}
+              </a>
+              <Logout style={{top:"-20px"}}/>
             </li>
           </ul>
         </div>

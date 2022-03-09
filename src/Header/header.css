@@ -270,3 +270,9 @@ a:focus {
   height: 28px;  
   top:-22px;
 }
+.active {
+  display: block;
+}
+.display_none{
+  display: none;
+}
