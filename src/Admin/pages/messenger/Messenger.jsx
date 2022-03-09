@@ -15,7 +15,8 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
-  const [newMessageComing, SetNewMessageComing] = useState()
+  const[newMessageComing, setNewMessageComing] = useState(false)
+
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
     userToFetchConversation = currentUser.userToFetchConversation;
@@ -27,29 +28,20 @@ export default function Messenger() {
     localStorage.setItem('user', JSON.stringify(guestInfo))
   }
 useEffect(()=>{
-  socket.current = io("ws://localhost:8800");
-  socket.current.emit("messageComing", arg=>{
-    console.log(arg);
-  });
-})
-  useEffect(() => {
-    //https://dmitripavlutin.com/react-useeffect-infinite-loop/
-
-    const getConversations = async () => {
-      try {
-        const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
-        setConversations(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getConversations();
-  }, []);
+  console.log('run from addmin');
+  
+  
+},[newMessageComing,socket.current.emit("messageComing")])
+ 
 
   useEffect(() => {
+    socket.current = io("ws://localhost:8800");
+    
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
       try {
+        const resData = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
+        setConversations(resData.data);
         currentUser = JSON.parse(localStorage.getItem('user'));
         userToFetchConversation = currentUser.userToFetchConversation;
         const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + userToFetchConversation);
@@ -83,6 +75,7 @@ useEffect(()=>{
         const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
         document.getElementById('chatMessageInputAdmin').value = '';
         setEnabledSendIcon(false)
+        
     } catch (error) {
         console.log(error);
     }
