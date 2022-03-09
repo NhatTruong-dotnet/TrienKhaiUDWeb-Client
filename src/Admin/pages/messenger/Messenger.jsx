@@ -3,8 +3,10 @@ import Conversation from '../../components/conversations/Conversation'
 import Message from '../../components/message/Message'
 import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
-export default function Messenger() {
+import {io} from "socket.io-client"
 
+export default function Messenger() {
+  const socket = useRef();
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -13,6 +15,7 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
+  const [newMessageComing, SetNewMessageComing] = useState()
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
     userToFetchConversation = currentUser.userToFetchConversation;
@@ -23,7 +26,12 @@ export default function Messenger() {
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
   }
-
+useEffect(()=>{
+  socket.current = io("ws://localhost:8800");
+  socket.current.emit("messageComing", arg=>{
+    console.log(arg);
+  });
+})
   useEffect(() => {
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
@@ -63,6 +71,8 @@ export default function Messenger() {
       "gmail": "admin@gmail.com"
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
+    
+
     setEmail(gmail);
   }
 

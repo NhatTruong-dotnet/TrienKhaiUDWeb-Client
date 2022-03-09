@@ -10,20 +10,15 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
-    const [socket, setSocket] = useState(null);
+    const socket = useRef()
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
 
-    useEffect(() => {
-        setSocket(io("ws://localhost:8800"))
-    },[])
-
-    useEffect(() => {
-        socket?.on("welcome", message => {
-            console.log(message);
-        })
-    },[socket])
+    useEffect(()=>{
+        socket.current = io("ws://localhost:8800")
+    }, [])
+   
     function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
@@ -33,6 +28,8 @@ export default function Conversation(props) {
             }
             localStorage.setItem('user', JSON.stringify(guestInfo))
         }
+        
+
         setShowModal(!showModal);
     }
 
@@ -60,6 +57,7 @@ export default function Conversation(props) {
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
+            socket.current.emit("sendMessage", "test");
             setEnabledSendIcon(false)
         } catch (error) {
             console.log(error);
