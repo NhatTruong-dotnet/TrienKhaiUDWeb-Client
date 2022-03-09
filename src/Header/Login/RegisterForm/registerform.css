@@ -86,14 +86,7 @@
     transition: 0.2s all;
   }
 
-  .message {
-    position: absolute;
-    padding-left: 3px;
-    color: red;
-    font-size: 13px;
-    margin-bottom: 35px;
-  }
-
+  
   .err {
     position: absolute;
     padding-left: 3px;
