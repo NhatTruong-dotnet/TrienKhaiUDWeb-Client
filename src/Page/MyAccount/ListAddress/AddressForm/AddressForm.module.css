@@ -12,6 +12,20 @@
     margin-top: 30px;
 }
 
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 60px;
+    left: 185px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #c92127;
+}
+.checkboxContainer > label {
+    margin-top: 7px;
+    margin-left: 10px;
+}
 .label {
     flex: 0 0 25%;
     text-align: left;
@@ -30,7 +44,7 @@
     padding-left: 0;
 }
 .btnWrap {
-    margin-top: 40px;
+    margin-top: 60px;
     text-align: center;
     position: relative;
 }
