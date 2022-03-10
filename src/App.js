@@ -32,23 +32,17 @@ export default function App() {
               <Route path="/admin/messenger">
                   <Messenger />
                 </Route>
-                <Route path="/">
+                
+                <Route exact path="/">
                   <ContextProvider>
                     <BookPage />
                   </ContextProvider>
-                  {/* <button
-                                onClick={() => emitMessage('success', 'Hello')}
-                            >
-                                click
-                            </button> */}
-                  {/* <DynamicModal showModal={true}></DynamicModal> */}
                 </Route>
                 <Route path="/books">
                   <ContextProvider>
                     <BookPage />
                   </ContextProvider>
                 </Route>
-                
                 <Route path="/detail/:bookName">
                   <Detail />
                 </Route>

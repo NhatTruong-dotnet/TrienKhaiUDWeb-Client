@@ -26,13 +26,13 @@ function DetailContainer(props) {
     const navigate = useHistory()
     const [selectedAmount, setSelectedAmount] = useState(1)
     const { bookName } = useParams()
-    const[popupLoadingSpinner, setPopupLoadingSpinner]  = useState(false);
+    const [popupLoadingSpinner, setPopupLoadingSpinner] = useState(false);
     const getBookDetail = async () => {
         const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
         try {
+            setPopupLoadingSpinner(true)
             const res = await axios.get(url)
             setBookDetail(res.data[0])
-
             let cartItem = {
                 bookId: res.data[0]._id,
                 price: res.data[0].price,
@@ -42,16 +42,18 @@ function DetailContainer(props) {
             await axios
                 .post(
                     'https://serverbookstore.herokuapp.com/api/seenList/' +
-                        JSON.parse(localStorage.getItem('user')).gmail,
+                    JSON.parse(localStorage.getItem('user')).gmail,
                     cartItem
                 )
                 .then(() => {
                     renderSeenList(
                         'https://serverbookstore.herokuapp.com/api/seenList/' +
-                            JSON.parse(localStorage.getItem('user')).gmail
+                        JSON.parse(localStorage.getItem('user')).gmail
                     )
                 })
+            setPopupLoadingSpinner(false)
         } catch (error) {
+            setPopupLoadingSpinner(false)
             console.log(error)
         }
     }
@@ -71,8 +73,11 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
+    console.log(rating);
 
     async function addItemToCart() {
+        setPopupLoadingSpinner(true);
+
         let cartItem = {
             bookId: id,
             price: price,
@@ -82,10 +87,12 @@ function DetailContainer(props) {
         try {
             await axios.post(
                 'https://serverbookstore.herokuapp.com/api/carts/' +
-                    JSON.parse(localStorage.getItem('user')).gmail,
+                JSON.parse(localStorage.getItem('user')).gmail,
                 cartItem
             )
+            setPopupLoadingSpinner(false);
         } catch (error) {
+            setPopupLoadingSpinner(false);
             console.log(error)
         }
     }
@@ -102,19 +109,17 @@ function DetailContainer(props) {
                             <Button
                                 icon={<RiShoppingCart2Line />}
                                 eventClick={async () => {
-                                    setPopupLoadingSpinner(true);
                                     await addItemToCart()
                                     fetchData(
                                         'https://serverbookstore.herokuapp.com/api/carts/' +
-                                            JSON.parse(
-                                                localStorage.getItem('user')
-                                            ).gmail
+                                        JSON.parse(
+                                            localStorage.getItem('user')
+                                        ).gmail
                                     )
-                                    setPopupLoadingSpinner(false);
                                     emitMessage("success", "Thêm vào giỏ hàng thành công");
                                 }
-                                
-                            }
+
+                                }
                             >
                                 Thêm vào giỏ hàng
                             </Button>
@@ -123,9 +128,9 @@ function DetailContainer(props) {
                                     await addItemToCart()
                                     fetchData(
                                         'https://serverbookstore.herokuapp.com/api/carts/' +
-                                            JSON.parse(
-                                                localStorage.getItem('user')
-                                            ).gmail
+                                        JSON.parse(
+                                            localStorage.getItem('user')
+                                        ).gmail
                                     )
                                     navigate.push('/checkout/payment')
                                 }}
@@ -173,10 +178,10 @@ function DetailContainer(props) {
                 </div>
             </div>
 
-      <DynamicModal showModal={popupLoadingSpinner} loading />
+            <DynamicModal showModal={popupLoadingSpinner} loading />
 
         </GlobalStyle>
-        
+
     )
 }
 

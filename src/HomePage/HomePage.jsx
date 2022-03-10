@@ -5,9 +5,9 @@ import './homepage.css'
 import React, { useState, useEffect,useContext } from 'react'
 import axios from 'axios';
 import { Context } from '../Page/BooksPage/Context/Context'
+
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
-  const { listBook, fetchData } = useContext(Context)
   useEffect(() => {
     const getConversations = async () => {
       try {

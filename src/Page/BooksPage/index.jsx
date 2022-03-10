@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import GlobalStyle from '../../GlobalStyle/GlobalStyle'
 import ListBook from '../../Common/ListBook/ListBook'
 import Sidebar from './Components/Sidebar/Sidebar'
@@ -8,16 +8,18 @@ import Paging from '../../Common/Paging/Paging'
 import { Context } from './Context/Context'
 import Conversation from './../../Chat/Conversation'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import DynamicModal from '../../Common/DynamicModal/DynamicModal'
 // import ContextProvider from './Context/Context'
 
 function Books(props) {
     const { listBook, fetchData } = useContext(Context)
     const params = useParams()
-
+    const [popupLoadingModal, setPopupLoadingModal] = useState(true);
     const url = JSON.parse(localStorage.getItem('url'))
     console.log(url);
     useEffect(() => {
         fetchData(url)
+        setPopupLoadingModal(false)
     }, [url])
 
     return (
@@ -42,6 +44,7 @@ function Books(props) {
             </div>
             {/* </ContextProvider> */}
             <Conversation />
+            <DynamicModal showModal={popupLoadingModal} loading />
         </GlobalStyle>
     )
 }

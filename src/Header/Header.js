@@ -20,6 +20,7 @@ function Header (){
     <div className="container-fluid">
       <nav className="navbar navbar-expand-lg custom_nav-container ">
         <a  className="navbar-brand" onClick={()=>{
+          localStorage.setItem('url',JSON.stringify("https://serverbookstore.herokuapp.com/api/books/"));
           navigate.push('/books');
         }} href="#"style={{ alignItems: "center", paddingLeft: 100 }}>
           <span>Bostorek</span>

@@ -7,6 +7,10 @@ import './payment.css'
 import LeftCartItem from '../../LeftCart/components/LeftCartItem'
 import PaymentItem from './paymentItem/PaymentItem'
 import axios from 'axios'
+import DynamicModal from '../../../Common/DynamicModal/DynamicModal'
+import { emitMessage } from "../../../Common/ToastMessage/ToastMessage";
+import { useHistory } from 'react-router-dom'
+
 export default function Payment() {
   const[shippingAddress, setShippingAddress] = useState([])
   const [itemsCheckout,setItemsCheckOut] = useState([])
@@ -14,13 +18,17 @@ export default function Payment() {
   const phoneNumber = useRef();
   const [checkoutComplete, setCheckoutComplete] = useState(false);
   const [newBillCreated, setNewBillCreated]= useState('')
+  const [loadingModal, setLoadingModal] = useState(false)
+  const navigate = useHistory()
   useEffect(async () => {
-    console.log('run');
+    setLoadingModal(true);
     const dataRes = await axios.get("https://serverbookstore.herokuapp.com/api/users/address/"+ JSON.parse(localStorage.getItem('user')).gmail);
     setShippingAddress(dataRes.data)
-
+    
     const cartsRes = await axios.get("https://serverbookstore.herokuapp.com/api/carts/"+ JSON.parse(localStorage.getItem('user')).gmail);
     setItemsCheckOut(cartsRes.data)
+    setLoadingModal(false);
+
 },[checkoutComplete])
 
 
@@ -104,6 +112,12 @@ export default function Payment() {
 
         <div onClick={async () => {
           const orderId = await axios.get("https://serverbookstore.herokuapp.com/api/carts/id/"+JSON.parse(localStorage.getItem('user')).gmail);
+          try {
+            console.log(document.querySelector('input[name="shippingAddress"]:checked').value); 
+          } catch (error) {
+            emitMessage("error", "Thiếu địa chỉ giao hàng");
+          }
+
           let newBill ={
             gmail:JSON.parse(localStorage.getItem('user')).gmail,
             phoneNumber: phoneNumber.current.value,
@@ -113,8 +127,17 @@ export default function Payment() {
             deliveryAddress:document.querySelector('input[name="shippingAddress"]:checked').value,
             toUser: JSON.parse(localStorage.getItem('user')).gmail
           }
-          const newBillReturn = await axios.post("https://serverbookstore.herokuapp.com/api/bills", newBill).then(async (data)=> {
-          });
+          try {
+          setLoadingModal(true);
+            const newBillReturn = await axios.post("https://serverbookstore.herokuapp.com/api/bills", newBill).then(async (data)=> {
+            });
+            setLoadingModal(false);
+            emitMessage("success", "Đặt hàng thành công");
+            navigate.push('/books')
+          } catch (error) {
+            setLoadingModal(false);
+            emitMessage("error", "Có lỗi xảy ra");
+          }
           
         }} className={styles.btnWrap} >
           <Button type="button" solid>Đặt hàng</Button>
@@ -123,7 +146,7 @@ export default function Payment() {
       </div>
       </div>
     }
-    
+    <DynamicModal showModal={loadingModal} loading />
 
   </>
   )
