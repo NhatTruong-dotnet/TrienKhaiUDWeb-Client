@@ -12,11 +12,10 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
-    const socket = useRef()
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-    const { newMessageCome, fetchData } = useContext(Context);
+    const { sendToClient,newMessageCome, fetchData } = useContext(Context);
 
     function openMessageBoard() {
         try {
@@ -36,10 +35,11 @@ export default function Conversation(props) {
         //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
         const getConversations = async () => {
-            console.log('run');
+            console.log('run in client');
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
                 const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
+                console.log(res.data[0].messages);
                 if (currentUser.gmail !== "") {
                     setConversations(res.data[0].messages);
                 }
@@ -48,17 +48,16 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal, messageSendSucess,newMessageCome])
+    }, [showModal, messageSendSucess,sendToClient])
+
 
     async function  sendMessage(){
         try {
             currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
-            fetchData(document.getElementById('chatMessageInput').value);
+            fetchData('admin');
             document.getElementById('chatMessageInput').value = '';
-            console.log(newMessageCome);
-
             setEnabledSendIcon(false)
 
         } catch (error) {

@@ -15,7 +15,7 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
-  const { newMessageCome, fetchData } = useContext(Context);
+  const {sendToClient, newMessageCome, fetchData } = useContext(Context);
 
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
@@ -47,11 +47,9 @@ export default function Messenger() {
   );
 
   useEffect(() => {
-    
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
       try {
-        console.log('run');
         const resData = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/");
         setConversations(resData.data);
         currentUser = JSON.parse(localStorage.getItem('user'));
@@ -64,6 +62,8 @@ export default function Messenger() {
     }
     getConversations();}, [fetchMessagesByEmail,messageSendSucess,newMessageCome]
   );
+
+
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" })}, [messages]
@@ -85,7 +85,7 @@ export default function Messenger() {
         currentUser = JSON.parse(localStorage.getItem('user'))
         const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
         const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.userToFetchConversation,message).then(() => setMessageSendSucess(!messageSendSucess));
-        fetchData(document.getElementById('chatMessageInputAdmin').value);
+        fetchData('client');
         document.getElementById('chatMessageInputAdmin').value = '';
         setEnabledSendIcon(false)
         

@@ -16,7 +16,7 @@ import i18next from 'i18next'
 import ToastMessage, { emitMessage } from './Common/ToastMessage/ToastMessage'
 import DynamicModal from './Common/DynamicModal/DynamicModal'
 import Payment from './Cart/components/payment/Payment'
-
+import Conversation from './Chat/Conversation'
 const common_en = require('./Common/translations/en/common.json')
 const common_vn = require('./Common/translations/vn/common.json')
 
@@ -58,9 +58,13 @@ export default function App() {
                             <Route path='/checkout/payment'>
                                 <Payment />
                             </Route>
+                            <Route >
+                                <Conversation />
+                            </Route>
                         </Switch>
                         <Footer />
                         <ToastMessage />
+                        
                     </CartContextProvider>
                 </SeenListProvider>
                 </AdminContext>

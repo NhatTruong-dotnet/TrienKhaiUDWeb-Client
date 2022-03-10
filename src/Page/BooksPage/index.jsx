@@ -14,8 +14,7 @@ function Books(props) {
     const { listBook, fetchData } = useContext(Context)
     const params = useParams()
 
-    const url = 'https://serverbookstore.herokuapp.com/api/Books'
-
+    const url = JSON.parse(localStorage.getItem('user')).url
     useEffect(() => {
         fetchData(url)
     }, [url])
