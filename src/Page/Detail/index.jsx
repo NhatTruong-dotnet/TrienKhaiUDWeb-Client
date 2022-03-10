@@ -17,6 +17,8 @@ import { SeenListContext } from '../../Header/Context/SeenListContext'
 import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import '../../../node_modules/react-toastify/dist/ReactToastify.css'
+import DynamicModal from "../../Common/DynamicModal/DynamicModal";
+import { emitMessage } from "../../Common/ToastMessage/ToastMessage";
 function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context)
     const { fetchData: renderSeenList } = useContext(SeenListContext)
@@ -24,7 +26,7 @@ function DetailContainer(props) {
     const navigate = useHistory()
     const [selectedAmount, setSelectedAmount] = useState(1)
     const { bookName } = useParams()
-
+    const[popupLoadingSpinner, setPopupLoadingSpinner]  = useState(false);
     const getBookDetail = async () => {
         const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
         try {
@@ -87,16 +89,7 @@ function DetailContainer(props) {
             console.log(error)
         }
     }
-    const notify = () =>
-        toast.success('Thêm vào giỏ hàng thành công', {
-            position: 'bottom-left',
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
+
     return (
         <GlobalStyle>
             <div className='grid wide'>
@@ -109,6 +102,7 @@ function DetailContainer(props) {
                             <Button
                                 icon={<RiShoppingCart2Line />}
                                 eventClick={async () => {
+                                    setPopupLoadingSpinner(true);
                                     await addItemToCart()
                                     fetchData(
                                         'https://serverbookstore.herokuapp.com/api/carts/' +
@@ -116,9 +110,11 @@ function DetailContainer(props) {
                                                 localStorage.getItem('user')
                                             ).gmail
                                     )
-
-                                    notify()
-                                }}
+                                    setPopupLoadingSpinner(false);
+                                    emitMessage("success", "Thêm vào giỏ hàng thành công");
+                                }
+                                
+                            }
                             >
                                 Thêm vào giỏ hàng
                             </Button>
@@ -176,18 +172,11 @@ function DetailContainer(props) {
                     <CommentList rating={rating} />
                 </div>
             </div>
-            <ToastContainer
-                position='bottom-left'
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+
+      <DynamicModal showModal={popupLoadingSpinner} loading />
+
         </GlobalStyle>
+        
     )
 }
 

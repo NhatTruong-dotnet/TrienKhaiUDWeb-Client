@@ -14,7 +14,8 @@ function Books(props) {
     const { listBook, fetchData } = useContext(Context)
     const params = useParams()
 
-    const url = JSON.parse(localStorage.getItem('user')).url
+    const url = JSON.parse(localStorage.getItem('url'))
+    console.log(url);
     useEffect(() => {
         fetchData(url)
     }, [url])
