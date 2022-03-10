@@ -7,7 +7,6 @@ function Provider({ children }) {
     const [carts, setCarts] = useState([])
 
     const fetchData = async url => {
-        console.log('run');
         try {
             const res = await axios.get(url)
             setCarts(res.data)

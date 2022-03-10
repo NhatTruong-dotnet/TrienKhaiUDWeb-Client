@@ -5,15 +5,27 @@ import { useContext, useEffect, useState } from "react";
 import { SeenListContext } from "../Context/SeenListContext";
 import CartItem from "../components/CartItem";
 import axios from "axios";
-function SeenCart() {
-    const { seenList, fetchData } = useContext(SeenListContext);
 
-    useEffect(() => {
-      fetchData(
-        "https://serverbookstore.herokuapp.com/api/seenList/" +
-          JSON.parse(localStorage.getItem("user")).gmail
-      );
-    }, []);
+function SeenCart() {
+  const { seenList, fetchData } = useContext(SeenListContext);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  try {
+    let gmailUser = currentUser.gmail
+  } catch (error) {
+    let userObj ={
+      "gmail":""
+    }
+
+    localStorage.setItem('user', JSON.stringify(userObj))
+    localStorage.setItem('url', JSON.stringify("https://serverbookstore.herokuapp.com/api/books/"))
+  }
+  useEffect(() => {
+
+    fetchData(
+      "https://serverbookstore.herokuapp.com/api/seenList/" +
+        JSON.parse(localStorage.getItem("user")).gmail
+    );
+  }, []);
   return (
     <div className="top-cart-content">
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -21,14 +33,17 @@ function SeenCart() {
           <FiShoppingCart />
           <span>&nbsp; Danh sách đã xem</span>
         </div>
-        {
-        seenList.map((element) => {
-            return <CartItem key={element._id} bookName={element.bookName} amount={element.amount} bookPrice={element.price} />
-          })
-
-        }
+        {seenList.map((element) => {
+          return (
+            <CartItem
+              key={element._id}
+              bookName={element.bookName}
+              amount={element.amount}
+              bookPrice={element.price}
+            />
+          );
+        })}
       </div>
-     
     </div>
   );
 }

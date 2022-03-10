@@ -28,7 +28,11 @@ function LoginForm() {
           console.log(res.data.USER);
           setPopupLoadingSpinner(false);
           emitMessage("success", "Đăng nhập thành công");
-          his.push("/");
+          if(email ==="admin@gmail.com"){
+            his.push('/admin/messenger')
+          }else{
+            his.push("/");
+          }
           document.getElementById("login-register").classList.remove("active");
           document
             .getElementById("userAccount")

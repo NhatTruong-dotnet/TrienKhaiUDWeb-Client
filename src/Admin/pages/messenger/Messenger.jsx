@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
 import {io} from "socket.io-client"
 import { Context } from "../../Context/Context";
+import LoginForm from '../../../Header/Login/LoginForm/LoginForm'
 export default function Messenger() {
   const socket = useRef();
   const [conversations, setConversations] = useState([]);
@@ -20,15 +21,22 @@ export default function Messenger() {
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
     userToFetchConversation = currentUser.userToFetchConversation;
+    console.log('try')
   } catch (error) {
     let guestInfo = {
       "userToFetchConversation": "",
-      "gmail": "admin@gmail.com"
+      "gmail": ""
     }
     localStorage.setItem('user', JSON.stringify(guestInfo))
+    currentUser = JSON.parse(localStorage.getItem('user'))
+    
   }
   useEffect(() => {
-    
+    console.log('run in admin');
+    currentUser = JSON.parse(localStorage.getItem('user'))
+    if (currentUser.gmail !== "admin@gmail.com") {
+      document.getElementById("login-register").classList.add("active");
+    }
     //https://dmitripavlutin.com/react-useeffect-infinite-loop/
     const getConversations = async () => {
       try {
@@ -43,7 +51,7 @@ export default function Messenger() {
           console.log(error);
       }
     }
-    getConversations();},
+    getConversations();},[currentUser.gmail]
   );
 
   useEffect(() => {

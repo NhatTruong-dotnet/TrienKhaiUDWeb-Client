@@ -2,27 +2,12 @@ import Conversation from '../Chat/Conversation'
 import Sidebar from '../Page/BooksPage/Components/Sidebar/Sidebar'
 import ListBook from '../Common/ListBook/ListBook'
 import './homepage.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 import axios from 'axios';
+import { Context } from '../Page/BooksPage/Context/Context'
 export default function HomePage() {
   const [conversations, setConversations] = useState([]);
-  const arr1 = [
-    {
-      id: 1,
-      label: 'Sách tiếng Việt',
-      value: 1,
-    },
-    {
-      id: 2,
-      label: 'Thiếu nhi',
-      value: 2,
-    },
-    {
-      id: 3,
-      label: 'Văn học',
-      value: 3,
-    },
-  ]
+  const { listBook, fetchData } = useContext(Context)
   useEffect(() => {
     const getConversations = async () => {
       try {
