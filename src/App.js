@@ -17,6 +17,7 @@ import ToastMessage, { emitMessage } from "./Common/ToastMessage/ToastMessage";
 import DynamicModal from "./Common/DynamicModal/DynamicModal";
 import Payment from "./Cart/components/payment/Payment";
 import Conversation from "./Chat/Conversation";
+import BillPage from "./Admin/pages/bills";
 const common_en = require("./Common/translations/en/common.json");
 const common_vn = require("./Common/translations/vn/common.json");
 
@@ -32,11 +33,13 @@ export default function App() {
               <Route path="/admin/messenger">
                   <Messenger />
                 </Route>
-                
                 <Route exact path="/">
                   <ContextProvider>
                     <BookPage />
                   </ContextProvider>
+                </Route>
+                <Route exact path="/admin/bill">
+                  <BillPage />
                 </Route>
                 <Route path="/books">
                   <ContextProvider>
