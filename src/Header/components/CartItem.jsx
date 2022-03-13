@@ -5,19 +5,19 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
 export default function CartItem(props) {
-  const [bookImg, setBookImg] = useState({})
+  const [bookImg, setBookImg] = useState('')
   const navigate = useHistory();
-  const getBookDetail = async () => {
-    await axios.get("https://serverbookstore.herokuapp.com/api/Books/" + props.bookName).then(res => {
-      console.log(res.data[0]);
-      setBookImg(res.data[0].img[0]);
-    }).catch(error => {
-      console.error(error);
-      console.log(error.message);
-    });
-  }
-   getBookDetail();
-  console.log(bookImg);
+  // const getBookDetail = async () => {
+  //   await axios.get("https://serverbookstore.herokuapp.com/api/Books/" + props.bookName).then(res => {
+  //     console.log(res.data[0]);
+  //     setBookImg(res.data[0].img[0]);
+  //   }).catch(error => {
+  //     console.error(error);
+  //     console.log(error.message);
+  //   });
+  // }
+  //  getBookDetail();
+  // console.log(bookImg);
   return (
     <>
       <div id="cart-sidebar" className="mini-products-list" onClick={()=>{
