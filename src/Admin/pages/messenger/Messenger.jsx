@@ -3,11 +3,8 @@ import Conversation from '../../components/conversations/Conversation'
 import Message from '../../components/message/Message'
 import { useContext, useEffect, useRef, useState } from 'react'
 import axios from "axios"
-import {io} from "socket.io-client"
 import { Context } from "../../Context/Context";
-import LoginForm from '../../../Header/Login/LoginForm/LoginForm'
 export default function Messenger() {
-  const socket = useRef();
   const [conversations, setConversations] = useState([]);
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -16,7 +13,7 @@ export default function Messenger() {
   let currentUser = JSON.parse(localStorage.getItem('user'));
   let userToFetchConversation = '';
   let messageSend = useRef();
-  const {sendToClient, newMessageCome, fetchData } = useContext(Context);
+  const { newMessageCome, fetchData } = useContext(Context);
 
   const [enabledSendIcon, setEnabledSendIcon] = useState(false);
   try { 
@@ -51,7 +48,7 @@ export default function Messenger() {
           console.log(error);
       }
     }
-    getConversations();},[currentUser.gmail]
+    getConversations();},[currentUser.gmail,newMessageCome]
   );
 
   useEffect(() => {

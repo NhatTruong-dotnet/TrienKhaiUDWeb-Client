@@ -4,7 +4,6 @@ import Message from './components/message/Message';
 import { Context } from "../Admin/Context/Context";
 
 import './conversation.css'
-import {io} from "socket.io-client"
 export default function Conversation(props) {
     const [showModal, setShowModal] = useState(false);
     const [messageSendSucess, setMessageSendSucess] = useState(false);
@@ -15,7 +14,7 @@ export default function Conversation(props) {
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-    const { sendToClient,newMessageCome, fetchData } = useContext(Context);
+    const { newMessageCome, fetchData } = useContext(Context);
 
     function openMessageBoard() {
         try {
@@ -48,16 +47,16 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal, messageSendSucess,sendToClient])
+    }, [showModal, messageSendSucess])
 
 
     async function  sendMessage(){
         try {
             currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
-            const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
-            fetchData('admin');
+            await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
+            await fetchData("admin")
             setEnabledSendIcon(false)
 
         } catch (error) {

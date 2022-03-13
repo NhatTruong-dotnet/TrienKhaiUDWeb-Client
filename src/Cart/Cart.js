@@ -12,7 +12,7 @@ function Cart(){
       "https://serverbookstore.herokuapp.com/api/carts/" +
         JSON.parse(localStorage.getItem("user")).gmail
     );
-  }, []);
+  }, [true]);
   carts.map((e)=>{
     return quantity++;
   })
