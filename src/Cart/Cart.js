@@ -2,17 +2,18 @@ import "./cart.css"
 import RightCart from "./RightCart/RightCart"
 import Conversation from './../Chat/Conversation'
 import LeftCart from "./LeftCart/LeftCart"
-import { useContext, useEffect } from "react";
+import { useContext, useEffect,useState } from "react";
 import { Context } from "../Header/Context/Context";
 function Cart(){
     const { carts, fetchData } = useContext(Context);
     var quantity =0;
+
   useEffect(() => {
     fetchData(
       "https://serverbookstore.herokuapp.com/api/carts/" +
         JSON.parse(localStorage.getItem("user")).gmail
     );
-  }, [true]);
+  }, []);
   carts.map((e)=>{
     return quantity++;
   })

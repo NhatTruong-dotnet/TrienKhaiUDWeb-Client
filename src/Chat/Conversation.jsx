@@ -47,7 +47,7 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal, messageSendSucess])
+    }, [showModal, messageSendSucess,newMessageCome])
 
 
     async function  sendMessage(){

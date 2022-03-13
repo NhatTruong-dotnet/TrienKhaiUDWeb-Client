@@ -12,14 +12,14 @@ function LeftCart(){
       "https://serverbookstore.herokuapp.com/api/carts/" +
         JSON.parse(localStorage.getItem("user")).gmail
     );
-  }, [true]);
+  }, []);
   {carts.map((element) => {        
             
     return (     
         totalPrice +=(parseInt(element.price)*parseInt(element.amount)) 
     );
   })}
-  if(totalPrice!=0){
+  if(totalPrice!==0){
     document.getElementById("btnCheckout").classList.remove("btn-checkout-disable");
   }
   const navigate = useHistory();
