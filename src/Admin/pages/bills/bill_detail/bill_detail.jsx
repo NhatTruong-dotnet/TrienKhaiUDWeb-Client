@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Col, Divider, Row, Table } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
+import DynamicModal from '../../../../Common/DynamicModal/DynamicModal';
 export default function Bill_detail(props) {
     const [orderList, setOrderList] = useState([]);
     const [total, setTotal] =useState(0);
+    
     useEffect(async () =>{
         let orderListById = await axios.get("https://serverbookstore.herokuapp.com/api/order/"+ props.item.userGmail+"/"+props.item.orderId).then((data) => {
             data.data.orderList.map((element) => {
@@ -14,7 +16,6 @@ export default function Bill_detail(props) {
 
         let byId = await axios.get("https://serverbookstore.herokuapp.com/api/order/"+ props.item.userGmail+"/"+props.item.orderId)
         setOrderList(byId.data.orderList)
-
     },[])
     
 
