@@ -31,7 +31,6 @@ function MyAccount(props) {
             content = (
                 <>
                     <Orders />
-                    <Orders />
                 </>
             )
             break

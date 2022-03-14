@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
-import BookItem from './BookItem/BookItem'
 import styles from './Orders.module.css'
 import axios from 'axios'
+import OrderItem from './OrderItem/OrderItem'
 
 function Orders(props) {
     const [listOrder, setListOrder] = useState([])
@@ -15,8 +15,7 @@ function Orders(props) {
                 const res = await axios.get(
                     `https://serverbookstore.herokuapp.com/api/bills/${gmail}`
                 )
-                console.log(res.data)
-                // setListOrder(res.data)
+                setListOrder(res.data)
             } catch (error) {
                 console.log(error)
             }
@@ -27,33 +26,25 @@ function Orders(props) {
 
     return (
         <div className={clsx(styles.container)}>
-            <div className={styles.orders}>
-                <BookItem imgSrc name amount price />
-                <BookItem imgSrc name amount price />
-                <div className={styles.orderInfo}>
-                    <div className={styles.wrap}>
-                        <div className={styles.text}>
-                            <span className={styles.label}>Ngày mua hàng:</span>
-                            13/3/2022
-                        </div>
-                        <div className={styles.text}>
-                            <span className={styles.label}>Trạng thái:</span> đã
-                            giao hàng
-                        </div>
-                        <div className={styles.text}>
-                            <span className={styles.label}>
-                                Phương thức thanh toán:
-                            </span>
-                            COD
-                        </div>
-                    </div>
-                    <div className={styles.totalPayment}>
-                        <span className={styles.label}>Tổng số tiền:</span> 1000
-                    </div>
-                </div>
-            </div>
+            {listOrder.map(
+                (createdDate, status, paymentMethod, orders_detail, total) => (
+                    <OrderItem
+                        key={createdDate}
+                        createdDate={createdDate}
+                        status={status}
+                        paymentMethod={paymentMethod}
+                        total={total}
+                        ordersDetail={orders_detail}
+                    />
+                )
+            )}
+            {listOrder.length === 0 ? <EmptyOrder /> : ''}
         </div>
     )
+}
+
+const EmptyOrder = () => {
+    return <div className={styles.empty}>Bạn chưa có đơn hàng nào</div>
 }
 
 export default Orders
