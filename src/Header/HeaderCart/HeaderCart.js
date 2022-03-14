@@ -25,7 +25,7 @@ function HeaderCart() {
 
         {carts.map((element) => {
           total += (parseInt(element.price)*parseInt(element.amount))
-          return <CartItem key={element._id} bookName={element.bookName} amount={element.amount} bookPrice={element.price} />
+          return <CartItem key={element._id} img={element.img} bookName={element.bookName} amount={element.amount} bookPrice={element.price} />
         })}
       </div>
       <div style={{ display: "flex", padding: "12px 16px" }}>

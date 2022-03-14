@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef,useContext} from 'react'
 import Message from './components/message/Message';
-import { Context } from "../Admin/Context/Context";
 
 import './conversation.css'
-import {io} from "socket.io-client"
 export default function Conversation(props) {
     const [showModal, setShowModal] = useState(false);
     const [messageSendSucess, setMessageSendSucess] = useState(false);
@@ -15,7 +13,6 @@ export default function Conversation(props) {
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-    const { sendToClient,newMessageCome, fetchData } = useContext(Context);
 
     function openMessageBoard() {
         try {
@@ -35,12 +32,11 @@ export default function Conversation(props) {
         //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
         const getConversations = async () => {
-            console.log('run in client');
+
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
-                const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
-                console.log(res.data[0].messages);
-                if (currentUser.gmail !== "") {
+                if(currentUser.gmail !==""){
+                    const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
                     setConversations(res.data[0].messages);
                 }
             } catch (error) {
@@ -48,15 +44,14 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal, messageSendSucess,sendToClient])
+    }, [showModal, messageSendSucess])
 
 
     async function  sendMessage(){
         try {
             currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
-            const res = await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
-            fetchData('admin');
+            await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
             setEnabledSendIcon(false)
 

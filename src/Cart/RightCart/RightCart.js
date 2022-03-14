@@ -19,7 +19,7 @@ function LeftCart(){
         totalPrice +=(parseInt(element.price)*parseInt(element.amount)) 
     );
   })}
-  if(totalPrice!=0){
+  if(totalPrice!==0){
     document.getElementById("btnCheckout").classList.remove("btn-checkout-disable");
   }
   const navigate = useHistory();

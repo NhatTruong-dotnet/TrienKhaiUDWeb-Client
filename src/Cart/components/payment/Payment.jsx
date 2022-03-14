@@ -85,7 +85,7 @@ export default function Payment() {
           <div className="total-cart-page title-final-total">
             <div className="title-cart-page-left">Tổng Số Tiền (gồm VAT và phí vận chuyển)</div>
             <div className="number-cart-page-right">
-              <span className="price">{ new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total +15000)} đ</span>
+              <span className="price">{ new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total +15000)}</span>
             </div>
           </div>
         </div>
