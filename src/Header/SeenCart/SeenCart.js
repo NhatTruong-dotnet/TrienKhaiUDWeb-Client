@@ -40,6 +40,7 @@ function SeenCart() {
               bookName={element.bookName}
               amount={element.amount}
               bookPrice={element.price}
+              img={element.img}
             />
           );
         })}

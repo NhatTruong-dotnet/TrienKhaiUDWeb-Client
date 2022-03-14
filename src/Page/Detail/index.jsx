@@ -38,6 +38,7 @@ function DetailContainer(props) {
                 price: res.data[0].price,
                 amount: selectedAmount,
                 bookName: res.data[0].name,
+                img: res.data[0].img[0]
             }
             await axios
                 .post(
@@ -73,7 +74,6 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
-    console.log(rating);
 
     async function addItemToCart() {
         setPopupLoadingSpinner(true);
@@ -83,8 +83,9 @@ function DetailContainer(props) {
             price: price,
             amount: selectedAmount,
             bookName: name,
-            img: img
+            img: img[0]
         }
+        console.log(cartItem);
         try {
             await axios.post(
                 'https://serverbookstore.herokuapp.com/api/carts/' +
