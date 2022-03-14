@@ -6,12 +6,8 @@ function RightCart() {
   const { carts, fetchData } = useContext(Context);
   var quantity =0;
   useEffect(() => {
-    fetchData(
-      "https://serverbookstore.herokuapp.com/api/carts/" +
-        JSON.parse(localStorage.getItem("user")).gmail
-    );
+    
   }, [true]);
-  console.log(carts);
   carts.map((e)=>{
     return quantity++;
   })

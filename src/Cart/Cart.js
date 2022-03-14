@@ -9,10 +9,7 @@ function Cart(){
     var quantity =0;
 
   useEffect(() => {
-    fetchData(
-      "https://serverbookstore.herokuapp.com/api/carts/" +
-        JSON.parse(localStorage.getItem("user")).gmail
-    );
+    
   }, []);
   carts.map((e)=>{
     return quantity++;
