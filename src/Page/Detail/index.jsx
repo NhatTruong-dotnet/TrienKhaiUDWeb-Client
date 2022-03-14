@@ -17,8 +17,8 @@ import { SeenListContext } from '../../Header/Context/SeenListContext'
 import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import '../../../node_modules/react-toastify/dist/ReactToastify.css'
-import DynamicModal from "../../Common/DynamicModal/DynamicModal";
-import { emitMessage } from "../../Common/ToastMessage/ToastMessage";
+import DynamicModal from '../../Common/DynamicModal/DynamicModal'
+import { emitMessage } from '../../Common/ToastMessage/ToastMessage'
 function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context)
     const { fetchData: renderSeenList } = useContext(SeenListContext)
@@ -26,7 +26,7 @@ function DetailContainer(props) {
     const navigate = useHistory()
     const [selectedAmount, setSelectedAmount] = useState(1)
     const { bookName } = useParams()
-    const [popupLoadingSpinner, setPopupLoadingSpinner] = useState(false);
+    const [popupLoadingSpinner, setPopupLoadingSpinner] = useState(false)
     const getBookDetail = async () => {
         const url = `https://serverbookstore.herokuapp.com/api/Books/${bookName}`
         try {
@@ -42,13 +42,13 @@ function DetailContainer(props) {
             await axios
                 .post(
                     'https://serverbookstore.herokuapp.com/api/seenList/' +
-                    JSON.parse(localStorage.getItem('user')).gmail,
+                        JSON.parse(localStorage.getItem('user')).gmail,
                     cartItem
                 )
                 .then(() => {
                     renderSeenList(
                         'https://serverbookstore.herokuapp.com/api/seenList/' +
-                        JSON.parse(localStorage.getItem('user')).gmail
+                            JSON.parse(localStorage.getItem('user')).gmail
                     )
                 })
             setPopupLoadingSpinner(false)
@@ -73,26 +73,26 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
-    console.log(rating);
+    console.log(rating)
 
     async function addItemToCart() {
-        setPopupLoadingSpinner(true);
+        setPopupLoadingSpinner(true)
 
         let cartItem = {
             bookId: id,
             price: price,
             amount: selectedAmount,
-            bookName: name
+            bookName: name,
         }
         try {
             await axios.post(
                 'https://serverbookstore.herokuapp.com/api/carts/' +
-                JSON.parse(localStorage.getItem('user')).gmail,
+                    JSON.parse(localStorage.getItem('user')).gmail,
                 cartItem
             )
-            setPopupLoadingSpinner(false);
+            setPopupLoadingSpinner(false)
         } catch (error) {
-            setPopupLoadingSpinner(false);
+            setPopupLoadingSpinner(false)
             console.log(error)
         }
     }
@@ -112,14 +112,15 @@ function DetailContainer(props) {
                                     await addItemToCart()
                                     fetchData(
                                         'https://serverbookstore.herokuapp.com/api/carts/' +
-                                        JSON.parse(
-                                            localStorage.getItem('user')
-                                        ).gmail
+                                            JSON.parse(
+                                                localStorage.getItem('user')
+                                            ).gmail
                                     )
-                                    emitMessage("success", "Thêm vào giỏ hàng thành công");
-                                }
-
-                                }
+                                    emitMessage(
+                                        'success',
+                                        'Thêm vào giỏ hàng thành công'
+                                    )
+                                }}
                             >
                                 Thêm vào giỏ hàng
                             </Button>
@@ -128,9 +129,9 @@ function DetailContainer(props) {
                                     await addItemToCart()
                                     fetchData(
                                         'https://serverbookstore.herokuapp.com/api/carts/' +
-                                        JSON.parse(
-                                            localStorage.getItem('user')
-                                        ).gmail
+                                            JSON.parse(
+                                                localStorage.getItem('user')
+                                            ).gmail
                                     )
                                     navigate.push('/checkout/payment')
                                 }}
@@ -179,9 +180,7 @@ function DetailContainer(props) {
             </div>
 
             <DynamicModal showModal={popupLoadingSpinner} loading />
-
         </GlobalStyle>
-
     )
 }
 

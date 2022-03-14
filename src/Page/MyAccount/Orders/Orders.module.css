@@ -1,0 +1,73 @@
+.container {
+    padding: 30px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+.orders {
+    border-top: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+}
+.bookItem {
+    display: flex;
+    position: relative;
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+}
+.bookImage {
+    width: 100px;
+    height: 100px;
+}
+.bookInfo {
+    font-family: sans-serif;
+    max-width: 650px;
+}
+.name {
+    font-size: 20px;
+    font-weight: 700;
+}
+.amount {
+    margin-top: 5px;
+}
+.price {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 600;
+}
+.totalPayment {
+    text-align: right;
+    margin-right: 50px;
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #c92127;
+}
+.label {
+    font-size: 14px;
+    color: #333;
+    margin-right: 5px;
+}
+.orderInfo {
+    display: flex;
+    justify-content: space-between;
+}
+.wrap {
+    margin-top: 30px;
+}
+.text {
+    color: #c92127;
+    font-weight: 700;
+}
+.text + .text {
+    margin-top: 10px;
+}
+.label {
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 5px;
+}

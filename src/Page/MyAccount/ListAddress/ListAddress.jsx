@@ -1,40 +1,58 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Button from '../../../Common/Button/Button'
+import DynamicModal from '../../../Common/DynamicModal/DynamicModal'
+import { emitMessage } from '../../../Common/ToastMessage/ToastMessage'
 import AddressForm from './AddressForm/AddressForm'
 import AddressItem from './AddressItem/AddressItem'
 import styles from './ListAddress.module.css'
 
 function ListAddress(props) {
     const [isOpenForm, setIsOpenForm] = useState(false)
+    const [showModal, setShowModal] = useState(false)
     const [ListAddressData, setListAddressData] = useState([])
+    const [selectedAddress, setSelectedAddress] = useState()
     const gmail = JSON.parse(localStorage.getItem('user')).gmail
 
     useEffect(() => {
-        const getListAddress = async () => {
-            try {
-                const res = await axios.get(
-                    `https://serverbookstore.herokuapp.com/api/users/address/${gmail}`
-                )
-                console.log(moveAddressDefaultToTop(res.data))
-                setListAddressData(res.data)
-            } catch (error) {
-                console.log(error)
+        if (!isOpenForm) {
+            setShowModal(true)
+            const getListAddress = async () => {
+                try {
+                    const res = await axios.get(
+                        `https://serverbookstore.herokuapp.com/api/users/address/${gmail}`
+                    )
+                    setListAddressData(moveAddressDefaultToTop(res.data))
+                    setShowModal(false)
+                } catch (error) {
+                    console.log(error)
+                    setShowModal(false)
+                    emitMessage('error', error.message)
+                }
             }
+            getListAddress()
         }
-        getListAddress()
-    }, [gmail])
+    }, [gmail, isOpenForm])
+
+    const handleEditAddress = selected => {
+        setSelectedAddress(selected)
+        setIsOpenForm(true)
+    }
 
     return (
         <div className={styles.listAddress}>
+            <DynamicModal showModal={showModal} loading />
             {isOpenForm || (
                 <>
-                    {ListAddressData.map(({ _id: id, address }, index) => (
+                    {ListAddressData.map(({ _id: id, address, isDefault }) => (
                         <AddressItem
                             key={id}
                             id={id}
                             address={address}
-                            isDefault={index === 0}
+                            isDefault={isDefault}
+                            onEditAddress={() => {
+                                handleEditAddress({ id, address, isDefault })
+                            }}
                         />
                     ))}
 
@@ -46,7 +64,11 @@ function ListAddress(props) {
                 </>
             )}
             {isOpenForm && (
-                <AddressForm handleCloseForm={() => setIsOpenForm(false)} />
+                <AddressForm
+                    selectedAddress={selectedAddress}
+                    setSelectedAddress={setSelectedAddress}
+                    handleCloseForm={() => setIsOpenForm(false)}
+                />
             )}
         </div>
     )
@@ -54,6 +76,7 @@ function ListAddress(props) {
 
 const moveAddressDefaultToTop = (listAddress = []) => {
     if (!Array.isArray(listAddress)) return []
+    if (listAddress.length === 0) return []
 
     const defaultAddressIndex = listAddress.findIndex(
         ({ isDefault }) => isDefault
