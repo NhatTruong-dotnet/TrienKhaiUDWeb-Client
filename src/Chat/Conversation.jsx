@@ -34,12 +34,11 @@ export default function Conversation(props) {
         //https://dmitripavlutin.com/react-useeffect-infinite-loop/
 
         const getConversations = async () => {
-            console.log('run in client');
+
             try {
                 currentUser = JSON.parse(localStorage.getItem('user'));
-                const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
-                console.log(res.data[0].messages);
-                if (currentUser.gmail !== "") {
+                if(currentUser.gmail !==""){
+                    const res = await axios.get("https://serverbookstore.herokuapp.com/api/conversations/" + currentUser.gmail);
                     setConversations(res.data[0].messages);
                 }
             } catch (error) {
