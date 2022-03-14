@@ -7,17 +7,17 @@ import { useHistory } from 'react-router-dom'
 export default function CartItem(props) {
   const [bookImg, setBookImg] = useState('')
   const navigate = useHistory();
-  // const getBookDetail = async () => {
-  //   await axios.get("https://serverbookstore.herokuapp.com/api/Books/" + props.bookName).then(res => {
-  //     console.log(res.data[0]);
-  //     setBookImg(res.data[0].img[0]);
-  //   }).catch(error => {
-  //     console.error(error);
-  //     console.log(error.message);
-  //   });
-  // }
-  //  getBookDetail();
-  // console.log(bookImg);
+  const getBookDetail = async () => {
+    await axios.get("https://serverbookstore.herokuapp.com/api/Books/" + props.bookName).then(res => {
+      console.log(res.data[0]);
+      setBookImg(res.data[0].img[0]);
+    }).catch(error => {
+      console.error(error);
+      console.log(error.message);
+    });
+  }
+   getBookDetail();
+  console.log(bookImg);
   return (
     <>
       <div id="cart-sidebar" className="mini-products-list" onClick={()=>{
@@ -25,7 +25,7 @@ export default function CartItem(props) {
       }}>
         <li className="item odd" style={{ padding: "12px 16px" }}>
           <a href="" title="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" className="product-image">
-          {/* <img src={bookImg} style={{ height: 68 }} alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" /> */}
+          <img src={bookImg} style={{ height: 68 }} alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" />
           </a>
           <div className="product-details" style={{ flex: 2, paddingLeft: 4 }}>
             <p className="product-name-no-ellipsis">

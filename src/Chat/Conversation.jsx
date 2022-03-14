@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef,useContext} from 'react'
 import Message from './components/message/Message';
-import { Context } from "../Admin/Context/Context";
 
 import './conversation.css'
 export default function Conversation(props) {
@@ -14,7 +13,6 @@ export default function Conversation(props) {
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-    const { newMessageCome, fetchData } = useContext(Context);
 
     function openMessageBoard() {
         try {
@@ -46,7 +44,7 @@ export default function Conversation(props) {
             }
         }
         getConversations();
-    }, [showModal, messageSendSucess,newMessageCome])
+    }, [showModal, messageSendSucess])
 
 
     async function  sendMessage(){
@@ -55,7 +53,6 @@ export default function Conversation(props) {
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
             document.getElementById('chatMessageInput').value = '';
-            await fetchData("admin")
             setEnabledSendIcon(false)
 
         } catch (error) {
