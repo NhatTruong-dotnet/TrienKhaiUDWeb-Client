@@ -10,7 +10,7 @@ function AccountInfo(props) {
     const [profileUser, setProfileUser] = useState({
         username: '',
         phone: '',
-        picture: 'tri.png',
+        image: undefined,
     })
     const [showModal, setShowModal] = useState(false)
 
@@ -24,12 +24,13 @@ function AccountInfo(props) {
                     const res = await axios.get(
                         `https://serverbookstore.herokuapp.com/api/users/profile/${gmail}`
                     )
-                    const { username, phone } = res.data
+                    const { username, phone, image } = res.data
                     console.log(res.data)
                     setProfileUser({
                         ...profileUser,
                         username,
                         phone,
+                        image,
                     })
                     setShowModal(false)
                 } catch (error) {
@@ -42,13 +43,13 @@ function AccountInfo(props) {
 
         getProfileUser()
     }, [])
+    console.log(profileUser)
 
     const onProfileUserChange = e => {
-        console.log(e.target.files)
         setProfileUser({
             ...profileUser,
             [e.target.name]:
-                e.target.name === 'img' ? e.target.files[0] : e.target.value,
+                e.target.name === 'image' ? e.target.files[0] : e.target.value,
         })
     }
 
@@ -56,12 +57,16 @@ function AccountInfo(props) {
         e.preventDefault()
         setShowModal(true)
         try {
+            const formData = new FormData()
+            formData.append('username', profileUser.username)
+            formData.append('phone', profileUser.phone)
+            formData.append('image', profileUser.image)
             const res = await axios.put(
                 `https://serverbookstore.herokuapp.com/api/users/updateProfile/${gmail}`,
-                profileUser,
+                formData,
                 {
                     headers: {
-                        'content-type': 'multipart/form-data', // do not forget this
+                        'Content-Type': 'multipart/form-data',
                     },
                 }
             )
@@ -107,7 +112,7 @@ function AccountInfo(props) {
                     <input
                         type='file'
                         className={clsx(styles.input, styles.file)}
-                        name='picture'
+                        name='image'
                         onChange={onProfileUserChange}
                     />
                 </div>

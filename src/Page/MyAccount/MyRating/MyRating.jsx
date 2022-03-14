@@ -21,7 +21,7 @@ function MyRating(props) {
         }
 
         getRatingUser()
-    }, [gmail])
+    }, [])
 
     return (
         <div>

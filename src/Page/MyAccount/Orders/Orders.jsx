@@ -23,7 +23,7 @@ function Orders(props) {
         }
 
         getRatingUser()
-    }, [gmail])
+    }, [])
 
     return (
         <div className={clsx(styles.container)}>
