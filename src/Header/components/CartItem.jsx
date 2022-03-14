@@ -25,7 +25,7 @@ export default function CartItem(props) {
       }}>
         <li className="item odd" style={{ padding: "12px 16px" }}>
           <a href="" title="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" className="product-image">
-            <img src={bookImg} style={{ height: 68 }} alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" />
+          {/* <img src={bookImg} style={{ height: 68 }} alt="Rèn Kĩ Năng Sống Dành Cho Học Sinh - Kĩ Năng Kiểm Soát Cảm Xúc" /> */}
           </a>
           <div className="product-details" style={{ flex: 2, paddingLeft: 4 }}>
             <p className="product-name-no-ellipsis">
