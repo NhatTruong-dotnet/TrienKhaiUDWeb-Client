@@ -82,7 +82,8 @@ function DetailContainer(props) {
             bookId: id,
             price: price,
             amount: selectedAmount,
-            bookName: name
+            bookName: name,
+            img: img
         }
         try {
             await axios.post(
