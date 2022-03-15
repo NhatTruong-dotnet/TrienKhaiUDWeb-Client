@@ -1,11 +1,12 @@
 import React from 'react'
 import GlobalStyle from '../../GlobalStyle/GlobalStyle'
-import styles from './index.module.css'
 import AccountSideBar from './AccountSideBar/AccountSideBar'
 import AccountInfo from './AccountInfo/AccountInfo'
 import Frame from '../../Common/Frame/Frame'
 import ListAddress from './ListAddress/ListAddress'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import Orders from './Orders/Orders'
+import MyRating from './MyRating/MyRating'
 
 function MyAccount(props) {
     const { tab } = useParams()
@@ -23,6 +24,20 @@ function MyAccount(props) {
             content = (
                 <Frame title='Sổ địa chỉ'>
                     <ListAddress />
+                </Frame>
+            )
+            break
+        case 'orders':
+            content = (
+                <>
+                    <Orders />
+                </>
+            )
+            break
+        case 'rating':
+            content = (
+                <Frame title='Nhận xét của tôi'>
+                    <MyRating />
                 </Frame>
             )
             break

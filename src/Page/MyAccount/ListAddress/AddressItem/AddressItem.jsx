@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './AddressItem.module.css'
 import { Link } from 'react-router-dom'
 
-function AddressItem({ isDefault, address }) {
+function AddressItem({ isDefault, address, onEditAddress }) {
     return (
         <div className={styles.address}>
             {isDefault && (
@@ -18,7 +18,9 @@ function AddressItem({ isDefault, address }) {
                 <span className={styles.label}>Địa chỉ:</span>
                 {address}
             </div>
-            <div className={styles.link}>Thay đổi địa chỉ</div>
+            <div className={styles.link} onClick={onEditAddress}>
+                Thay đổi địa chỉ
+            </div>
         </div>
     )
 }

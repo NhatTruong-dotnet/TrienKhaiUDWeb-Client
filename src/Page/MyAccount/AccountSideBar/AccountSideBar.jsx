@@ -12,9 +12,15 @@ function AccountSideBar(props) {
                 linkTo='/account/edit'
             />
             <AccountSideBarItem label='Sổ địa chỉ' linkTo='/account/address' />
-            <AccountSideBarItem label='Đơn hàng của tôi' linkTo='' />
-            <AccountSideBarItem label='Yêu thích' linkTo='' />
-            <AccountSideBarItem label='Nhận xét của tôi' linkTo='' />
+            <AccountSideBarItem
+                label='Đơn hàng của tôi'
+                linkTo='/account/orders'
+            />
+            {/* <AccountSideBarItem label='Yêu thích' linkTo='' /> */}
+            <AccountSideBarItem
+                label='Nhận xét của tôi'
+                linkTo='/account/rating'
+            />
         </div>
     )
 }
