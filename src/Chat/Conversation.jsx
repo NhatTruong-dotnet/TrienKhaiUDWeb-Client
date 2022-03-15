@@ -10,7 +10,7 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
-    const [socket, setSocket] = useState(io(`https://serverbookstore.herokuapp.com:8800`));
+    const [socket, setSocket] = useState(io(`https://serverbookstore.herokuapp.com:7939`));
     let guestUserEmail = React.createRef();
     const [newMessageFromAdmin, setNewMessageFromAdmin]= useState(false)
     let messageSend = useRef();
