@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef,useContext} from 'react'
 import Message from './components/message/Message';
-
+import io from 'socket.io-client'
 import './conversation.css'
 export default function Conversation(props) {
     const [showModal, setShowModal] = useState(false);
@@ -10,10 +10,10 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
+    const [socket, setSocket] = useState(io(`http://localhost:8800`));
     let guestUserEmail = React.createRef();
     let messageSend = useRef();
     const [enabledSendIcon, setEnabledSendIcon] = useState(false);
-
     function openMessageBoard() {
         try {
             console.log(currentUser.gmail);
@@ -52,6 +52,7 @@ export default function Conversation(props) {
             currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
+            socket.emit("clientChat", message)
             document.getElementById('chatMessageInput').value = '';
             setEnabledSendIcon(false)
 
