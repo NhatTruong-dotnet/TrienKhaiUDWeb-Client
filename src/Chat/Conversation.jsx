@@ -10,7 +10,7 @@ export default function Conversation(props) {
     const [guestUser, setGuestUser] = useState(false);
     const [conversations, setConversations] = useState([]);
     const scrollRef = useRef();
-    const [socket, setSocket] = useState(io(`http://serverbookstore.herokuapp.com`));
+    const [socket, setSocket] = useState(io(`https://serverbookstore.herokuapp.com`));
     let guestUserEmail = React.createRef();
     const [newMessageFromAdmin, setNewMessageFromAdmin]= useState(false)
     let messageSend = useRef();
@@ -56,7 +56,7 @@ export default function Conversation(props) {
             currentUser = JSON.parse(localStorage.getItem('user'))
             const message = {gmail: currentUser.gmail, messageText:messageSend.current.value}
             await axios.post("https://serverbookstore.herokuapp.com/api/conversations/"+currentUser.gmail,message).then(() => setMessageSendSucess(!messageSendSucess));
-            socket.emit("clientChat", message)
+            socket.emit("clientChat", 'chatt')
             document.getElementById('chatMessageInput').value = '';
             setEnabledSendIcon(false)
 
