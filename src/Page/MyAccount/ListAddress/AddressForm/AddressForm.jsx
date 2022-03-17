@@ -4,6 +4,8 @@ import Button from '../../../../Common/Button/Button'
 import styles from './AddressForm.module.css'
 import DynamicModal from '../../../../Common/DynamicModal/DynamicModal'
 import { emitMessage } from '../../../../Common/ToastMessage/ToastMessage'
+import validator from 'validator'
+import clsx from 'clsx'
 
 function AddressForm({ selectedAddress, setSelectedAddress, handleCloseForm }) {
     const [addressData, setAddressData] = useState(
@@ -13,10 +15,39 @@ function AddressForm({ selectedAddress, setSelectedAddress, handleCloseForm }) {
             isDefault: false,
         }
     )
+
+    const [validationMessage, setValidationMessage] = useState({
+        address: '',
+    })
+    const [isFirstSubmit, setIsFirstSubmit] = useState(true)
+
     const [showModal, setShowModal] = useState(false)
     const gmail = JSON.parse(localStorage.getItem('user')).gmail
 
+    const validateForm = () => {
+        if (validator.isEmpty(addressData.address)) {
+            setValidationMessage(prevState => ({
+                ...prevState,
+                address: 'Trường này là bắt buộc',
+            }))
+            return false
+        }
+
+        return true
+    }
+    const validateFormAfterFirstSubmit = () => {
+        if (!isFirstSubmit) {
+            validateForm()
+        }
+    }
     const onAddressDataChange = e => {
+        if (e.target.name === 'address' && validationMessage['address']) {
+            setValidationMessage({
+                ...validationMessage,
+                [e.target.name]: '',
+            })
+        }
+
         setAddressData({
             ...addressData,
             [e.target.name]:
@@ -26,18 +57,23 @@ function AddressForm({ selectedAddress, setSelectedAddress, handleCloseForm }) {
 
     const handleSubmitForm = async e => {
         e.preventDefault()
-        const method = addressData.id ? 'put' : 'post'
-        const urlParam = addressData.id ? 'updateAddress' : 'addAddress'
-        const url = `https://serverbookstore.herokuapp.com/api/users/${urlParam}/${gmail}`
-        try {
-            setShowModal(true)
-            const res = await axios({ method, url, data: addressData })
-            const { message } = res.data
-            setShowModal(false)
-            emitMessage('success', message)
-        } catch (error) {
-            setShowModal(false)
-            console.log(error)
+        setIsFirstSubmit(false)
+
+        const validForm = validateForm()
+        if (validForm) {
+            const method = addressData.id ? 'put' : 'post'
+            const urlParam = addressData.id ? 'updateAddress' : 'addAddress'
+            const url = `https://serverbookstore.herokuapp.com/api/users/${urlParam}/${gmail}`
+            try {
+                setShowModal(true)
+                const res = await axios({ method, url, data: addressData })
+                const { message } = res.data
+                setShowModal(false)
+                emitMessage('success', message)
+            } catch (error) {
+                setShowModal(false)
+                console.log(error)
+            }
         }
     }
 
@@ -45,23 +81,6 @@ function AddressForm({ selectedAddress, setSelectedAddress, handleCloseForm }) {
         <>
             <DynamicModal showModal={showModal} loading />
             <form className={styles.form} onSubmit={handleSubmitForm}>
-                {/* <div className={styles.formGroup}>
-                <label className={styles.label}>Họ và tên</label>
-                <input
-                    type='text'
-                    className={styles.input}
-                    placeholder='Họ và tên'
-                />
-            </div>
-            <div className={styles.formGroup}>
-                <label className={styles.label}>Số điện thoại</label>
-                <input
-                    type='text'
-                    className={styles.input}
-                    placeholder='Số điện thoại'
-                />
-            </div> */}
-
                 <div className={styles.formGroup}>
                     <label className={styles.label}>Địa chỉ</label>
                     <input
@@ -69,14 +88,19 @@ function AddressForm({ selectedAddress, setSelectedAddress, handleCloseForm }) {
                         className={styles.input}
                         placeholder='Địa chỉ'
                         value={addressData.address}
+                        onBlur={validateFormAfterFirstSubmit}
                         onChange={onAddressDataChange}
                         name='address'
                     />
+                    <div className={styles.message}>
+                        {validationMessage.address}
+                    </div>
                 </div>
                 <div className={styles.checkboxContainer}>
                     <input
                         type='checkbox'
                         className={styles.checkbox}
+                        onBlur={validateFormAfterFirstSubmit}
                         onChange={onAddressDataChange}
                         name='isDefault'
                         checked={addressData.isDefault}

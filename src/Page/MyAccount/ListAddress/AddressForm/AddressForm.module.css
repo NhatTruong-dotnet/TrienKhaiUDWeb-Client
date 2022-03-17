@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 60px;
+    bottom: 70px;
     left: 185px;
     font-size: 14px;
     font-weight: 700;
@@ -40,11 +40,19 @@
     font-weight: 600;
     font-size: 14px;
 }
+.message {
+    position: absolute;
+    left: 190px;
+    top: 34px;
+    color: #c92127;
+    font-size: 12px;
+}
+
 .file {
     padding-left: 0;
 }
 .btnWrap {
-    margin-top: 60px;
+    margin-top: 80px;
     text-align: center;
     position: relative;
 }

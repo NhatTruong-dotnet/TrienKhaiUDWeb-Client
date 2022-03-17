@@ -23,6 +23,7 @@ function DetailContainer(props) {
     const { carts, fetchData } = useContext(Context)
     const { fetchData: renderSeenList } = useContext(SeenListContext)
     const [bookDetail, setBookDetail] = useState({})
+    const [rating, setRating] = useState([])
     const navigate = useHistory()
     const [selectedAmount, setSelectedAmount] = useState(1)
     const { bookName } = useParams()
@@ -69,11 +70,24 @@ function DetailContainer(props) {
         author,
         suppiler,
         bookLayout,
-        rating,
         price,
         numberInStock,
         img,
     } = bookDetail
+
+    useEffect(() => {
+        const getAllRatingBook = async () => {
+            try {
+                const res = await axios.get(
+                    `https://serverbookstore.herokuapp.com/api/rating-comment/commentSort/${id}`
+                )
+                setRating(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getAllRatingBook()
+    }, [id])
 
     async function addItemToCart() {
         setPopupLoadingSpinner(true)
