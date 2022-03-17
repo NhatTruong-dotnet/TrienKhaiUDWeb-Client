@@ -29,7 +29,7 @@ function LoginForm() {
           setPopupLoadingSpinner(false);
           emitMessage("success", "Đăng nhập thành công");
           if(email ==="admin@gmail.com"){
-            his.push('/admin/messenger')
+           window.open("https://admin-portalbookstore.herokuapp.com/","_self")
           }else{
             his.push("/");
           }
