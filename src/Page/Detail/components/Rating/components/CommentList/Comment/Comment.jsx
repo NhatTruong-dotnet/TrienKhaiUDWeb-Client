@@ -2,11 +2,11 @@ import styles from './Comment.module.css'
 import RatingStar from '../../../../../../../Common/RatingStar/RatingStar'
 import { formatDate } from '../../../../../../../Tools/formatDate'
 
-function Comment({ ratingDate, ratingValue, commentText }) {
+function Comment({ ratingDate, ratingValue, commentText, username }) {
     return (
         <div className={styles.container}>
             <div className={styles.userInfo}>
-                <div className={styles.name}>Trong Tri</div>
+                <div className={styles.name}>{username}</div>
                 <div className={styles.createdDate}>
                     {formatDate(ratingDate)}
                 </div>

@@ -4,6 +4,7 @@
     background-color: #fff;
     border-radius: 10px;
     font-family: 'Roboto', sans-serif;
+    position: relative;
 }
 .header {
     text-align: center;
@@ -60,4 +61,11 @@
     color: #7a7e7f;
     margin-right: 30px;
     cursor: pointer;
+}
+.message {
+    position: absolute;
+    left: 24px;
+    bottom: 94px;
+    color: #c92127;
+    font-size: 14px;
 }

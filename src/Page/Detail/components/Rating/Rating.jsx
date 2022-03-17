@@ -15,13 +15,13 @@ function Rating({ rating = [], bookId, getBookDetail }) {
         (prev, { ratingValue }) => prev + ratingValue,
         0
     )
-    const averageRatingValue = totalRatingValue / rating.length
+    const averageRatingValue = Math.round(totalRatingValue / rating.length)
 
     return (
         <div className={styles.ratingContainer}>
             <div className={styles.averageRating}>
                 <div className={styles.ratingNumber}>
-                    {averageRatingValue}{' '}
+                    {averageRatingValue}
                     <span className={styles.textSm}>/5</span>
                 </div>
                 <RatingStar value={averageRatingValue} />
@@ -45,21 +45,6 @@ function Rating({ rating = [], bookId, getBookDetail }) {
                     getBookDetail={getBookDetail}
                 />
             </DynamicModal>
-
-            {/* <DynamicModal loading showModal={true} autoClose={1000} /> */}
-
-            {/* <DynamicModal
-                confirmDialogConfig={{
-                    title: 'This is title',
-                    content: 'This is content',
-                    acceptText: 'Yes',
-                    cancelText: 'No',
-                    onDone: value => {
-                        console.log(value)
-                    },
-                    loadingOnDone: true,
-                }}
-            /> */}
         </div>
     )
 }
