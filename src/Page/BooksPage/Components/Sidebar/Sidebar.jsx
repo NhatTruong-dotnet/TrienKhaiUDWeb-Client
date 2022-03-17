@@ -1,41 +1,44 @@
 import SidebarItem from './SidebarItem/SidebarItem'
 import styles from './sidebar.module.css'
 import clsx from 'clsx'
-
+import { useParams } from 'react-router-dom'
 
 const arr1 = [
     {
         id: 1,
         label: 'Sách trong nước',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator/local",
+        value: 'https://serverbookstore.herokuapp.com/api/books/Search-Translator/local',
     },
     {
         id: 2,
         label: 'Sách nước ngoài',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Translator/global",
+        value: 'https://serverbookstore.herokuapp.com/api/books/Search-Translator/global',
     },
     {
         id: 3,
         label: 'First News',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Suppiler/First News",
-    }, 
+        value: 'https://serverbookstore.herokuapp.com/api/books/Search-Suppiler/First News',
+    },
     {
         id: 4,
         label: 'NXB Thanh niên',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Publisher/NXB Thanh Niên",
+        value: 'https://serverbookstore.herokuapp.com/api/books/Search-Publisher/NXB Thanh Niên',
     },
     {
         id: 5,
         label: 'NXB Kim Đồng',
-        value: "https://serverbookstore.herokuapp.com/api/books/Search-Publisher/NXB Kim Đồng",
-    }
+        value: 'https://serverbookstore.herokuapp.com/api/books/Search-Publisher/NXB Kim Đồng',
+    },
 ]
 
 function Sidebar(props) {
+    const params = useParams()
+    console.log(params)
     return (
         <div className={clsx(styles.sidebarContainer, 'shadow')}>
             <div className={styles.title}>Nhóm sản phẩm</div>
             <SidebarItem title={'All Category'} listFilter={arr1} />
+            <SidebarItem checkbox title={'Giá'} listFilter={arr1} />
         </div>
     )
 }
