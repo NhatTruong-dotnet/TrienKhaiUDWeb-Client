@@ -16,7 +16,7 @@ function CommentList({ rating = [] }) {
                     />
                 )
             )}
-            <Paging totalPage={5} />
+            {/* <Paging totalPage={5} /> */}
         </div>
     )
 }

@@ -39,6 +39,21 @@ function ListAddress(props) {
         setIsOpenForm(true)
     }
 
+    const handleDeleteAddress = async id => {
+        const gmail = JSON.parse(localStorage.getItem('user')).gmail
+
+        try {
+            console.log(gmail)
+            const res = axios.delete(
+                `https://serverbookstore.herokuapp.com/api/users/deleteAddress/${id}`,
+                { gmail }
+            )
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className={styles.listAddress}>
             <DynamicModal showModal={showModal} loading />
@@ -53,6 +68,7 @@ function ListAddress(props) {
                             onEditAddress={() => {
                                 handleEditAddress({ id, address, isDefault })
                             }}
+                            onDeleteAddress={handleDeleteAddress}
                         />
                     ))}
 

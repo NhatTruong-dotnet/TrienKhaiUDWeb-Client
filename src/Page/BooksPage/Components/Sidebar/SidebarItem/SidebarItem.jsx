@@ -1,13 +1,11 @@
 import styles from './sidebarItem.module.css'
-import { BiChevronDown } from 'react-icons/bi'
-import { useHistory } from "react-router-dom";
-import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 
 function SidebarItem({ title, listFilter = [], checkbox }) {
-    const navigate = useHistory();
+    const navigate = useHistory()
 
-    function setURLFilter(url){
-        localStorage.setItem('url',JSON.stringify(url));
+    function setURLFilter(url) {
+        localStorage.setItem('url', JSON.stringify(url))
 
         navigate.push(`/books`)
     }
@@ -20,9 +18,14 @@ function SidebarItem({ title, listFilter = [], checkbox }) {
                     {checkbox ? (
                         <FilterCheckBox id={id} value={value} label={label} />
                     ) : (
-                        <div className={styles.link} onClick={() => {
-                            setURLFilter(value)
-                        }}>{label}</div>
+                        <div
+                            className={styles.link}
+                            onClick={() => {
+                                setURLFilter(value)
+                            }}
+                        >
+                            {label}
+                        </div>
                     )}
                 </div>
             ))}
@@ -32,7 +35,7 @@ function SidebarItem({ title, listFilter = [], checkbox }) {
 
 function FilterCheckBox({ id, value, label }) {
     return (
-        <>
+        <span>
             <input
                 className={styles.checkbox}
                 type='checkbox'
@@ -42,7 +45,7 @@ function FilterCheckBox({ id, value, label }) {
             <label className={styles.label} htmlFor={id}>
                 {label}
             </label>
-        </>
+        </span>
     )
 }
 
