@@ -33,7 +33,8 @@ function DetailContainer(props) {
         try {
             setPopupLoadingSpinner(true)
             const res = await axios.get(url)
-            setBookDetail(res.data)
+            setBookDetail(res.data[0])
+            console.log(typeof res.data)
             let cartItem = {
                 bookId: res.data._id,
                 price: res.data.price,
