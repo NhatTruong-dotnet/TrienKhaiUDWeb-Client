@@ -8,7 +8,7 @@ import Modal from '../../../../Common/Modal/Modal'
 import ReviewForm from './components/ReviewForm/ReviewForm'
 import DynamicModal from '../../../../Common/DynamicModal/DynamicModal'
 
-function Rating({ rating = [], bookId, getBookDetail }) {
+function Rating({ rating = [], bookId, getAllRatingBook }) {
     const [isOpenModal, setIsOpenModal] = useState(false)
 
     const totalRatingValue = rating.reduce(
@@ -42,7 +42,7 @@ function Rating({ rating = [], bookId, getBookDetail }) {
                 <ReviewForm
                     onCloseModal={() => setIsOpenModal(false)}
                     bookId={bookId}
-                    getBookDetail={getBookDetail}
+                    getAllRatingBook={getAllRatingBook}
                 />
             </DynamicModal>
         </div>

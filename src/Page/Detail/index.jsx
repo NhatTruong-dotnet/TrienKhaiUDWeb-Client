@@ -33,14 +33,15 @@ function DetailContainer(props) {
         try {
             setPopupLoadingSpinner(true)
             const res = await axios.get(url)
-            setBookDetail(res.data[0])
+            setBookDetail(res.data)
             let cartItem = {
-                bookId: res.data[0]._id,
-                price: res.data[0].price,
+                bookId: res.data._id,
+                price: res.data.price,
                 amount: selectedAmount,
-                bookName: res.data[0].name,
-                img: res.data[0].img[0],
+                bookName: res.data.name,
+                img: res.data.img[0],
             }
+            console.log(cartItem)
             await axios
                 .post(
                     'https://serverbookstore.herokuapp.com/api/seenList/' +
@@ -74,19 +75,23 @@ function DetailContainer(props) {
         numberInStock,
         img,
     } = bookDetail
+    console.log(bookDetail)
+
+    const getAllRatingBook = async id => {
+        try {
+            const res = await axios.get(
+                `https://serverbookstore.herokuapp.com/api/rating-comment/commentSort/${id}`
+            )
+            setRating(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        const getAllRatingBook = async () => {
-            try {
-                const res = await axios.get(
-                    `https://serverbookstore.herokuapp.com/api/rating-comment/commentSort/${id}`
-                )
-                setRating(res.data)
-            } catch (error) {
-                console.log(error)
-            }
+        if (id) {
+            getAllRatingBook(id)
         }
-        getAllRatingBook()
     }, [id])
 
     async function addItemToCart() {
@@ -189,7 +194,7 @@ function DetailContainer(props) {
                     <Rating
                         rating={rating}
                         bookId={id}
-                        getBookDetail={getBookDetail}
+                        getAllRatingBook={getAllRatingBook}
                     />
                     <CommentList rating={rating} />
                 </div>

@@ -94,4 +94,20 @@ const ConfirmDialog = ({
     )
 }
 
+// export function useAsyncModal(asyncFunc) {
+//     const [isPending, setIsPending] = useState(true)
+//     async function callAsyncTask() {
+//         // setIsPending(true)
+//         try {
+//             const data = await asyncFunc()
+//             // setIsPending(false)
+//             return data
+//         } catch (error) {
+//             // setIsPending(false)
+//             return error
+//         }
+//     }
+//     return [isPending, callAsyncTask]
+// }
+
 export default DynamicModal

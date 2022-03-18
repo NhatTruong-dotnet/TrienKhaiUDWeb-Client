@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './AddressItem.module.css'
-import { AiFillDelete } from 'react-icons/ai'
+// import { AiFillDelete } from 'react-icons/ai'
 import { BiEdit } from 'react-icons/bi'
 
 function AddressItem({
@@ -8,7 +8,7 @@ function AddressItem({
     isDefault,
     address,
     onEditAddress,
-    onDeleteAddress,
+    // onDeleteAddress,
 }) {
     return (
         <div className={styles.address}>
@@ -21,12 +21,12 @@ function AddressItem({
             </div>
             <div className={styles.link}>
                 <BiEdit onClick={onEditAddress} />
-                <AiFillDelete
+                {/* <AiFillDelete
                     className={styles.delete}
                     onClick={() => {
                         onDeleteAddress(id)
                     }}
-                />
+                /> */}
             </div>
         </div>
     )

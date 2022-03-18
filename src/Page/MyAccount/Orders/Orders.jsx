@@ -25,21 +25,29 @@ function Orders(props) {
     }, [])
 
     return (
-        <div className={clsx(styles.container)}>
+        <>
             {listOrder.map(
-                (createdDate, status, paymentMethod, orders_detail, total) => (
-                    <OrderItem
-                        key={createdDate}
-                        createdDate={createdDate}
-                        status={status}
-                        paymentMethod={paymentMethod}
-                        total={total}
-                        ordersDetail={orders_detail}
-                    />
+                ({
+                    billId,
+                    createdDate,
+                    status,
+                    paymentMethod,
+                    orders_detail,
+                    total,
+                }) => (
+                    <div key={billId} className={clsx(styles.container)}>
+                        <OrderItem
+                            createdDate={createdDate}
+                            status={status}
+                            paymentMethod={paymentMethod}
+                            total={total}
+                            ordersDetail={orders_detail}
+                        />
+                    </div>
                 )
             )}
             {listOrder.length === 0 ? <EmptyOrder /> : ''}
-        </div>
+        </>
     )
 }
 

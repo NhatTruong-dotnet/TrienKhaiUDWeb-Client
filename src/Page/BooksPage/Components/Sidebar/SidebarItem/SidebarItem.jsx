@@ -1,12 +1,15 @@
 import styles from './sidebarItem.module.css'
 import { useHistory } from 'react-router-dom'
+import { useContext } from 'react'
+import { Context } from '../../../Context/Context'
 
 function SidebarItem({ title, listFilter = [], checkbox }) {
     const navigate = useHistory()
+    const { setUrl } = useContext(Context)
 
     function setURLFilter(url) {
         localStorage.setItem('url', JSON.stringify(url))
-
+        setUrl(url)
         navigate.push(`/books`)
     }
 
