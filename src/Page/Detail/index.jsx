@@ -35,10 +35,10 @@ function DetailContainer(props) {
             const res = await axios.get(url)
             setBookDetail(res.data[0])
             let cartItem = {
-                bookId: res.data._id,
-                price: res.data.price,
+                bookId: res.data[0]._id,
+                price: res.data[0].price,
                 amount: selectedAmount,
-                bookName: res.data.name,
+                bookName: res.data[0].name,
                 img: res.data[0].img[0],
             }
             console.log(cartItem)
