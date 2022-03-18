@@ -13,6 +13,10 @@ import Payment from './Cart/components/payment/Payment'
 import Conversation from './Chat/Conversation'
 
 export default function App() {
+  let guestInfo = {
+    url: "https://serverbookstore.herokuapp.com/api/books/",
+  };
+  localStorage.setItem("url", JSON.stringify(guestInfo));
     return (
         <>
             <Router>
