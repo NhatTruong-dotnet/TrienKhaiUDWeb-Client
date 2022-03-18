@@ -7,7 +7,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import validator from 'validator'
 
-function ReviewForm({ onCloseModal, bookId, getBookDetail }) {
+function ReviewForm({ onCloseModal, bookId, getAllRatingBook }) {
     const [ratingValue, setRatingValue] = useState(5)
     const [commentText, setCommentText] = useState('')
     const [validationMessage, setValidationMessage] = useState('')
@@ -45,7 +45,7 @@ function ReviewForm({ onCloseModal, bookId, getBookDetail }) {
                     `https://serverbookstore.herokuapp.com/api/rating-comment/${bookId}`,
                     formData
                 )
-                getBookDetail()
+                getAllRatingBook(bookId)
             } catch (error) {
                 console.log(error)
             }

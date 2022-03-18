@@ -1,7 +1,6 @@
 import SidebarItem from './SidebarItem/SidebarItem'
 import styles from './sidebar.module.css'
 import clsx from 'clsx'
-import { useParams } from 'react-router-dom'
 
 const arr1 = [
     {
@@ -32,13 +31,10 @@ const arr1 = [
 ]
 
 function Sidebar(props) {
-    const params = useParams()
-    console.log(params)
     return (
         <div className={clsx(styles.sidebarContainer, 'shadow')}>
             <div className={styles.title}>Nhóm sản phẩm</div>
             <SidebarItem title={'All Category'} listFilter={arr1} />
-            <SidebarItem checkbox title={'Giá'} listFilter={arr1} />
         </div>
     )
 }

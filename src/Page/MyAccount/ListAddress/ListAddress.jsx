@@ -17,6 +17,7 @@ function ListAddress(props) {
     useEffect(() => {
         if (!isOpenForm) {
             setShowModal(true)
+
             const getListAddress = async () => {
                 try {
                     const res = await axios.get(
@@ -41,12 +42,13 @@ function ListAddress(props) {
 
     const handleDeleteAddress = async id => {
         const gmail = JSON.parse(localStorage.getItem('user')).gmail
-
         try {
             console.log(gmail)
+            const formData = new FormData()
+            formData.append('gmail', gmail)
             const res = axios.delete(
                 `https://serverbookstore.herokuapp.com/api/users/deleteAddress/${id}`,
-                { gmail }
+                formData
             )
             console.log(res.data)
         } catch (error) {

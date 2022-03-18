@@ -5,8 +5,11 @@ export const Context = createContext()
 
 function Provider({ children }) {
     const [listBook, setListBook] = useState([])
-    
-    const fetchData = async url => {
+    const [url, setUrl] = useState(
+        'https://serverbookstore.herokuapp.com/api/books/Search-Translator/local'
+    )
+
+    const fetchData = async () => {
         try {
             const res = await axios.get(url)
             setListBook(res.data)
@@ -18,6 +21,8 @@ function Provider({ children }) {
     const value = {
         listBook,
         fetchData,
+        setUrl,
+        url,
     }
 
     return <Context.Provider value={value}>{children}</Context.Provider>
